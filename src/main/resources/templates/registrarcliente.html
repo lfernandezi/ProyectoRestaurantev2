@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout::head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<!---<script type="text/javascript"
+	th:src="@{/script/jsweb/cliente/Cliente.js}">
+	
+</script>--->
+<body>
+	<div th:replace=layout::titulo></div>
+	<div class="alert alert-warning" role="alert">
+		<div class="container">
+			<div class="row">
+				<div class="p-1 mb-5 bg-transparent text-dark col-sm">
+					<img src="img/loginpollo2.jpg" alt="jacket" width="350"
+						height="700">
+				</div>
+				<div class="col-md">
+					<div class="card">
+						<h2 class=text-center>REGISTRO</h2>
+						<div class="text-center alert alert-danger" role="alert">
+							<span class="text-danger" th:text="${mensaje}"></span>
+						</div>
+						<div class="card-body">
+							<form th:action="@{/registrarCliente}" method="post"
+								th:object="${nuevocliente}">
+								<div class="row g-3">
+									<div class="col">
+										<label for="txtnombre">Ingrese Nombre :</label> <input
+											type="text" th:field="*{xnombre}" class="form-control"
+											id="txtnombre"> <span id="errornombre"
+											class="text-danger"></span> <label for="txtapellido">Ingrese
+											Apellido :</label> <input type="text" th:field="*{xapellido}"
+											class="form-control" id="txtapellido">
+									</div>
+								</div>
+								<br />
+								<div class="row g-3">
+									<div class="col">
+										<label for="txtdni">Ingrese N° DNI :</label> <input
+											type="number" th:field="*{xdni}" class="form-control"
+											id="txtdni"> <span id="errordni" class="text-danger"></span>
+									</div>
+									<div class="col">
+										<label for="txttelefono">Ingrese teléfono :</label> <input
+											type="number" th:field="*{xtelefono}" class="form-control"
+											id="txttelefono"> <span id="errortelefono"
+											class="text-danger"></span>
+									</div>
+								</div>
+								<br />
+								<div class="row g-3">
+									<div class="col">
+										<label for="txtdireccion">Ingrese dirección :</label> <input
+											type="text" th:field="*{xdireccion}" class="form-control"
+											id="txtdireccion"> <span id="errordireccion"
+											class="text-danger"></span>
+									</div>
+								</div>
+								<br />
+								<div class="row g-3">
+									<div class="col">
+										<label for="txtemail">Ingrese Email :</label> <input
+											type="text" th:field="*{xemail}" class="form-control"
+											id="txtemail" placeholder="ejemplo@ejemplo"> <span
+											id="erroremail" class="text-danger"></span>
+									</div>
+								</div>
+								<br />
+								<div class="row g-3">
+									<div class="col">
+										<label for="txtcontrasenia">Ingrese Contraseña:</label> <input
+											type="password" th:field="*{xcontrasenia}"
+											class="form-control" id="txtcontrasenia"> <span
+											id="errorcontrasenia" class="text-danger"></span>
+									</div>
+								</div>
+								<br />
+								<div class="row g-3">
+									<div class="col">
+										<button type="submit"
+											class="btn btn-outline-success btn-block" id="btnregistrar">REGISTRAR</button>
+									</div>
+									<div class="col">
+										<a th:href="@{/login}"
+											class="btn btn-outline-primary btn-block"> REGRESAR </a>
+									</div>
+								</div>
+								<div id="mensaje"></div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="p-2 mb-5 bg-transparent text-dark col-sm">
+					<img src="img/loginpollo1.jpg" alt="jacket" width="350"
+						height="700">
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

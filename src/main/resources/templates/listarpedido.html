@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="login::head">
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+<script type="text/javascript" th:src="@{/script/jsweb/pedido/frmListarPedido.js}"></script>
+
+<body>
+	<div th:fragment="titulo" class="alert alert-danger" role="alert">
+		<h1 class="text-center">"RESTAURANTE POLLERIA EATSFREE"</h1>
+	</div>
+	<h2 class="text-center">ESTADOS DE PEDIDOS</h2>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm">
+
+				<hr />
+				<table id="tblpedido" class="table table-hover table-bordered">
+					<thead class="table-secondary">
+						<tr>
+							<td scope="col">CODIGO</td>
+							<td scope="col">FECHA</td>
+							<td scope="col">CLIENTE</td>
+							<td scope="col">DIRECCION</td>
+							<td scope="col">SUBTOTAL</td>
+							<td scope="col">IGV</td>
+							<td scope="col">MONTO</td>
+							<td scope="col">ESTADO</td>
+							<td scope="col">VER PEDIDO</td>
+							<td scope="col">Cambiar estado</td>
+						</tr>
+					</thead>
+					<tbody>
+						<!--<tr th:each="pedido:${listarpedido}">
+							<td th:text="${pedido.codpedido}"></td>
+							<td th:text="${pedido.fechacreacion}"></td>
+							<td th:text="${pedido.codcliente}"></td>
+							<td th:text="${pedido.direccion}"></td>
+							<td th:text="${pedido.subtotal}"></td>
+							<td th:text="${pedido.igv}"></td>
+							<td th:text="${pedido.monto}"></td>
+							<td th:text="${pedido.estado}"></td>
+							<td>
+								<input type="image" align="center" src="/img/ingresar.jpg" width="60" height="40"
+									class="btnverpedido" th:data-codpedido="${pedido.codpedido}"
+									th:data-codcliente="${pedido.codcliente}">
+							</td>
+							<td>
+								<input type="image" align="center" src="/img/actualizar.jpg" width="60" height="40"
+									class="btnactualizarpedido" th:data-codpedido="${pedido.codpedido}"
+									th:data-codcliente="${pedido.codcliente}">
+							</td>
+						</tr-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal agregar y actualizar -->
+	<div class="modal fade" id="modalpedido" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">VER
+						PEDIDO</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="table-responsive">
+						<table id="tbldetallepedido" class="table table-hover table-bordered">
+							<thead class="table-secondary">
+								<tr>
+									<td scope="col" class="text-center">Nro Pedido</td>
+									<td scope="col" class="text-center">Nro producto</td>
+									<td scope="col" class="text-center">Nombre Producto</td>
+									<td scope="col" class="text-center">Descripción</td>
+									<td scope="col" class="text-center">Cantidad</td>
+									<td scope="col" class="text-center">Precio</td>
+									<td scope="col" class="text-center">SubTotal</td>
+
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">CERRAR</button>
+					<button type="button" class="btn btn-outline-success" id="btnregistarempleado">IMPRIMIR</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Modal actualizarPedido -->
+	<div class="modal fade" id="modalactualizarpedido" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Cambiar Estado</h5>
+					<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+					
+					<select class="form-control" id="cboEstadoPedido">
+						<option value="0">Seleccione</option>
+						<option value="1">En Preparación</option>
+						<option value="2">En Ruta</option>
+					</select>
+					<input type="hidden" value="0" id="hddcodpedidoactualizar">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary" id="btnActualizarEstadoPedido">Actualizar estado</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal eliminar EMPLEADO-->
+	<div class="modal fade" id="modaleliminarempleado" tabindex="-1" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Eliminar
+						Empleado</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<label id="mensajeeliminar"></label> <input type="hidden" value="0" id="hddcodempleadoeliminar">
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">CERRAR</button>
+					<button type="button" class="btn btn-outline-danger" id="btneliminarempleado">ELIMINAR</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

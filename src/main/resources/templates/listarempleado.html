@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="login::head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript"
+	th:src="@{/script/jsweb/empleado/frmListarEmpleado.js}"></script>
+
+<body>
+	<div th:fragment="titulo" class="alert alert-danger" role="alert">
+		<h1 class="text-center">"RESTAURANTE POLLERIA EATSFREE"</h1>
+	</div>
+	<h2 class="text-center">MANTENIMIENTO DE EMPLEADOS</h2>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm">
+				<a class="nav-link" th:href="@{/Menus/menua}"> Volver al Menu
+					Administrador </a>
+				<hr />
+
+		
+				<div class="row g-4">
+					<label>Buscar Empleado:</label>
+					<div class="col-auto">
+						<select class="form-control" id="cbobuscarempleado">
+							<option value="0">Seleccionar</option>
+							<option value="1">Todos</option>
+							<option value="2">Por Código</option>
+							<option value="3">Por Dni</option>
+						</select>
+					</div>
+					<div class="col-auto">
+						<input type="number" class="form-control" id="txtbuscarempleado"
+							placeholder="Ejm:12345678"> <span
+							id="errorbuscarempleado" class="text-danger"></span>
+					</div>
+					<div class="col-auto">
+						<button type="submit" class="btn btn-primary mb-3"
+							id="btnbuscarempleado">Buscar</button>
+					</div>
+
+					<div class="col-sm" align="right">
+						<input type="image" src="/img/registrar.png" width="60"
+							height="50" id="btnagregarempleado" align="center">Registrar Empleado
+					</div>
+				</div>
+				<hr />
+				<table id="tblEmpleado" class="table table-hover table-bordered">
+					<thead class="table-secondary">
+						<tr>
+							<td scope="col">CODIGO</td>
+							<td scope="col">NOMBRE</td>
+							<td scope="col">APELLIDO</td>
+							<td scope="col">DNI</td>
+							<td scope="col">CARGO</td>
+							<td scope="col">CONTRASEÑA</td>
+							<td scope="col">FECHA</td>
+							<td scope="col">AREA</td>
+							<td scope="col">ACTUALIZAR</td>
+							<td scope="col">ELIMINAR</td>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- tr th:each="empleado:${listadoempleado}">
+							<td th:text="${empleado.codempleado}"></td>
+							<td th:text="${empleado.nombre}"></td>
+							<td th:text="${empleado.apellido}"></td>
+							<td th:text="${empleado.dni}"></td>
+							<td th:text="${empleado.codcargo}"></td>
+							<td th:text="${empleado.contrasenia}"></td>
+							<td th:text="${empleado.fecha_ingreso}"></td>
+							<td th:text="${empleado.codarea}"></td>
+							<td>
+								<input type="image" align="center" src="/img/actualizar.jpg" width="60" height="40"
+									class="btnactualizarempleado" th:data-codempleado="${empleado.codempleado}"
+									th:data-nombre="${empleado.nombre}" th:data-apellido="${empleado.apellido}"
+									th:data-dni="${empleado.dni}" th:data-codcargo="${empleado.codcargo}"
+									th:data-contrasenia="${empleado.contrasenia}"
+									th:data-fecha_ingreso="${empleado.fecha_ingreso}" th:data-codarea="${empleado.codarea}">
+							</td>
+							<td>
+								<input type="image" align="center" src="/img/eliminar.jpg" width="60" height="40"
+									class="btneliminarempleado" th:data-codempleado="${empleado.codempleado}"
+									th:data-nombre="${empleado.nombre}">
+							</td>
+						</tr-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal agregar y actualizar -->
+	<div class="modal fade" id="modalempleado" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Registrar
+						Empleado</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="txtnombre">INGRESE NOMBRE:</label> <input type="text"
+							name="letras" onkeypress="return sololetras(event)"
+							onpaste="return false" class="form-control" id="txtnombre">
+						<span id="errornombre" class="text-danger"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="txtapellido">INGRESE APELLIDO:</label> <input
+							type="text" name="letras" onkeypress="return sololetras(event)"
+							onpaste="return false" class="form-control" id="txtapellido">
+						<span id="errorapellido" class="text-danger"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="txtdni">INGRESE DNI:</label> <input type="number"
+							class="form-control" id="txtdni"> <span id="errordni"
+							class="text-danger"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="cbocargo">SELECCIONE CARGO:</label> <select
+							class="form-control" id="cbocargo">
+
+						</select> <span id="errorcargo" class="text-danger"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="txtcontrasena">INGRESE CONTRASEÑA:</label> <input
+							type="password" class="form-control" id="txtcontrasena">
+						<span id="errorcontrasena" class="text-danger"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="txtfecha">FECHA DE INGRESO:</label> <input type="date"
+							class="form-control" id="txtfecha"> <span id="errorfecha"
+							class="text-danger"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="cboarea">SELECCIONE AREA:</label> <select
+							class="form-control" id="cboarea">
+						</select>
+					</div>
+
+					<input type="hidden" value="0" id="hddcodempleado" />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary"
+						data-dismiss="modal">CERRAR</button>
+					<button type="button" class="btn btn-outline-success"
+						id="btnregistarempleado">GUARDAR</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Modal eliminar EMPLEADO-->
+	<div class="modal fade" id="modaleliminarempleado" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Eliminar
+						Empleado</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<label id="mensajeeliminar"></label> <input type="hidden" value="0"
+						id="hddcodempleadoeliminar">
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary"
+						data-dismiss="modal">CERRAR</button>
+					<button type="button" class="btn btn-outline-danger"
+						id="btneliminarempleado">ELIMINAR</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

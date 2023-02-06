@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="login::head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript"
+	th:src="@{/script/jsweb/carrito/frmListarCarrito.js}"></script>
+<body>
+	<nav th:replace="layout::titulo"></nav>
+	<div class="alert alert-primary" role="alert">
+		<span id="txtcliente" th:text="${mensaje}"></span>
+	</div>
+	<h2 class="text-center">CARRITO DE COMPRAS</h2>
+	<div class="container">
+		<div class="row">
+			<div class="col-md">
+				<table id= "tblcarrito" class="table table-hover table-bordered">
+					<thead class="table-secondary">
+						<tr>							
+							<td scope="col">CODIGO</td>
+							<td scope="col">NOMBRE COMBO</td>
+							<td scope="col">DESCRIPCION PRODUCTO</td>
+							<td scope="col">PRECIO</td>
+							<td scope="col">CANTIDAD</td>
+							<td scope="col">SUBTOTAL</td>
+							<td scope="col">MODIFICAR</td>	
+							<td scope="col">ELIMINAR</td>						
+						</tr>
+					</thead>
+					<tbody>					
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md">
+				<div class="card">
+					<div class="card-header">
+						<ul class="navbar-nav">
+							<h5 class=text-center>RESUMEN DE COMPRA</h5>
+						</ul>
+					</div>
+					<div class="card-body alert alert-secondary" id="tblCompra">
+						<!--<h5 class="card-title">SUBTOTAL :</h5>
+					<div class="form-group">
+						<label>SUBTOTAL :</label> <input
+							type="text" class="form-control" readonly>
+					</div>
+
+						<h5 class="card-title">ENTREGA :</h5>
+						<br>
+						<hr class="dropdown-divider">
+						<h5 class="card-title">TOTAL :</h5>-->
+						<br> <a class="btn btn-outline-info btn-block" th:href="@{/despacho}">FINALIZAR COMPRA</a>
+						<ul class="navbar-nav">
+							<li class="nav-item"><a class="nav-link"
+								th:href="@{/categorias}"> <=AGREGAR MAS PRODUCTOS </a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal agregar producto-->
+	<div class="modal fade" id="modalproducto" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">ACTUALIZAR CARRITO</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				
+					<form th:action="registrarpedido" method="post">
+					<div class="form-group">
+						<label for="txtnombre">NOMBRE COMBO:</label> <input
+							type="text" class="form-control" id="txtnombre" readonly>
+					</div>
+
+					<div class="form-group">
+						<label for="txtdescripcion">DESCRIPCION PRODUCTO: </label> <input type="text"
+							class="form-control" id="txtdescripcion" readonly>
+					</div>
+
+					<div class="form-group">
+						<label for="txtprecio">PRECIO:</label> <input
+							type="number" class="form-control" id="txtprecio" readonly>
+					</div>
+					<div class="form-group">
+						<label for="txtprecio">CANTIDAD:</label> <input
+							type="number" class="form-control" id="txtcantidad">
+							<span id="errorcantidad" class="text-danger"></span>							
+					</div>
+					
+					<input type="hidden" id="hddcodproducto" value="0" />
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary"
+						data-dismiss="modal">CERRAR</button>
+					<button type="button" class="btn btn-outline-warning"
+						id="btnagregarcarrito">MODIFICAR</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal eliminar producto -->
+	<div class="modal fade" id="modaleliminarcarrito" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">ELIMINAR
+						CARRITO</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<label id="mensajeeliminar"></label> <input type="hidden" value="0"
+						id="hddcodproductoeliminar">
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary"
+						data-dismiss="modal">CERRAR</button>
+					<button type="button" class="btn btn-outline-danger"
+						id="btneliminarcarrito">ELIMINAR</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+</body>
+
+</html>

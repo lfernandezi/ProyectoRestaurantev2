@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace=layout::head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+<script type="text/javascript"
+	th:src="@{/script/jsweb/producto/frmListarProductoxCategoria.js}"></script>
+<body>
+	<div th:replace="layout::titulo"></div>
+	<div class="alert alert-warning" role="alert">	
+	<div th:replace="layout::categorias"></div>	
+	<div class="alert alert-primary" role="alert">
+		<span id="txtcliente" th:text="${mensaje}"></span>
+	</div>
+		<div class="card">
+		<div class="card-body">
+			<div class="form-group">
+				<label for="cbocategoria">SELECCIONE UNA CATEGORIA</label>
+				<select class="form-control" id="cbocategoria">
+					<option value="0">Seleccione</option>
+					<option th:each="categoria :${listadoCategoria}"
+					th:text="${categoria.categoria}"
+					th:value="${categoria.codcategoria}">
+					</option>					
+				</select>
+			</div>
+			<hr />
+			<div id="tblcategoria" class="row row-cols-1 row-cols-md-3">	
+						
+			</div>
+		</div>
+	</div>
+	<!-- Modal agregar producto-->
+	<div class="modal fade" id="modalproducto" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">REGISTRAR AL CARRITO</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				
+					<form th:action="registrarpedido" method="post">
+					<div class="form-group">
+						<label for="txtnombre">NOMBRE COMBO:</label> <input
+							type="text" class="form-control" id="txtnombre" readonly>
+					</div>
+
+					<div class="form-group">
+						<label for="txtdescripcion">DESCRIPCION PRODUCTO: </label> <input type="text"
+							class="form-control" id="txtdescripcion" readonly>
+					</div>
+
+					<div class="form-group">
+						<label for="txtprecio">PRECIO:</label> <input
+							type="number" class="form-control" id="txtprecio" readonly>
+					</div>
+					<div class="form-group">
+						<label for="txtprecio">INGRESE CANTIDAD:</label> <input
+							type="number" class="form-control" id="txtcantidad">
+					</div>
+
+					<input type="hidden" id="hddcodproducto" value="0" />
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary"
+						data-dismiss="modal">CERRAR</button>
+					<button type="button" class="btn btn-outline-success"
+						id="btnagregarcarrito">AGREGAR AL CARRITO</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

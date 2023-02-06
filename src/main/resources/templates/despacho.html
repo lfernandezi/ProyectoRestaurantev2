@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="login::head">
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+<script type="text/javascript" th:src="@{/script/jsweb/despacho/frmdespacho.js}"></script>
+
+<body>
+	<nav th:replace="layout::titulo"></nav>
+	<div class="container" id="contenedor1">
+		<div class="row">
+			<div class="col-sm">
+				<img src="img/loginpollo2.jpg" alt="jacket" width="350" height="400">
+			</div>
+			<div class="col">
+				<div class="card">
+					<div class="card-header card-center">
+						<ul class="navbar-nav">
+							<h5 class=text-center>Datos del Cliente</h5>
+						</ul>
+					</div>
+					<div id="tblClienteFinal" class="card-body alert alert-secondary">
+					</div>
+				</div>
+				<br />
+			</div>
+			<div class="col-sm">
+				<img src="img/loginpollo2.jpg" alt="jacket" width="350" height="400">
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<br>
+
+	<div class="container" id="contenedor2">
+		<div class="row">
+			<div class="col">
+				<div class="card">
+					<div class="card-header card-center">
+						<ul class="navbar-nav">
+							<h5 class=text-center>Datos de Pedido</h5>
+						</ul>
+					</div>
+					<div class="card-body alert alert-secondary">
+						<table id="tblcarrito" class="table table-hover table-bordered">
+							<thead class="table-secondary">
+								<tr>
+									<td scope="col">CODIGO</td>
+									<td scope="col">NOMBRE</td>
+									<td scope="col">DESCRIPCION</td>
+									<td scope="col">PRECIO</td>
+									<td scope="col">CANTIDAD</td>
+									<td scope="col">SUBTOTAL</td>
+
+								</tr>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<br>
+
+	<div class="container" id="contenedor3">
+		<div class="row">
+			<div class="col-sm">
+				<img src="img/loginpollo2.jpg" alt="jacket" width="350" height="400">
+			</div>
+			<div class="col">
+
+				<div class="card">
+					<div class="card-header card-center">
+						<ul class="navbar-nav">
+							<h5 class=text-center>Datos del Pago</h5>
+						</ul>
+					</div>
+					<div id="tblPago" class="card-body alert alert-secondary">
+						<div class="row">
+							<div class="col">
+								<div id="tblCompra" class="card-body alert alert-secondary">
+
+								</div>
+								<br> <a th:href='@{/carrito}' class='btn btn-outline-info btn-block'>Regresar al
+									carrito</a>
+							</div>
+
+						</div>
+
+						<div class="row">
+							<div class="col">
+								<br> <label for="cbomomento">Momento de Pago</label> <select class="form-select"
+									id="cbomomento" aria-label="Default select example">
+									<option selected value="0">Seleccione</option>
+									<option value="1">Contraentrega</option>
+									<option value="2">Pagar en línea</option>
+								</select> <span id="errormomento" class="text-danger"></span>
+							</div>
+							<div class="col">
+								<br> <label for="cboforma" id="lblforma">Forma de
+									Pago :</label> <select class="form-select" id="cboforma"
+									aria-label="Default select example">
+									<option selected value="0">Seleccione</option>
+									<option value="1">Efectivo</option>
+									<option value="2">Tarjeta</option>
+								</select> <span id="errorforma" class="text-danger"></span>
+							</div>
+						</div>
+						<br>
+					</div>
+					<div class="row">
+						<div class="col">
+							<button type="button" class="btn btn-outline-success" id="btnregistrartarjeta">Ingresar
+								Tarjeta</button>
+						</div>
+						<div class="col">
+							<button type="button" class="btn btn-outline-info" id="btningresarpedido">Ingresar
+								Pedido</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm">
+				<img src="img/loginpollo2.jpg" alt="jacket" width="350" height="400">
+			</div>
+		</div>
+	</div>
+	<div class="alert alert-warning" role="alert">
+		<div class="container" id="contenedor4">
+			<div class="row">
+				<div class="col-sm">
+					<img src="img/loginpollo2.jpg" alt="jacket" width="360" height="600">
+				</div>
+				<div class="col-sm">
+					<br>
+					<div class="card" style="width: 20rem;">
+						<img src="img/venta.jpg" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h2 class="card-title text-center">VENTA REGISTRADA</h2>
+							<h5 class="card-text text-center">Su Pedido esta en Camino a su Domicilio</h5>
+						</div>
+						<a th:href="@{/categorias}" class="btn btn-outline-primary btn-block">REGRESAR AL MENU</a>
+					</div>
+
+				</div>
+				<div class="col-sm">
+					<img src="img/loginpollo1.jpg" alt="jacket" width="370" height="600">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal cambiar direccion-->
+	<div class="modal fade" id="modaldireccion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Cambiar
+						Direccion</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+					<div class="form-group">
+						<label for="txtdireccion2">Dirección de Despacho: </label> <input type="text"
+							class="form-control" id="txtdireccion2">
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">CERRAR</button>
+					<button type="button" class="btn btn-outline-success" id="btncambiardireccion">ACTUALIZAR</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal ingresar tarjeta-->
+	<div class="modal fade" id="modaltarjeta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Ingresar
+						Tarjeta</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+					<div class="form-group">
+						<label for="txtnumerotarjeta">Nro tarjeta: </label> <input type="number" class="form-control"
+							id="txtnumerotarjeta">
+						<span id="errortarjeta" class="text-danger"></span>
+					</div>
+					<div class="row">
+						<div class="col">
+							<div class="form-group">
+								<label for="txtfechaexpiracion">Fecha de Expiración: </label> <input type="date"
+									class="form-control" id="txtfechaexpiracion">
+								<span id="errorfecha" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								<label for="txtclaveseguridad">Clave de Seguridad </label> <input type="number"
+									class="form-control" id="txtclaveseguridad">
+								<span id="errorclave" class="text-danger"></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="txtmonto3">Monto: </label> <input type="number" class="form-control" id="txtmonto3"
+							readonly>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">CERRAR</button>
+					<button type="button" class="btn btn-outline-success" id="btnvalidartarjeta">PAGAR</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+
+</html>
