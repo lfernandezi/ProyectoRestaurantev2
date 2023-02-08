@@ -74,8 +74,8 @@ public class ProductoController {
 	
 	@GetMapping("/buscarProducto")
 	@ResponseBody
-	public List<Producto> buscarProducto(@RequestParam("codproducto") Integer codigo) {
-		List <Producto> listproducto = new ArrayList<Producto>();
+	public List<ProductoResponse> buscarProducto(@RequestParam("codproducto") Integer codigo) {
+		List <ProductoResponse> listproducto = new ArrayList<ProductoResponse>();
 		listproducto.add(productoService.buscarProducto(codigo)); 
 		return listproducto;
 	}

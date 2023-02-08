@@ -44,6 +44,7 @@ public class EmpleadoService {
         
 		Empleado empl =empleadoRepository.findById(codigo).orElse(null);  
 		EmpleadoResponse e= new EmpleadoResponse();
+		if(Objects.nonNull(empl)) {
 		
 			e.setCodempleado(empl.getCodempleado());
 			e.setNombre(empl.getNombre());
@@ -53,8 +54,10 @@ public class EmpleadoService {
 			e.setFecha_ingreso(empl.getFecha_ingreso());
 			e.setCodarea(areaRepository.findById(empl.getCodarea()).orElse(null));
 			e.setCodcargo(cargoRepository.findById(empl.getCodcargo()).orElse(null));
-			
+		}
 			return e;
+			
+		
     }
 	
 	
@@ -62,7 +65,8 @@ public class EmpleadoService {
        
 		Empleado empl = empleadoRepository.buscarEmpleado(dni);  
 		EmpleadoResponse e= new EmpleadoResponse();
-		
+		if(Objects.nonNull(empl)) {
+			
 		e.setCodempleado(empl.getCodempleado());
 		e.setNombre(empl.getNombre());
 		e.setApellido(empl.getApellido());
@@ -71,7 +75,7 @@ public class EmpleadoService {
 		e.setFecha_ingreso(empl.getFecha_ingreso());
 		e.setCodarea(areaRepository.findById(empl.getCodarea()).orElse(null));
 		e.setCodcargo(cargoRepository.findById(empl.getCodcargo()).orElse(null));
-		
+		}
 		return e;
     }
 	

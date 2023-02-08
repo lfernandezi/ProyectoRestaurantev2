@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import edu.pe.idat.repository.CategoriaRepository;
 import edu.pe.idat.repository.ProductoRepository;
 import edu.pe.idat.model.Empleado;
+import edu.pe.idat.model.EmpleadoResponse;
 import edu.pe.idat.model.Producto;
 import edu.pe.idat.model.ProductoResponse;
 
@@ -73,8 +74,21 @@ public class ProductoService {
 	}*/
 		
 		
-	public Producto buscarProducto(Integer codigo) {
-        return productoRepository.findById(codigo).orElse(null);
+	public ProductoResponse buscarProducto(Integer codigo) {
+		
+		Producto pro = productoRepository.findById(codigo).orElse(null);;  
+		ProductoResponse p= new ProductoResponse();
+		if(Objects.nonNull(pro)) {
+			
+		p.setCodproducto(pro.getCodproducto());
+		p.setNombre(pro.getNombre());
+		p.setDescripcion(pro.getDescripcion());
+		p.setPrecio(pro.getPrecio());
+		p.setCodcategoria(cateRepository.findById(pro.getCodcategoria()).orElse(null));
+		
+		}
+		return p;
+      
     }
 	
 	

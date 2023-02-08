@@ -216,6 +216,13 @@ function BuscarproductoxCodigo(codigo) {
 		success: function(data) {
 			$("#tblproducto > tbody").html("");
 			$.each(data, function(index, value) {
+			
+			if (value.codproducto == 0) {
+					$("#tblproducto > tbody").append(
+						"<tr>" +
+						"<td colspan='10' class='text-center'> EMPLEADO NO ENCONTRADO </td>" +
+						"</tr>");
+				} else {
 				$("#tblproducto > tbody").append("<tr>" +
 					"<td>" + value.codproducto + "</td>" +
 					"<td class='text-center'>" + value.nombre + "</td>" +
@@ -234,7 +241,7 @@ function BuscarproductoxCodigo(codigo) {
 					" data-nombre='" + value.nombre + "'" +
 					">Eliminar</button></td>" +
 					"</tr>"
-				);
+				)};
 			})
 		}
 	});
