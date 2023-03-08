@@ -1,10 +1,11 @@
 $(document).ready(function() {
 	$("#tblcategoria").hide();
+	ListarCategoria();
 });
 
 $(document).on("change", "#cbocategoria", function() {
 	var categoria = $("#cbocategoria").val();
-	//alert(idespecialidad);
+
 	if (categoria === "0"){
 		$("#tblcategoria").hide();
 		$("#tblcategoria").html("");
@@ -12,14 +13,16 @@ $(document).on("change", "#cbocategoria", function() {
 	} else{
 		$.ajax({
 			type: "GET",
-			url: "/Categorias/listarProductoxCategorias",
+			url: "/listarProductoxCategorias",
 			data: {
 				codcategoria: categoria
 			},
 			success: function(data) {
+			
 				$("#tblcategoria").html("");
 				if (data.length > 0) {
 					$.each(data, function(index, value) {
+					
 						$("#tblcategoria").append(
 							"<div class='col mb-4'>" +
 							"<div class='card border-warning h-100'>" +
@@ -93,6 +96,29 @@ $(document).on("click", "#btnagregarcarrito", function() {
 	}
 
 });
+
+function ListarCategoria() {
+	$.ajax({
+		type: "GET",
+		url: "/listarCategorias",
+		dataType: "json",
+		success: function(resultado) {
+			//console.log(resultado);
+			$("#cbocategoria").html("");
+			$("#cbocategoria").append(
+				"<option value='0'> Seleccionar</option>");
+			$.each(resultado, function(index, value) {
+				$("#cbocategoria").append(
+					"<option value='" + value.codcategoria + "'>" + value.categoria + "</option>"
+				);
+			});
+
+			/*$("#cbocategoria").append(
+				"<option value='100'> Otro </option>");*/
+			$("#cbocategoria").val(codigocategoria);
+		}
+	});
+}
 
 
 

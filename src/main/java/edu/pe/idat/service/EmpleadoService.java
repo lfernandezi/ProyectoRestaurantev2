@@ -12,40 +12,40 @@ import edu.pe.idat.model.Empleado;
 import edu.pe.idat.model.EmpleadoResponse;
 
 @Service
-public class EmpleadoService {	
-	
+public class EmpleadoService {
+
 	@Autowired
 	EmpleadoRepository empleadoRepository;
-	
+
 	@Autowired
 	AreaEmpleadoRepository areaRepository;
-	
+
 	@Autowired
 	CargoEmpleadoRepository cargoRepository;
-	
-	/*public List<Empleado> listarEmpleado(){
-		return empleadoRepository.findAll();
-	}	*/
+
+	/*
+	 * public List<Empleado> listarEmpleado(){ return empleadoRepository.findAll();
+	 * }
+	 */
 
 	public void registrarEmpleado(Empleado empleado) {
-		if(empleado.getCodempleado() == 0) {
+		if (empleado.getCodempleado() == 0) {
 			empleadoRepository.save(empleado);
-		}else {
+		} else {
 			empleadoRepository.saveAndFlush(empleado);
 		}
 	}
-	
+
 	public void eliminarEmpleado(Empleado Empleado) {
 		empleadoRepository.deleteById(Empleado.getCodempleado());
 	}
-	
-	
+
 	public EmpleadoResponse buscarEmpleado(Integer codigo) {
-        
-		Empleado empl =empleadoRepository.findById(codigo).orElse(null);  
-		EmpleadoResponse e= new EmpleadoResponse();
-		if(Objects.nonNull(empl)) {
-		
+
+		Empleado empl = empleadoRepository.findById(codigo).orElse(null);
+		EmpleadoResponse e = new EmpleadoResponse();
+		if (Objects.nonNull(empl)) {
+
 			e.setCodempleado(empl.getCodempleado());
 			e.setNombre(empl.getNombre());
 			e.setApellido(empl.getApellido());
@@ -55,49 +55,52 @@ public class EmpleadoService {
 			e.setCodarea(areaRepository.findById(empl.getCodarea()).orElse(null));
 			e.setCodcargo(cargoRepository.findById(empl.getCodcargo()).orElse(null));
 		}
-			return e;
-			
-		
-    }
-	
-	
+		return e;
+
+	}
+
 	public EmpleadoResponse buscarEmpleadoxdni(String dni) {
-       
-		Empleado empl = empleadoRepository.buscarEmpleado(dni);  
-		EmpleadoResponse e= new EmpleadoResponse();
-		if(Objects.nonNull(empl)) {
-			
-		e.setCodempleado(empl.getCodempleado());
-		e.setNombre(empl.getNombre());
-		e.setApellido(empl.getApellido());
-		e.setDni(empl.getDni());
-		e.setContrasenia(empl.getContrasenia());
-		e.setFecha_ingreso(empl.getFecha_ingreso());
-		e.setCodarea(areaRepository.findById(empl.getCodarea()).orElse(null));
-		e.setCodcargo(cargoRepository.findById(empl.getCodcargo()).orElse(null));
+
+		Empleado empl = empleadoRepository.buscarEmpleado(dni);
+		EmpleadoResponse e = new EmpleadoResponse();
+		if (Objects.nonNull(empl)) {
+
+			e.setCodempleado(empl.getCodempleado());
+			e.setNombre(empl.getNombre());
+			e.setApellido(empl.getApellido());
+			e.setDni(empl.getDni());
+			e.setContrasenia(empl.getContrasenia());
+			e.setFecha_ingreso(empl.getFecha_ingreso());
+			e.setCodarea(areaRepository.findById(empl.getCodarea()).orElse(null));
+			e.setCodcargo(cargoRepository.findById(empl.getCodcargo()).orElse(null));
 		}
 		return e;
-    }
-	
-	public List<EmpleadoResponse> listarEmpleadoResponse(){
+	}
+
+	public List<EmpleadoResponse> listarEmpleadoResponse() {
 		List<Empleado> listaini = empleadoRepository.findAll();
 		List<EmpleadoResponse> listafin = new ArrayList<EmpleadoResponse>();
-		for (Empleado empl:listaini) {
+		if (!listaini.isEmpty()) {
+
+			for (Empleado empl : listaini) {
+				EmpleadoResponse empresponse = new EmpleadoResponse();
+				empresponse.setCodempleado(empl.getCodempleado());
+				empresponse.setNombre(empl.getNombre());
+				empresponse.setApellido(empl.getApellido());
+				empresponse.setDni(empl.getDni());
+				empresponse.setContrasenia(empl.getContrasenia());
+				empresponse.setFecha_ingreso(empl.getFecha_ingreso());
+				empresponse.setCodarea(areaRepository.findById(empl.getCodarea()).orElse(null));
+				empresponse.setCodcargo(cargoRepository.findById(empl.getCodcargo()).orElse(null));
+
+				listafin.add(empresponse);
+			}
+		}else {
 			EmpleadoResponse empresponse = new EmpleadoResponse();
-			empresponse.setCodempleado(empl.getCodempleado());
-			empresponse.setNombre(empl.getNombre());
-			empresponse.setApellido(empl.getApellido());
-			empresponse.setDni(empl.getDni());
-			empresponse.setContrasenia(empl.getContrasenia());
-			empresponse.setFecha_ingreso(empl.getFecha_ingreso());
-			empresponse.setCodarea(areaRepository.findById(empl.getCodarea()).orElse(null));
-			empresponse.setCodcargo(cargoRepository.findById(empl.getCodcargo()).orElse(null));
-			
+			empresponse.setCodempleado(0);
 			listafin.add(empresponse);
 		}
-		return listafin ;
-	}	
-	
+		return listafin;
+	}
+
 }
-
-

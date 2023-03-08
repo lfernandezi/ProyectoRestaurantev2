@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout::head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<script type="text/javascript"
+	th:src="@{/script/jsweb/categorias/frmlistarCategorias.js}"></script>
+
+<body>
+<div th:replace="layout::titulo"></div>
+
+<h2 class="text-center">MANTENIMIENTO DE CATEGORIAS</h2>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm">
+				<a class="nav-link" th:href="@{/Menus/menua}"> Volver al Menu
+					Administrador </a>
+				<hr />
+				<div class="row g-4">
+					<label>Buscar Categoria:</label>
+					<div class="col-auto">
+						<select class="form-control" id="cbobuscarcategoria">
+							<option value="0">Seleccionar</option>
+							<option value="1">Todos</option>
+							<option value="2">Por Código</option>
+							<!--  option value="3">Por Dni</option-->
+						</select>
+					</div>
+					<div class="col-auto">
+						<input type="number" class="form-control" id="txtbuscarcategoria"
+							placeholder="Ejm:12345678"> <span
+							id="errorbuscarcategoria" class="text-danger"></span>
+					</div>
+					<div class="col-auto">
+						<button type="submit" class="btn btn-primary mb-3"
+							id="btnbuscarcategoria">Buscar</button>
+					</div>
+
+					<div class="col-sm" align="right">
+						<input type="image" src="/img/registrar.png" width="60"
+							height="50" id="btnagregarcategoria" align="center">Registrar Categoria
+					</div>
+				</div>
+				<hr />
+				<table id="tblCategoria" class="table table-hover table-bordered">
+					<thead class="table-secondary">
+						<tr>
+							<td scope="col">CODIGO</td>
+							<td scope="col">NOMBRE</td>
+							<td scope="col">ACTUALIZAR</td>
+							<td scope="col">ELIMINAR</td>
+						</tr>
+					</thead>
+					<tbody>
+		
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal agregar y actualizar -->
+	<div class="modal fade" id="modalcategoria" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Registrar
+						Categoria</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="txtcategoria">INGRESE NOMBRE:</label> <input type="text"
+							name="letras" onkeypress="return sololetras(event)"
+							onpaste="return false" class="form-control" id="txtcategoria">
+						<span id="errorcategoria" class="text-danger"></span>
+					</div>
+
+					
+					<input type="hidden" value="0" id="hddcodcategoria" />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary"
+						data-dismiss="modal">CERRAR</button>
+					<button type="button" class="btn btn-outline-success"
+						id="btnregistarcategoria">GUARDAR</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Modal eliminar EMPLEADO-->
+	<div class="modal fade" id="modaleliminarcategoria" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Eliminar
+						Categoria</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<label id="mensajeeliminar"></label> <input type="hidden" value="0"
+						id="hddcodcategoriaeliminar">
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary"
+						data-dismiss="modal">CERRAR</button>
+					<button type="button" class="btn btn-outline-danger"
+						id="btneliminarcategoria">ELIMINAR</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

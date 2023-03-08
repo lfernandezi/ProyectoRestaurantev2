@@ -21,7 +21,7 @@ public class ClienteService {
 
 	public void RegistrarCliente(Cliente cliente) {
 		clienterepository.registrarCliente(cliente.getXdni(), cliente.getXnombre(), cliente.getXapellido(),
-				cliente.getXemail(), cliente.getXcontrasenia(), cliente.getXdireccion(), cliente.getXtelefono(),
+				cliente.getXemail(), cliente.getXcontrasenia(),cliente.getXtelefono(), cliente.getXdireccion(), 
 				"ACTIVO");
 	}
 	
@@ -29,9 +29,7 @@ public class ClienteService {
 		clienterepository.eliminarCliente(cliente.getCodcliente());		
 		}
 	
-	/*public ClienteForm buscarcliente(Integer codigo) {
-        return clienterepository.buscarCliente(codigo);
-    }*/
+	
 	
 	public Cliente buscarcliente(Integer codigo) {
         return clienterepository.findById(codigo).orElse(null);
@@ -43,7 +41,7 @@ public class ClienteService {
 	
 	public void ActualizarCliente(Cliente cliente) {
 		clienterepository.registrarCliente(cliente.getXdni(), cliente.getXnombre(), cliente.getXapellido(),
-				cliente.getXemail(), cliente.getXcontrasenia(), cliente.getXdireccion(), cliente.getXtelefono(),
+				cliente.getXemail(), cliente.getXcontrasenia(),cliente.getXtelefono(), cliente.getXdireccion(), 
 				"ACTIVO");
 	}
 

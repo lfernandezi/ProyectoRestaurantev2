@@ -239,37 +239,55 @@ function ListarEmpleado() {
 		dataType: "json",
 		success: function(resultado) {
 			console.log(resultado);
+			
+			
 			$("#tblEmpleado > tbody").html("");
 			$.each(resultado, function(index, value) {
-				$("#tblEmpleado > tbody").append(
-					"<tr>" +
-					"<td>" + value.codempleado + "</td>" +
-					"<td>" + value.nombre + "</td>" +
-					"<td>" + value.apellido + "</td>" +
-					"<td>" + value.dni + "</td>" +
-					"<td>" + value.codcargo.cargo + "</td>" +
-					"<td type='password'>" + value.contrasenia + "</td>" +
-					"<td>" + value.fecha_ingreso + "</td>" +
-					"<td>" + value.codarea.area + "</td>" +
+				if (value.codempleado == 0) {
+					$("#tblEmpleado > tbody").append(
+						"<tr>" +
+						"<td colspan='10' class='text-center'> NO HA REGISTRADO NINGÚN EMPLEADO </td>" +
+						"</tr>");
+				} else {
+					$("#tblEmpleado > tbody").append(
+						"<tr>" +
+						"<td>" + value.codempleado + "</td>" +
+						"<td>" + value.nombre + "</td>" +
+						"<td>" + value.apellido + "</td>" +
+						"<td>" + value.dni + "</td>" +
+						"<td>" + value.codcargo.cargo + "</td>" +
+						"<td type='password'>" + value.contrasenia + "</td>" +
+						"<td>" + value.fecha_ingreso + "</td>" +
+						"<td>" + value.codarea.area + "</td>" +
 
-					"<td><button type='button' class='btn btn-outline-warning btnactualizarempleado' " +
-					" data-codempleado='" + value.codempleado + "'" +
-					" data-nombre='" + value.nombre + "'" +
-					" data-apellido='" + value.apellido + "'" +
-					" data-dni='" + value.dni + "'" +
-					" data-codcargo='" + value.codcargo.codcargo + "'" +
-					" data-contrasenia='" + value.contrasenia + "'" +
-					" data-fecha_ingreso='" + value.fecha_ingreso + "'" +
-					" data-codarea='" + value.codarea.codarea + "'" +
-					">Actualizar</button></td>" +
-					"<td><button type='button' class='btn btn-outline-danger btneliminarempleado' " +
-					" data-codempleado='" + value.codempleado + "'" +
-					" data-nombre='" + value.nombre + "'" +
-					">Eliminar</button></td>" +
-					"</td>"
-				);
-
+						"<td><button type='button' class='btn btn-outline-warning btnactualizarempleado' " +
+						" data-codempleado='" + value.codempleado + "'" +
+						" data-nombre='" + value.nombre + "'" +
+						" data-apellido='" + value.apellido + "'" +
+						" data-dni='" + value.dni + "'" +
+						" data-codcargo='" + value.codcargo.codcargo + "'" +
+						" data-contrasenia='" + value.contrasenia + "'" +
+						" data-fecha_ingreso='" + value.fecha_ingreso + "'" +
+						" data-codarea='" + value.codarea.codarea + "'" +
+						">Actualizar</button></td>" +
+						"<td><button type='button' class='btn btn-outline-danger btneliminarempleado' " +
+						" data-codempleado='" + value.codempleado + "'" +
+						" data-nombre='" + value.nombre + "'" +
+						">Eliminar</button></td>" +
+						"</td>"
+					);
+				}
 			});
+		},
+
+		error: function(xhr, status) {
+
+			$("#tblEmpleado > tbody").append(
+
+				"<tr>" +
+				"<td colspan='10' class='text-center'> OCURRIÓ UN ERROR </td>" +
+				"</tr>");
+
 		}
 	});
 }
@@ -328,7 +346,7 @@ function BuscarempleadoxCodigo(codigo) {
 			$("#tblEmpleado > tbody").append(
 
 				"<tr>" +
-				"<td colspan='10' class='text-center'> EMPLEADO NO ENCONTRADO </td>" +
+				"<td colspan='10' class='text-center'> OCURRIÓ UN ERROR </td>" +
 				"</tr>");
 
 		}
@@ -389,7 +407,7 @@ function BuscarEmpleadoxdni(codigo) {
 			$("#tblEmpleado > tbody").append(
 
 				"<tr>" +
-				"<td colspan='10' class='text-center'> EMPLEADO NO ENCONTRADO </td>" +
+				"<td colspan='10' class='text-center'> OCURRIÓ UN ERROR </td>" +
 				"</tr>");
 		}
 	});

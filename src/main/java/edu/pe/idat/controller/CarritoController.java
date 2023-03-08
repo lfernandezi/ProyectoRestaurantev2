@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import edu.pe.idat.model.Carrito;
 import edu.pe.idat.model.Cliente;
 import edu.pe.idat.model.DetallePedido;
+import edu.pe.idat.model.Usuario;
 import edu.pe.idat.model.response.ResultadoResponse;
 import edu.pe.idat.service.CarritoService;
 
@@ -29,7 +30,7 @@ public class CarritoController {
 	CarritoService carritoservice;
 	
 
-	@GetMapping("/carrito")
+	/*@GetMapping("/carrito")
 	public String listarpedidos(Model model, final HttpSession session) {
 
 		List<Carrito> listapedidos = (List<Carrito>) session.getAttribute("misesion");
@@ -38,8 +39,8 @@ public class CarritoController {
 			model.addAttribute("compra", 0);
 		}
 		try {
-			Cliente cliente = (Cliente) session.getAttribute("otrasesion");
-			model.addAttribute("mensaje", cliente.getXnombre() + " " + cliente.getXapellido());
+			Usuario cliente = (Usuario) session.getAttribute("otrasesion");
+			model.addAttribute("mensaje", cliente.getEmail());
 			model.addAttribute("listadopedidos", listapedidos);
 			return "carrito";
 		} catch (Exception e) {
@@ -48,7 +49,20 @@ public class CarritoController {
 			return "carrito";
 		}
 	}
+*/
+	@GetMapping("/carrito")
+	public String listarpedidos(Model model, final HttpSession session) {
 
+		List<Carrito> listapedidos = (List<Carrito>) session.getAttribute("misesion");
+		if (CollectionUtils.isEmpty(listapedidos)) {
+			listapedidos = new ArrayList<Carrito>();
+			model.addAttribute("compra", 0);
+			model.addAttribute("listadopedidos", listapedidos);
+			
+		}
+		return "carrito";
+	}
+	
 	@GetMapping("/listarcarrito")
 	@ResponseBody
 	public List<Carrito>listarcarrito(final HttpSession session) {
@@ -108,4 +122,20 @@ public class CarritoController {
 		return new ResultadoResponse(respuesta, mensaje);
 	}
 
+	
+	@GetMapping("/verusuario")
+	@ResponseBody
+	public ResultadoResponse verusuario(final HttpSession session) {
+		Boolean respuesta = true;
+		String mensaje = "algo";
+		try {
+			Usuario cliente = (Usuario) session.getAttribute("otrasesion");
+			
+			mensaje= cliente.getEmail();
+		} catch (Exception e) {
+			respuesta = false;
+			mensaje = "No estás registrado";
+		}
+		return new ResultadoResponse(respuesta, mensaje);
+	}
 }

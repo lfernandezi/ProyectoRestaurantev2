@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
@@ -14,15 +15,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.pe.idat.model.Cliente;
 import edu.pe.idat.model.DetallePedido;
+import edu.pe.idat.model.Usuario;
+import edu.pe.idat.service.ClienteService;
 
 @Controller
 public class DespachoController {
+	
+	@Autowired
+	ClienteService clienteservice;
+	
 
 	@GetMapping("/despacho")
 	public String despacho(Model model, final HttpSession session) {
 
 		List<DetallePedido> listapedidos = (List<DetallePedido>) session.getAttribute("misesion");
-		Cliente cliente = (Cliente) session.getAttribute("otrasesion");
+		Usuario cliente = (Usuario) session.getAttribute("otrasesion");
 		if (Objects.isNull(cliente)) {
 			model.addAttribute("mensaje", "No estás registrado");
 			return "carrito";
@@ -41,8 +48,9 @@ public class DespachoController {
 	@ResponseBody
 	public List<Cliente> listarcliente(final HttpSession session) {
 		List<Cliente> listacliente = new ArrayList<Cliente>();
-		Cliente cliente = (Cliente) session.getAttribute("otrasesion");
-		listacliente.add(cliente);
+		Usuario usu = (Usuario) session.getAttribute("otrasesion");
+		Cliente  cli=clienteservice.buscarcliente(usu.getCodusuario());
+		listacliente.add(cli);
 		return listacliente;
 	}
 

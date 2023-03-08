@@ -9,7 +9,7 @@ $(document).on("click", "#btnagregarproducto", function() {
 });
 
 $(document).on("click", ".btnactualizarproducto", function() {
-var codcategoria=$(this).attr("data-codcategoria");
+	var codcategoria = $(this).attr("data-codcategoria");
 
 	ListarCategoria(codcategoria);
 	$("#txtnombre").val($(this).attr("data-nombre"));
@@ -118,26 +118,35 @@ function ListarProductos() {
 			//console.log(resultado);
 			$("#tblproducto > tbody").html("");
 			$.each(resultado, function(index, value) {
-				$("#tblproducto > tbody").append(
-					"<tr>" +
-					"<td>" + value.codproducto + "</td>" +
-					"<td>" + value.nombre + "</td>" +
-					"<td>" + value.descripcion + "</td>" +
-					"<td>" + value.codcategoria.categoria + "</td>" +
-					"<td> S/.  " + value.precio + "</td>" +
-					"<td><button type='button' class='btn btn-outline-warning btnactualizarproducto' " +
-					" data-codproducto='" + value.codproducto + "'" +
-					" data-nombre='" + value.nombre + "'" +
-					" data-descripcion='" + value.descripcion + "'" +
-					" data-codcategoria='" + value.codcategoria.codcategoria + "'" +
-					" data-precio='" + value.precio + "'" +
 
-					">Actualizar</button></td>" +
-					"<td><button type='button' class='btn btn-outline-danger btneliminarproducto' " +
-					" data-codproducto='" + value.codproducto + "'" +
-					" data-nombre='" + value.nombre + "'" +
-					">Eliminar</button></td>" +
-					"</td>");
+				if (value.codproducto == 0) {
+					$("#tblproducto > tbody").append(
+						"<tr>" +
+						"<td colspan='10' class='text-center'> Aún no ha registrado ningún producto</td>" +
+						"</tr>");
+				} else {
+
+					$("#tblproducto > tbody").append(
+						"<tr>" +
+						"<td>" + value.codproducto + "</td>" +
+						"<td>" + value.nombre + "</td>" +
+						"<td>" + value.descripcion + "</td>" +
+						"<td>" + value.codcategoria.categoria + "</td>" +
+						"<td> S/.  " + value.precio + "</td>" +
+						"<td><button type='button' class='btn btn-outline-warning btnactualizarproducto' " +
+						" data-codproducto='" + value.codproducto + "'" +
+						" data-nombre='" + value.nombre + "'" +
+						" data-descripcion='" + value.descripcion + "'" +
+						" data-codcategoria='" + value.codcategoria.codcategoria + "'" +
+						" data-precio='" + value.precio + "'" +
+
+						">Actualizar</button></td>" +
+						"<td><button type='button' class='btn btn-outline-danger btneliminarproducto' " +
+						" data-codproducto='" + value.codproducto + "'" +
+						" data-nombre='" + value.nombre + "'" +
+						">Eliminar</button></td>" +
+						"</td>");
+				}
 			});
 		}
 	});
@@ -216,60 +225,37 @@ function BuscarproductoxCodigo(codigo) {
 		success: function(data) {
 			$("#tblproducto > tbody").html("");
 			$.each(data, function(index, value) {
-			
-			if (value.codproducto == 0) {
+
+				if (value.codproducto == 0) {
 					$("#tblproducto > tbody").append(
 						"<tr>" +
-						"<td colspan='10' class='text-center'> EMPLEADO NO ENCONTRADO </td>" +
+						"<td colspan='10' class='text-center'> PRODUCTO NO ENCONTRADO </td>" +
 						"</tr>");
 				} else {
-				$("#tblproducto > tbody").append("<tr>" +
-					"<td>" + value.codproducto + "</td>" +
-					"<td class='text-center'>" + value.nombre + "</td>" +
-					"<td class='text-center'>" + value.descripcion + "</td>" +
-					"<td class='text-center'>" + value.codcategoria.categoria + "</td>" +
-					"<td class='text-center'> S/.  " + value.precio + "</td>" +
-					"<td><button type='button' class='btn btn-outline-warning btnactualizarproducto' " +
-					" data-codproducto='" + value.codproducto + "'" +
-					" data-nombre='" + value.nombre + "'" +
-					" data-descripcion='" + value.descripcion + "'" +
-					" data-codcategoria='" + value.codcategoria.codcategoria + "'" +
-					" data-precio='" + value.precio + "'" +
-					">Actualizar</button></td>" +
-					"<td><button type='button' class='btn btn-outline-danger btneliminarempleado' " +
-					" data-codproducto='" + value.codproducto + "'" +
-					" data-nombre='" + value.nombre + "'" +
-					">Eliminar</button></td>" +
-					"</tr>"
-				)};
+					$("#tblproducto > tbody").append("<tr>" +
+						"<td>" + value.codproducto + "</td>" +
+						"<td class='text-center'>" + value.nombre + "</td>" +
+						"<td class='text-center'>" + value.descripcion + "</td>" +
+						"<td class='text-center'>" + value.codcategoria.categoria + "</td>" +
+						"<td class='text-center'> S/.  " + value.precio + "</td>" +
+						"<td><button type='button' class='btn btn-outline-warning btnactualizarproducto' " +
+						" data-codproducto='" + value.codproducto + "'" +
+						" data-nombre='" + value.nombre + "'" +
+						" data-descripcion='" + value.descripcion + "'" +
+						" data-codcategoria='" + value.codcategoria.codcategoria + "'" +
+						" data-precio='" + value.precio + "'" +
+						">Actualizar</button></td>" +
+						"<td><button type='button' class='btn btn-outline-danger btneliminarempleado' " +
+						" data-codproducto='" + value.codproducto + "'" +
+						" data-nombre='" + value.nombre + "'" +
+						">Eliminar</button></td>" +
+						"</tr>"
+					)
+				};
 			})
 		}
 	});
 }
 
-
-function ListarCategoria(codigocategoria) {
-
-	$.ajax({
-		type: "GET",
-		url: "/listarCategorias",
-		dataType: "json",
-		success: function(resultado) {
-			//console.log(resultado);
-			$("#cbocategoria").html("");
-			$("#cbocategoria").append(
-				"<option value='0'> Seleccionar</option>");
-			$.each(resultado, function(index, value) {
-				$("#cbocategoria").append(
-					"<option value='" + value.codcategoria + "'>" + value.categoria + "</option>"
-				);
-			});
-			
-			/*$("#cbocategoria").append(
-				"<option value='100'> Otro </option>");*/
-				$("#cbocategoria").val(codigocategoria);
-		}
-	});
-}
 
 

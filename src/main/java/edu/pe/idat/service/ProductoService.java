@@ -26,17 +26,23 @@ public class ProductoService {
 		
 		List<Producto> lisprod= productoRepository.findAll();
 		List<ProductoResponse> nvalistaprod=new ArrayList<ProductoResponse>();
-		
-		for (Producto producto:lisprod) {
+		if (!lisprod.isEmpty()) {
+			for (Producto producto:lisprod) {
+				ProductoResponse p=new ProductoResponse();
+				p.setCodproducto(producto.getCodproducto());
+				p.setNombre(producto.getNombre());
+				p.setDescripcion(producto.getDescripcion());
+				p.setPrecio(producto.getPrecio());
+				p.setCodcategoria(cateRepository.findById(producto.getCodcategoria()).orElse(null));
+				
+				nvalistaprod.add(p);
+			}
+		}else {
 			ProductoResponse p=new ProductoResponse();
-			p.setCodproducto(producto.getCodproducto());
-			p.setNombre(producto.getNombre());
-			p.setDescripcion(producto.getDescripcion());
-			p.setPrecio(producto.getPrecio());
-			p.setCodcategoria(cateRepository.findById(producto.getCodcategoria()).orElse(null));
-			
+			p.setCodproducto(0);
 			nvalistaprod.add(p);
 		}
+		
 		
 		return nvalistaprod;
 	}	

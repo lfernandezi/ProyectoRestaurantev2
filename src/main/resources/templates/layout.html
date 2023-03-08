@@ -23,11 +23,11 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" th:href="@{/categorias}">CARTA</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/Menus/menu}">CARTA</a></li>
 			</ul>
 		</div>
 	</nav>
-	<!-- >nav th:fragment="navloginE" class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<nav th:fragment="navloginE" class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<img src="/img/loginpollo2.jpg" alt="jacket" width="50" height="50">
 		<a class="navbar-brand">INGRESO :</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -38,23 +38,24 @@
 			<ul class="navbar-nav">
 			</ul>
 		</div>
-	</nav-->
+	</nav>
 	<nav th:fragment="menu" class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<img src="/img/loginpollo2.jpg" alt="jacket" width="50" height="50">
-		<a class="navbar-brand">MENU PRINCIPAL :</a>
+		<a class="navbar-brand">CLIENTE :</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
 			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" th:href="@{/categorias}">CARTA</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/carrito}">CARRITO</a></li>
+				
 				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${mensaje}"></a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" th:href="@{/login}">INICIAR SESION</a>	
 						<a class="dropdown-item" th:href="@{/registrarCliente}">REGISTRARSE</a>
-						<a class="dropdown-item" th:href="@{/login}">CERRAR SESION</a>						
+											
 					</div>
 				</li>
 			</ul>
@@ -77,9 +78,10 @@
 						<a class="dropdown-item" th:href="@{/listarempleado}">EMPLEADOS</a>
 						<a class="dropdown-item" th:href="@{/listaclientes}">CLIENTES</a>
 						<a class="dropdown-item" th:href="@{/listarpedido}">PEDIDOS</a>
+						<a class="dropdown-item" th:href="@{/listarcategorias}">CATEGORIAS</a>
 					</div>
 				</li>
-				<li class="nav-item"><a class="nav-link" th:href="@{/login}">INGRESA o REGISTRATE</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/login}">CERRAR SESIÓN</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -113,7 +115,7 @@
 		</div>
 	</nav>
 
-	<nav th:fragment="categorias" class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<!--nav th:fragment="categorias" class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<img src="/img/loginpollo2.jpg" alt="jacket" width="50" height="50">
 		<a class="navbar-brand">CATEGORIAS :</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -126,7 +128,7 @@
 				<li class="nav-item"><a class="nav-link" th:href="@{/login}">INGRESA o REGISTRATE</a></li>
 			</ul>
 		</div>
-	</nav>
+	</nav-->
 
 	<!-- >div th:fragment=manta class="container">
 		<div class="row">

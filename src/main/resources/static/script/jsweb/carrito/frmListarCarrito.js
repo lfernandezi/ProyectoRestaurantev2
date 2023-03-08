@@ -1,3 +1,9 @@
+$(document).ready(function() {
+	verUsuario();
+	ListarCarrito();
+
+});
+
 $(document).on("click", ".btnactualizarcarrito", function() {
 	$("#txtnombre").val($(this).attr("data-nombreproducto"));
 	$("#txtdescripcion").val($(this).attr("data-descripcion"));
@@ -15,10 +21,7 @@ $(document).on("click", ".btneliminarcarrito", function() {
 
 });
 
-$(document).ready(function() {
-	ListarCarrito();
-	//$("#compra").val(total);
-});
+
 
 $(document).on("click", "#btnagregarcarrito", function() {
 	var uno = $("#txtprecio").val();
@@ -77,6 +80,36 @@ $(document).on("click", "#btneliminarcarrito", function() {
 	});
 });
 
+function verUsuario() {
+	$.ajax({
+		type: "GET",
+		contentType: "application/json",
+		url: "/verusuario",
+		dataType: "json",
+		success: function(resultado) {
+			$("#navbarDropdown1").text(resultado.mensaje);
+			//var valor=resultado.mensaje;
+		}
+	});
+};
+
+
+$(document).on("click", "#btnirdespacho", function() {
+	if ($("#navbarDropdown1").text() == "No estás registrado") {
+		alert("No estás registrado");
+	} else {
+	
+		abrirotra();
+	}
+
+});
+
+function abrirotra() {
+
+
+	window.open("http://localhost:9080/despacho", "_self");
+
+}
 
 function ListarCarrito() {
 	var total = 0;
@@ -128,8 +161,13 @@ function ListarCarrito() {
 				"<h6 class='card-title'>ENTREGA ............ s/. " + delivery.toFixed(2) + "</h6>" +
 				"<h6 class='card-title'>IGV ....................... s/. " + igv.toFixed(2) + "</h6><hr />" +
 				"<h5 class='card-title'>TOTAL .......... s/. " + totaldelivery.toFixed(2) + "</h5>" +
-				"<a class='btn btn-outline-info btn-block' href='/despacho'>FINALIZAR COMPRA</a>" +
-				"<br> <a href='/categorias'class='btn btn-outline-success btn-block '>" +
+
+
+				//"<a class='btn btn-outline-info btn-block' id='btnirdespacho'  href='/despacho'>FINALIZAR COMPRA</a>" +
+
+				"<br><div class='center'> <button type='button' class='btn btn-outline-info col-12'	id='btnirdespacho' >FINALIZAR COMPRA</button> </div> " +
+
+				"<br> <a href='/Menus/menu'class='btn btn-outline-success btn-block '>" +
 				"Agregar más productos</a>"
 			);
 		}

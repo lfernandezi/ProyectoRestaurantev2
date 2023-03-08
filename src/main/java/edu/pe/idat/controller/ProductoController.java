@@ -81,11 +81,11 @@ public class ProductoController {
 	}
 	
 	
-	@GetMapping("/listarCategorias")
+	/*@GetMapping("/listarCategorias")
 	@ResponseBody
 	public List<Categoria> listarCategorias(){
 	return categoriaservice.ListarCategoria();
 	}
-	
+	*/
 }
 
