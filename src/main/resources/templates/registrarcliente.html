@@ -5,10 +5,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<!---<script type="text/javascript"
+<script type="text/javascript"
 	th:src="@{/script/jsweb/cliente/Cliente.js}">
-	
-</script>--->
+</script>
 <body>
 	<div th:replace=layout::titulo></div>
 	<div class="alert alert-warning" role="alert">
@@ -21,10 +20,16 @@
 				<div class="col-md">
 					<div class="card">
 						<h2 class=text-center>REGISTRO</h2>
-						<div class="text-center alert alert-danger" role="alert">
+						<!--div class="text-center alert alert-danger" role="alert">
 							<span class="text-danger" th:text="${mensaje}"></span>
+							
+						</div-->
+						
+						<div class="text-center">
+							<span class="text-danger" th:text="${mensaje}"></span>
+							<span class="text-success" th:text="${mensaje1}"></span>
 						</div>
-						<div class="card-body">
+						<div class="card-body" id="cardCliente">
 							<form th:action="@{/registrarCliente}" method="post"
 								th:object="${nuevocliente}">
 								<div class="row g-3">
@@ -73,9 +78,11 @@
 								<div class="row g-3">
 									<div class="col">
 										<label for="txtcontrasenia">Ingrese Contraseña:</label> <input
-											type="password" th:field="*{xcontrasenia}"
+											type="text" th:field="*{xcontrasenia}"
 											class="form-control" id="txtcontrasenia"> <span
 											id="errorcontrasenia" class="text-danger"></span>
+											
+											<input type="hidden"  th:field="*{codcliente}"  id="txtcodcliente" val="0"/>
 									</div>
 								</div>
 								<br />
@@ -85,12 +92,15 @@
 											class="btn btn-outline-success btn-block" id="btnregistrar">REGISTRAR</button>
 									</div>
 									<div class="col">
-										<a th:href="@{/login}"
+										<a th:href="@{/Menus/menu}"
 											class="btn btn-outline-primary btn-block"> REGRESAR </a>
 									</div>
 								</div>
 								<div id="mensaje"></div>
 							</form>
+							
+							
+							
 						</div>
 					</div>
 				</div>

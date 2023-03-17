@@ -188,3 +188,5 @@ $(document).on("click", ".btnactualizarestado", function() {
 	$("#modalcambiarestado").modal("show");
 
 });
+
+

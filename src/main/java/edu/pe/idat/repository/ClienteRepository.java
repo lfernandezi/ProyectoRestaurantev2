@@ -24,18 +24,12 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
 	@Transactional
 	@Modifying
-	@Query(value = "{call sp_ActualizarCliente(:idcliente, :dni,:nombre, :apellido, :email, :contrasenia, :telefono, :direccion, :estado)}", 
-	nativeQuery = true)
-	void actualizarCliente(@Param("idcliente")Integer idcliente, 
-			               @Param("dni") String dni,
-			               @Param("nombre") String nombre,
-			               @Param("apellido") String apellido,
-	                       @Param("email")String email, 
-                           @Param("contrasenia") String contrasenia,
-                           @Param("telefono") String telefono,
-                           @Param("direccion") String direccion,
-	                       
-                           @Param("estado") String estado);
+	@Query(value = "{call sp_ActualizarCliente(:codcliente, :dni, :nombre , :apellido,"
+			+ ":email, :contraseña, :telefono, :direccion, :estado)}", nativeQuery = true)
+	void actualizarCliente(@Param("codcliente") int codcliente,@Param("dni") String xdni, @Param("nombre") String xnombre,
+			@Param("apellido") String xapellido, @Param("email") String xemail,
+			@Param("contraseña") String xcontrasenia, @Param("telefono") String xtelefono,
+			@Param("direccion") String xdireccion, @Param("estado") String xestado);
 
 	@Transactional
 	@Modifying

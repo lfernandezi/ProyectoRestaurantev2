@@ -236,14 +236,16 @@ function ListarCarrito() {
 			if (total > 0) {
 				delivery = 5.00;
 			}
-			var igv = (total + delivery) * 0.18;
-			var totaldelivery = total + igv + delivery;
+			var igv = (total) * 0.18;
+			var subtotal = total-igv;
+			var totaldelivery = total + delivery;
 
 			$("#tblCompra").append(
-				"<h6 id='txtsubtotal' class='card-title'>SUBTOTAL .......... s/. " + total.toFixed(2) + "</h6>" +
-				"<h6 id='txtentrega'class='card-title'>ENTREGA ............ s/. " + delivery.toFixed(2) + "</h6>" +
-				"<h6 id='txtigv'class='card-title'>IGV ....................... s/. " + igv.toFixed(2) + "</h6><hr />" +
-				"<h5 id='txtmonto'class='card-title'>TOTAL .......... s/. " + totaldelivery.toFixed(2) + "</h5>"
+				"<h6 id='txtsubtotal' class='card-title'>SUBTOTAL .......................... s/. " + subtotal.toFixed(2) + "</h6>" +
+				"<h6 id='txtigv'class='card-title'>IGV ....................................... s/. " + igv.toFixed(2) + "</h6><hr />" +
+				"<h6 id='txttotal'class='card-title'>TOTAL .................................. s/. " + total.toFixed(2) + "</h6>" +
+				"<h6 id='txtentrega'class='card-title'>ENTREGA .............................. s/. " + delivery.toFixed(2) + "</h6>" +
+				"<h5 id='txtmonto'class='card-title'>TOTAL A PAGAR ... s/. " + totaldelivery.toFixed(2) + "</h5>"
 			);
 			$("#txtsubtotal").val(total.toFixed(2) + delivery);
 			$("#txtigv").val(igv.toFixed(2));

@@ -9,33 +9,9 @@
 	th:src="@{/script/jsweb/carrito/frmListarCarrito.js}"></script>
 <body>
 	<div th:replace="layout::titulo"></div>
-	
-	
-	<nav  class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<img src="/img/loginpollo2.jpg" alt="jacket" width="50" height="50">
-		<a class="navbar-brand">CLIENTE :</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNav">
-			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" th:href="@{/carrito}">CARRITO</a></li>
-				
-				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1"
-						role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" id="acion1" th:href="@{/login}">INICIAR SESION</a>	
-						<a class="dropdown-item" id="acion2" th:href="@{/registrarCliente}">REGISTRARSE</a>
-											
-					</div>
-				</li>
-			</ul>
-		</div>
-	</nav>
-	
-	
-	
+	<nav th:replace="layout::menuvx"></nav>
+
+
 	<h2 class="text-center">CARRITO DE COMPRAS</h2>
 	<div class="container">
 		<div class="row">
@@ -44,7 +20,7 @@
 					<thead class="table-secondary">
 						<tr>
 							<td scope="col">CODIGO</td>
-							<td scope="col">NOMBRE COMBO</td>
+							<td scope="col">NOMBRE</td>
 							<td scope="col">DESCRIPCION PRODUCTO</td>
 							<td scope="col">PRECIO</td>
 							<td scope="col">CANTIDAD</td>
@@ -57,33 +33,16 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="col-md">
+			<div class="col-bg">
 				<div class="card">
 					<div class="card-header">
 						<ul class="navbar-nav">
 							<h5 class=text-center>RESUMEN DE COMPRA</h5>
 						</ul>
 					</div>
-					<div class="card-body alert alert-secondary" id="tblCompra">
-						<!--<h5 class="card-title">SUBTOTAL :</h5>
-					<div class="form-group">
-						<label>SUBTOTAL :</label> <input
-							type="text" class="form-control" readonly>
-					</div>
+					<div class="card-body alert alert-secondary"   id="tblCompra">
 
-						<h5 class="card-title">ENTREGA :</h5>
-						<br>
-						<hr class="dropdown-divider">
-						<h5 class="card-title">TOTAL :</h5>-->
-						<!-- br> <a class="btn btn-outline-info btn-block" th:href="@{/despacho}" >FINALIZAR COMPRA</a>
-						<br>
-						<div><button type="button" class="btn btn-outline-info col-12"
-							id="btnirdespacho">FINALIZAR COMPRA</button>
-							</div>
-						<br>
-						<ul class="navbar-nav">
-							<li class="nav-item"><a class="nav-link"
-								th:href="@{/Menus/menu}"> <=AGREGAR MAS PRODUCTOS </a--></li>
+						</li>
 						</ul>
 					</div>
 				</div>
@@ -107,7 +66,7 @@
 
 					<form th:action="registrarpedido" method="post">
 						<div class="form-group">
-							<label for="txtnombre">NOMBRE COMBO:</label> <input type="text"
+							<label for="txtnombre">NOMBRE:</label> <input type="text"
 								class="form-control" id="txtnombre" readonly>
 						</div>
 

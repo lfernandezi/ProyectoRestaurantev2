@@ -29,27 +29,6 @@ public class CarritoController {
 	@Autowired
 	CarritoService carritoservice;
 	
-
-	/*@GetMapping("/carrito")
-	public String listarpedidos(Model model, final HttpSession session) {
-
-		List<Carrito> listapedidos = (List<Carrito>) session.getAttribute("misesion");
-		if (CollectionUtils.isEmpty(listapedidos)) {
-			listapedidos = new ArrayList<Carrito>();
-			model.addAttribute("compra", 0);
-		}
-		try {
-			Usuario cliente = (Usuario) session.getAttribute("otrasesion");
-			model.addAttribute("mensaje", cliente.getEmail());
-			model.addAttribute("listadopedidos", listapedidos);
-			return "carrito";
-		} catch (Exception e) {
-			model.addAttribute("mensaje", "No estás registrado");
-			model.addAttribute("listadopedidos", listapedidos);
-			return "carrito";
-		}
-	}
-*/
 	@GetMapping("/carrito")
 	public String listarpedidos(Model model, final HttpSession session) {
 
@@ -122,20 +101,5 @@ public class CarritoController {
 		return new ResultadoResponse(respuesta, mensaje);
 	}
 
-	
-	@GetMapping("/verusuario")
-	@ResponseBody
-	public ResultadoResponse verusuario(final HttpSession session) {
-		Boolean respuesta = true;
-		String mensaje = "algo";
-		try {
-			Usuario cliente = (Usuario) session.getAttribute("otrasesion");
-			
-			mensaje= cliente.getEmail();
-		} catch (Exception e) {
-			respuesta = false;
-			mensaje = "No estás registrado";
-		}
-		return new ResultadoResponse(respuesta, mensaje);
-	}
+
 }

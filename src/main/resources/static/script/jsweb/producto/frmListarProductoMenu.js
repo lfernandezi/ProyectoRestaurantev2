@@ -112,14 +112,10 @@ function ListarCategoria() {
 					"<option value='" + value.codcategoria + "'>" + value.categoria + "</option>"
 				);
 			});
-
-			/*$("#cbocategoria").append(
-				"<option value='100'> Otro </option>");*/
-			$("#cbocategoria").val(codigocategoria);
+			
 		}
 	});
 }
-
 
 
 

@@ -40,7 +40,8 @@ public class ClienteService {
 		}
 	
 	public void ActualizarCliente(Cliente cliente) {
-		clienterepository.registrarCliente(cliente.getXdni(), cliente.getXnombre(), cliente.getXapellido(),
+		
+		clienterepository.actualizarCliente(cliente.getCodcliente(), cliente.getXdni(), cliente.getXnombre(), cliente.getXapellido(),
 				cliente.getXemail(), cliente.getXcontrasenia(),cliente.getXtelefono(), cliente.getXdireccion(), 
 				"ACTIVO");
 	}

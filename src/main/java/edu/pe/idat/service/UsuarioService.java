@@ -14,4 +14,8 @@ public class UsuarioService {
 	public Usuario buscarUsuario(String email) {
 		return usurepo.buscarUsuarioxEmail(email);
 	}
+	
+	public void eliminarUsuario (int cod) {
+		usurepo.deleteById(cod);
+	}
 }

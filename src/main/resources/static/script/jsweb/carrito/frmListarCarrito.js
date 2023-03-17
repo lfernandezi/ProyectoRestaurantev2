@@ -1,7 +1,6 @@
 $(document).ready(function() {
 	verUsuario();
 	ListarCarrito();
-
 });
 
 $(document).on("click", ".btnactualizarcarrito", function() {
@@ -21,7 +20,28 @@ $(document).on("click", ".btneliminarcarrito", function() {
 
 });
 
+$(document).on("click", "#acion1", function() {
+	var registro = $("#navbarDropdown1").text();
+	if (registro == "No estás registrado") {
+		window.open("http://localhost:9080/login", "_self");
+	}else{
+		$.ajax({
+		type: "GET",
+		contentType: "application/json",
+		url: "/cerrarsesion",
+		dataType: "json",
+		success: function(resultado) {
+			if(resultado){
+			window.open("http://localhost:9080/login", "_self");
+			}else{
+				alert("Algo falló");
+			}
+			
+		}
+	});
+	}
 
+});
 
 $(document).on("click", "#btnagregarcarrito", function() {
 	var uno = $("#txtprecio").val();
@@ -80,35 +100,21 @@ $(document).on("click", "#btneliminarcarrito", function() {
 	});
 });
 
-function verUsuario() {
-	$.ajax({
-		type: "GET",
-		contentType: "application/json",
-		url: "/verusuario",
-		dataType: "json",
-		success: function(resultado) {
-			$("#navbarDropdown1").text(resultado.mensaje);
-			//var valor=resultado.mensaje;
-		}
-	});
-};
+
 
 
 $(document).on("click", "#btnirdespacho", function() {
 	if ($("#navbarDropdown1").text() == "No estás registrado") {
 		alert("No estás registrado");
 	} else {
-	
-		abrirotra();
+
+		abrirdespacho();
 	}
 
 });
 
-function abrirotra() {
-
-
+function abrirdespacho() {
 	window.open("http://localhost:9080/despacho", "_self");
-
 }
 
 function ListarCarrito() {
@@ -153,17 +159,17 @@ function ListarCarrito() {
 			if (total > 0) {
 				delivery = 5.00;
 			}
-			var igv = (total + delivery) * 0.18;
-			var totaldelivery = total + igv + delivery;
+			
+			var igv = (total) * 0.18;
+			var subtotal = total-igv;
+			var totaldelivery = total + delivery;
 
 			$("#tblCompra").append(
-				"<h6 class='card-title'>SUBTOTAL .......... s/. " + total.toFixed(2) + "</h6>" +
-				"<h6 class='card-title'>ENTREGA ............ s/. " + delivery.toFixed(2) + "</h6>" +
-				"<h6 class='card-title'>IGV ....................... s/. " + igv.toFixed(2) + "</h6><hr />" +
-				"<h5 class='card-title'>TOTAL .......... s/. " + totaldelivery.toFixed(2) + "</h5>" +
-
-
-				//"<a class='btn btn-outline-info btn-block' id='btnirdespacho'  href='/despacho'>FINALIZAR COMPRA</a>" +
+				"<h6 class='card-title'>SUBTOTAL ..................... s/. " + subtotal.toFixed(2) + "</h6>" +
+				"<h6 class='card-title'>IGV .................................. s/. " + igv.toFixed(2) + "</h6><hr />" +
+				"<h6 class='card-title'>TOTAL ............................. s/. " + total.toFixed(2) + "</h5>" +
+				"<h6 class='card-title'>ENTREGA ......................... s/.  " + delivery.toFixed(2) + "</h6>" +
+				"<h5 class='card-title'>TOTAL A PAGAR . s/. " + totaldelivery.toFixed(2) + "</h6>" +
 
 				"<br><div class='center'> <button type='button' class='btn btn-outline-info col-12'	id='btnirdespacho' >FINALIZAR COMPRA</button> </div> " +
 
