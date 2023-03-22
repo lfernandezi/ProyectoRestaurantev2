@@ -1,6 +1,81 @@
+//$(document).ready(function() {
+//listarpedido();
+//});
+
 $(document).ready(function() {
-	listarpedido();
+	$("#txtbuscarpedido").hide();
+	$("#cbobuscarporestado").hide();
 });
+
+
+$(document).on("change", "#cbobuscarpedido", function() {
+	$("#errorbuscar").text("");
+	$("#txtbuscarpedido").val("");
+	var buscar = $("#cbobuscarpedido").val();
+	if (buscar === "3" || buscar === "4") {
+		$("#cbobuscarporestado").hide();
+		$("#txtbuscarpedido").show();
+		$("#errorbuscar").show();
+	} else {
+		if (buscar === "2") {
+			$("#cbobuscarporestado").show();
+			$("#errorbuscar").show();
+			$("#txtbuscarpedido").hide();
+		}else{
+		$("#cbobuscarporestado").hide();
+			$("#errorbuscar").show();
+			$("#txtbuscarpedido").hide();
+			}
+	}
+});
+
+$(document).on("click", "#btnbuscarpedido", function() {
+	var buscar = $("#cbobuscarpedido").val();
+	var codigo = $("#txtbuscarpedido").val();
+	var estado = $("#cbobuscarporestado").val();
+
+
+	if (buscar === "0") {
+		alert("Seleccione una opción");
+		$("#errorbuscar").text("");
+	} else {
+		if (buscar === "1") {
+		
+		$("#txtbuscarpedido").hide();
+			$("#errorbuscarpedido").text("");
+			listarpedido();
+		} else {
+			if (buscar === "2") {
+			$("#txtbuscarpedido").hide();
+				if (estado == "0") {
+					alert("Seleccione una opción");
+				} else {
+					$("#errorbuscarpedido").text("");
+					buscarPedidoporEstado(estado);
+				}
+			} else {
+				if (codigo == "") {
+						$("#errorbuscarpedido").text("Ingresar datos de búsqueda");
+					
+				} else {
+					if (buscar === "3") {
+					$("#errorbuscarpedido").text("");
+						alert("se busca " + codigo);
+						buscarPedidoporCodigo(codigo);
+
+					} else {
+						$("#errorbuscarpedido").text("");
+						alert("Se busca dni " + codigo);
+						buscarPedidoporCliente(codigo);
+						
+					}
+				}
+			}
+		}
+	}
+
+});
+
 
 $(document).on("click", ".btnverpedido", function() {
 	var codigo = $(this).attr("data-codpedido");
@@ -23,12 +98,9 @@ $(document).on("click", "#btnActualizarEstadoPedido", function() {
 	var est = $("#cboEstadoPedido").val();
 	if (est == "0") {
 		alert("Escoja una opción");
-	} else if (est == "1") {
-		var estado = "En Preparación";
-		ActualizarEstadoPedido(codigo, estado);
-		listarpedido();
 	} else {
-		var estado = "En Ruta";
+		estado = $("#cboEstadoPedido").val();
+
 		ActualizarEstadoPedido(codigo, estado);
 		listarpedido();
 	}
@@ -42,17 +114,22 @@ function listarpedido() {
 		url: "/listarPedido",
 		dataType: "json",
 		success: function(resultado) {
-			//console.log(resultado);
+			
 			$("#tblpedido > tbody").html("");
 			$.each(resultado, function(index, value) {
+			
+			if (value.codpedido == 0 || value.codpedido == null) {
+					$("#tblpedido > tbody").append(
+						"<tr>" +
+						"<td colspan='10' class='text-center'> NO SE ENCONTRARON PEDIDOS </td>" +
+						"</tr>");
+				} else {
 				$("#tblpedido > tbody").append(
 					"<tr>" +
 					"<td>" + value.codpedido + "</td>" +
 					"<td>" + value.fechacreacion + "</td>" +
 					"<td>" + value.codcliente + "</td>" +
 					"<td>" + value.direccion + "</td>" +
-					"<td>" + value.subtotal + "</td>" +
-					"<td>" + value.igv + "</td>" +
 					"<td>" + value.monto + "</td>" +
 					"<td>" + value.estado + "</td>" +
 
@@ -63,41 +140,193 @@ function listarpedido() {
 					"<td><input type='image' align='center' src='/img/actualizar.jpg' width='60' height='40'" +
 					"class='btnactualizarpedido' data-codpedido='" + value.codpedido + "'" +
 					"data-codcliente='" + value.codcliente + "'" + "></td>" +
-					"</tr>"
-
-				);
-
+					"</tr>");
+					}
 			});
+		},
+		error: function(xhr, status) {
+			$("#tblpedido > tbody").append(
+				"<tr>" +
+				"<td colspan='10' class='text-center'> OCURRIÓ UN ERROR </td>" +
+				"</tr>");
+		}
+	});
+}
+
+function buscarPedidoporEstado(_estado) {
+
+	$.ajax({
+		type: "GET",
+		url: "/buscarPedidoporEstado",
+		data: {
+			estado: _estado
+		},
+		dataType: "json",
+		success: function(resultado) {
+			$("#tblpedido > tbody").html("");
+			$.each(resultado, function(index, value) {
+				if (value.codpedido == 0 || value.codpedido == null) {
+					$("#tblpedido > tbody").append(
+						"<tr>" +
+						"<td colspan='10' class='text-center'> NO SE ENCONTRARON PEDIDOS </td>" +
+						"</tr>");
+				} else {
+					$("#tblpedido > tbody").append(
+						"<tr>" +
+						"<td>" + value.codpedido + "</td>" +
+						"<td>" + value.fechacreacion + "</td>" +
+						"<td>" + value.codcliente + "</td>" +
+						"<td>" + value.direccion + "</td>" +
+						"<td>" + value.monto + "</td>" +
+						"<td>" + value.estado + "</td>" +
+
+						"<td><input type='image' align='center' src='/img/ingresar.jpg' width='60' height='40'" +
+						"class='btnverpedido'data-codpedido='" + value.codpedido + "'" +
+						"data-codcliente='" + value.codcliente + "'" + "></td>" +
+
+						"<td><input type='image' align='center' src='/img/actualizar.jpg' width='60' height='40'" +
+						"class='btnactualizarpedido' data-codpedido='" + value.codpedido + "'" +
+						"data-codcliente='" + value.codcliente + "'" + "></td>" +
+						"</tr>"
+
+					);
+				}
+			});
+		},
+		error: function(xhr, status) {
+			$("#tblpedido > tbody").append(
+				"<tr>" +
+				"<td colspan='10' class='text-center'> OCURRIÓ UN ERROR </td>" +
+				"</tr>");
+		}
+	});
+}
+
+function buscarPedidoporCodigo(codigopedido) {
+
+	$.ajax({
+		type: "GET",
+		url: "/buscarPedidoporCodigo",
+		data: {
+			codpedido: codigopedido
+		},
+		dataType: "json",
+		success: function(resultado) {
+			$("#tblpedido > tbody").html("");
+			$.each(resultado, function(index, value) {
+				if (value.codpedido == 0 || value.codpedido == null) {
+					$("#tblpedido > tbody").append(
+						"<tr>" +
+						"<td colspan='10' class='text-center'> NO SE ENCONTRARON PEDIDOS </td>" +
+						"</tr>");
+				} else {
+					$("#tblpedido > tbody").append(
+						"<tr>" +
+						"<td>" + value.codpedido + "</td>" +
+						"<td>" + value.fechacreacion + "</td>" +
+						"<td>" + value.codcliente + "</td>" +
+						"<td>" + value.direccion + "</td>" +
+						"<td>" + value.monto + "</td>" +
+						"<td>" + value.estado + "</td>" +
+
+						"<td><input type='image' align='center' src='/img/ingresar.jpg' width='60' height='40'" +
+						"class='btnverpedido'data-codpedido='" + value.codpedido + "'" +
+						"data-codcliente='" + value.codcliente + "'" + "></td>" +
+
+						"<td><input type='image' align='center' src='/img/actualizar.jpg' width='60' height='40'" +
+						"class='btnactualizarpedido' data-codpedido='" + value.codpedido + "'" +
+						"data-codcliente='" + value.codcliente + "'" + "></td>" +
+						"</tr>"
+
+					);
+				}
+			});
+		},
+		error: function(xhr, status) {
+			$("#tblpedido > tbody").append(
+				"<tr>" +
+				"<td colspan='10' class='text-center'> OCURRIÓ UN ERROR </td>" +
+				"</tr>");
+		}
+	});
+}
+
+function buscarPedidoporCliente(codigocliente) {
+
+	$.ajax({
+		type: "GET",
+		url: "/buscarPedidoporCliente",
+		data: {
+			codcliente: codigocliente
+		},
+		dataType: "json",
+		success: function(resultado) {
+			$("#tblpedido > tbody").html("");
+			$.each(resultado, function(index, value) {
+				if (value.codpedido == 0 || value.codpedido == null) {
+					$("#tblpedido > tbody").append(
+						"<tr>" +
+						"<td colspan='10' class='text-center'> NO SE ENCONTRARON PEDIDOS </td>" +
+						"</tr>");
+				} else {
+					$("#tblpedido > tbody").append(
+						"<tr>" +
+						"<td>" + value.codpedido + "</td>" +
+						"<td>" + value.fechacreacion + "</td>" +
+						"<td>" + value.codcliente + "</td>" +
+						"<td>" + value.direccion + "</td>" +
+						"<td>" + value.monto + "</td>" +
+						"<td>" + value.estado + "</td>" +
+
+						"<td><input type='image' align='center' src='/img/ingresar.jpg' width='60' height='40'" +
+						"class='btnverpedido'data-codpedido='" + value.codpedido + "'" +
+						"data-codcliente='" + value.codcliente + "'" + "></td>" +
+
+						"<td><input type='image' align='center' src='/img/actualizar.jpg' width='60' height='40'" +
+						"class='btnactualizarpedido' data-codpedido='" + value.codpedido + "'" +
+						"data-codcliente='" + value.codcliente + "'" + "></td>" +
+						"</tr>"
+
+					);
+				}
+			});
+		},
+		error: function(xhr, status) {
+			$("#tblpedido > tbody").append(
+				"<tr>" +
+				"<td colspan='10' class='text-center'> OCURRIÓ UN ERROR </td>" +
+				"</tr>");
 		}
 	});
 }
 
 
 
-
 function VerDetallePedido(codigo) {
+
 	$.ajax({
 		type: "GET",
-		url: "listarDetallePedido",
+		url: "/listarDetallePedido",
 		data: {
 			codpedido: codigo
 		},
-		datatype: 'jsonp',
+		datatype: 'json',
 		success: function(data) {
 			$("#tbldetallepedido > tbody").html("");
 			$.each(data, function(index, valu) {
+
 				$("#tbldetallepedido > tbody").append("<tr>" +
 					"<td>" + valu.codpedido + "</td>" +
 					"<td class='text-center'>" + valu.codproducto + "</td>" +
 					"<td class='text-center'>" + valu.nombreproducto + "</td>" +
-					"<td class='text-center'>" + valu.descripcion + "</td>" +
+					//"<td class='text-center'>" + valu.descripcion + "</td>" +
 					"<td class='text-center'>" + valu.cantidad + "</td>" +
 					"<td class='text-center'>" + valu.precio + "</td>" +
 					"<td class='text-center'>" + valu.subtotal + "</td>" +
-
 					"</tr>"
+
 				);
-			})
+			});
 		}
 	});
 }

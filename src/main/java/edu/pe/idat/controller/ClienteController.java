@@ -118,6 +118,8 @@ public class ClienteController {
 						clienteservice.RegistrarCliente(cliente);
 						mensaje = "Cliente registrado";
 						model.addAttribute("nuevocliente", new Cliente());
+						model.addAttribute("mensaje1", mensaje);
+						return "registrarcliente";
 					} else {
 						mensaje = "Email ya existe, no se pudo registrar";
 					}

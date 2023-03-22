@@ -137,8 +137,8 @@ function IngresarPedido() {
 		data: JSON.stringify({
 			codcliente: $("#txtcodigo").val(),
 			direccion: $("#txtdireccion").val(),
-			subtotal: $("#txtsubtotal").val(),
-			igv: $("#txtigv").val(),
+			monto: $("#txtsubtotal").val(),
+			//igv: $("#txtigv").val(),
 			monto: $("#txtmonto").val()
 		}),
 		success: function(resultado) {

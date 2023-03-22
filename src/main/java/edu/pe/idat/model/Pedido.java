@@ -8,135 +8,141 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="pedido")
+@Table(name = "pedido")
 public class Pedido {
-	
+
 	@Id
 	private int codpedido;
-	
-	@Column(name ="fechacreacion")
+
+	@Column(name = "fechacreacion")
 	private Date fechacreacion;
-	
-	
-	
-	@Column(name ="direccion")
+
+	@Column(name = "direccion")
 	private String direccion;
-	
-	/*@Column(name ="subtotal")
-	private double subtotal;
-	
-	@Column(name ="igv")
-	private double igv;*/
-	
-	@Column(name ="monto")
+
+	@Column(name = "ubicacion")
+	private String ubicacion;
+
+	@Column(name = "monto")
 	private double monto;
-	
-	/*@Column(name ="estado")
-	private String estado;*/
-	@Column(name ="estadopedido")
+
+	@Column(name = "estadopedido")
 	private String estado;
-	
-	
-	@Column(name ="codcliente")
-	private int codcliente;
-	
-	@Column(name ="codenvio")
-	private int codenvio;
-	
+
+	@Column(name = "motivo")
+	private String motivo;
 
 	
+	@Column(name = "codenvio")
+	private int codenvio;
+
+	@Column(name = "codcliente")
+	private int codcliente;
+
 	public int getCodpedido() {
 		return codpedido;
 	}
+
 	public void setCodpedido(int codpedido) {
 		this.codpedido = codpedido;
 	}
+
 	public Date getFechacreacion() {
 		return fechacreacion;
 	}
+
 	public void setFechacreacion(Date fechacreacion) {
 		this.fechacreacion = fechacreacion;
 	}
-	public int getCodcliente() {
-		return codcliente;
-	}
-	public void setCodcliente(int codcliente) {
-		this.codcliente = codcliente;
-	}
+
 	public String getDireccion() {
 		return direccion;
 	}
+
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	/*public double getSubtotal() {
-		return subtotal;
+
+	public String getUbicacion() {
+		return ubicacion;
 	}
-	public void setSubtotal(double subtotal) {
-		this.subtotal = subtotal;
+
+	public void setUbicacion(String ubicacion) {
+		this.ubicacion = ubicacion;
 	}
-	public double getIgv() {
-		return igv;
-	}
-	public void setIgv(double igv) {
-		this.igv = igv;
-	}*/
+
 	public double getMonto() {
 		return monto;
 	}
+
 	public void setMonto(double monto) {
 		this.monto = monto;
 	}
+
 	public String getEstado() {
 		return estado;
 	}
+
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	
-	
-	//AGREGADO
+
+	public String getMotivo() {
+		return motivo;
+	}
+
+	public void setMotivo(String motivo) {
+		this.motivo = motivo;
+	}
+
 	public int getCodenvio() {
 		return codenvio;
 	}
+
 	public void setCodenvio(int codenvio) {
 		this.codenvio = codenvio;
 	}
-	
-	
-	
+
+	public int getCodcliente() {
+		return codcliente;
+	}
+
+	public void setCodcliente(int codcliente) {
+		this.codcliente = codcliente;
+	}
+
+	public Pedido(int codpedido, Date fechacreacion, String direccion, String ubicacion, double monto, String estado,
+			String motivo, int codenvio, int codcliente) {
+		super();
+		this.codpedido = codpedido;
+		this.fechacreacion = fechacreacion;
+		this.direccion = direccion;
+		this.ubicacion = ubicacion;
+		this.monto = monto;
+		this.estado = estado;
+		this.motivo = motivo;
+		this.codenvio = codenvio;
+		this.codcliente = codcliente;
+	}
+
 	public Pedido() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	/*public Pedido(int codpedido, Date fechacreacion, int codcliente, String direccion, double subtotal, double igv,
-			double monto, String estado) {
+
+	public Pedido(String direccion, String ubicacion, double monto, String estado, String motivo, int codenvio,
+			int codcliente) {
 		super();
-		this.codpedido = codpedido;
-		this.fechacreacion = fechacreacion;
-		this.codcliente = codcliente;
 		this.direccion = direccion;
-		this.subtotal = subtotal;
-		this.igv = igv;
+		this.ubicacion = ubicacion;
 		this.monto = monto;
 		this.estado = estado;
-	}*/
-	public Pedido(int codpedido, Date fechacreacion, String direccion, double monto, String estado, int codcliente,
-			int codenvio) {
-		super();
-		this.codpedido = codpedido;
-		this.fechacreacion = fechacreacion;
-		this.direccion = direccion;
-		this.monto = monto;
-		this.estado = estado;
-		this.codcliente = codcliente;
+		this.motivo = motivo;
 		this.codenvio = codenvio;
+		this.codcliente = codcliente;
 	}
+
 	
-	
-	
+
+
 }
-
-
-
-

@@ -1,5 +1,7 @@
 package edu.pe.idat.repository;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,27 +10,19 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-
+import edu.pe.idat.model.Cliente;
 import edu.pe.idat.model.Pedido;
 
 @Repository  
 public interface PedidoRepository extends JpaRepository<Pedido,Integer>{
 	
-	/*@Transactional
-	@Modifying
-	@Query(value = "{call sp_IngresarPedido(:codcliente,"
-	+ ":direccion,:subtotal,:igv,:monto,:estado)}", nativeQuery = true)
-	void ingresarPedido(@Param("codcliente") Integer codcliente, @Param("direccion") String direccion,
-	@Param("subtotal") Double subtotal,@Param("igv") Double igv,
-	@Param("monto") Double monto, @Param("estado") String estado);*/
-	
 	
 	@Transactional
 	@Modifying
-	@Query(value = "{call sp_IngresarPedido(:codcliente,"
-	+ ":direccion,:monto,:estado)}", nativeQuery = true)
-	void ingresarPedido(@Param("codcliente") Integer codcliente, @Param("direccion") String direccion,
-	@Param("monto") Double monto, @Param("estado") String estado);
+	@Query(value = "{call sp_IngresarPedido(:direccion,  "
+	+ ":ubicacion, :monto, :estado, :motivo, :codcliente)}", nativeQuery = true)
+	void ingresarPedido( @Param("direccion") String direccion,  @Param("ubicacion") String ubicacion,
+			 @Param("monto") Double monto, @Param("estado") String estado, @Param("motivo") String motivo, @Param("codcliente") Integer codcliente);
 	
 	@Transactional
 	@Modifying
@@ -36,5 +30,14 @@ public interface PedidoRepository extends JpaRepository<Pedido,Integer>{
 			nativeQuery=true)
 	void actualizarEstadoPedido (@Param("codpedido")Integer codpedido,
 			                 @Param("estado")String estado);	
+	
+	
+	@Query(value = "{call sp_ListarPedidoxEstado(:estado)}",
+			nativeQuery = true)
+	public	List<Pedido> buscarPedidoporEstado(@Param("estado")String estado);
+	
+	@Query(value = "{call sp_ListarPedidoxCliente(:codcliente)}",
+			nativeQuery = true)
+	public	List<Pedido> buscarPedidoporCliente(@Param("codcliente")int codcliente);
 }
 

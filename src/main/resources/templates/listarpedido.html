@@ -11,11 +11,45 @@
 	<div th:fragment="titulo" class="alert alert-danger" role="alert">
 		<h1 class="text-center">"RESTAURANTE POLLERIA EATSFREE"</h1>
 	</div>
+	<nav th:replace="layout::menua"></nav>
 	<h2 class="text-center">ESTADOS DE PEDIDOS</h2>
 	<div class="container">
 		<div class="row">
 			<div class="col-sm">
-
+			<div class="col-sm-30">
+				<hr />
+				<div class="row g-3">
+					<label>Buscar Pedido:</label>
+					<div class="col-auto">
+						<select class="form-control" id="cbobuscarpedido">
+							<option value="0">Seleccionar</option>
+							<option value="1">Todos</option>
+							<option value="2">Por Estado</option>
+							<option value="3">Por Número de Pedido</option>
+							<option value="4">Por Código de Cliente</option>
+						</select>
+					</div>
+					<div class="col-auto">
+						<select class="form-control" id="cbobuscarporestado">
+							<option value="0">Seleccione</option>
+						<option value="Recibido">Recibido</option>
+						<option value="En Preparación">En Preparación</option>
+						<option value="Listo para Envío">Listo para Envío</option>
+						<option value="En Ruta">En Ruta</option>
+						<option value="Entregado">Entregado</option>
+						<option value="Cancelado">Cancelado</option>
+						<option value="Anulado">Anulado</option>
+						</select>
+					</div>
+					<div class="col-auto">
+						<input type="number" class="form-control" id="txtbuscarpedido" placeholder="Ejm: 123456">
+						<span id="errorbuscarpedido" class="text-danger"></span>
+					</div>
+					<div class="col-auto">
+						<button type="submit" class="btn btn-primary mb-3" id="btnbuscarpedido">Buscar</button>
+					</div>
+					
+				</div>
 				<hr />
 				<table id="tblpedido" class="table table-hover table-bordered">
 					<thead class="table-secondary">
@@ -25,34 +59,13 @@
 							<td scope="col">CLIENTE</td>
 							<td scope="col">DIRECCION</td>
 							<td scope="col">SUBTOTAL</td>
-							<td scope="col">IGV</td>
-							<td scope="col">MONTO</td>
 							<td scope="col">ESTADO</td>
 							<td scope="col">VER PEDIDO</td>
 							<td scope="col">Cambiar estado</td>
 						</tr>
 					</thead>
 					<tbody>
-						<!--<tr th:each="pedido:${listarpedido}">
-							<td th:text="${pedido.codpedido}"></td>
-							<td th:text="${pedido.fechacreacion}"></td>
-							<td th:text="${pedido.codcliente}"></td>
-							<td th:text="${pedido.direccion}"></td>
-							<td th:text="${pedido.subtotal}"></td>
-							<td th:text="${pedido.igv}"></td>
-							<td th:text="${pedido.monto}"></td>
-							<td th:text="${pedido.estado}"></td>
-							<td>
-								<input type="image" align="center" src="/img/ingresar.jpg" width="60" height="40"
-									class="btnverpedido" th:data-codpedido="${pedido.codpedido}"
-									th:data-codcliente="${pedido.codcliente}">
-							</td>
-							<td>
-								<input type="image" align="center" src="/img/actualizar.jpg" width="60" height="40"
-									class="btnactualizarpedido" th:data-codpedido="${pedido.codpedido}"
-									th:data-codcliente="${pedido.codcliente}">
-							</td>
-						</tr-->
+					
 					</tbody>
 				</table>
 			</div>
@@ -78,7 +91,7 @@
 									<td scope="col" class="text-center">Nro Pedido</td>
 									<td scope="col" class="text-center">Nro producto</td>
 									<td scope="col" class="text-center">Nombre Producto</td>
-									<td scope="col" class="text-center">Descripción</td>
+									<!-- td scope="col" class="text-center">Descripción</td-->
 									<td scope="col" class="text-center">Cantidad</td>
 									<td scope="col" class="text-center">Precio</td>
 									<td scope="col" class="text-center">SubTotal</td>
@@ -114,8 +127,13 @@
 					
 					<select class="form-control" id="cboEstadoPedido">
 						<option value="0">Seleccione</option>
-						<option value="1">En Preparación</option>
-						<option value="2">En Ruta</option>
+						<option value="Recibido">Recibido</option>
+						<option value="En Preparación">En Preparación</option>
+						<option value="Listo para Envío">Listo para Envío</option>
+						<option value="En Ruta">En Ruta</option>
+						<option value="Entregado">Entregado</option>
+						<option value="Cancelado">Cancelado</option>
+						<option value="Anulado">Anulado</option>
 					</select>
 					<input type="hidden" value="0" id="hddcodpedidoactualizar">
 				</div>

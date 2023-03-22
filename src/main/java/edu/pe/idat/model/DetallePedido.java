@@ -20,13 +20,18 @@ public class DetallePedido {
 	 * 
 	 * @Column(name ="descripcion") private String descripcion;
 	 */
-
+	@Column(name = "nombreproducto")
+	private String nombreproducto;
+	
 	@Column(name = "cantidad")
 	private int cantidad;
 
+	
 	@Column(name = "precio")
 	private double precio;
 
+	
+	
 	@Column(name = "subtotal")
 	private double subtotal;
 
@@ -54,13 +59,6 @@ public class DetallePedido {
 		this.codproducto = codproducto;
 	}
 
-	/*
-	 * public String getNombreproducto() { return nombreproducto; } public void
-	 * setNombreproducto(String nombreproducto) { this.nombreproducto =
-	 * nombreproducto; } public String getDescripcion() { return descripcion; }
-	 * public void setDescripcion(String descripcion) { this.descripcion =
-	 * descripcion; }
-	 */
 	public int getCantidad() {
 		return cantidad;
 	}
@@ -76,31 +74,31 @@ public class DetallePedido {
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
+	
+	public String getNombreproducto() {
+		return nombreproducto;
+	}
 
+	public void setNombreproducto(String nombreproducto) {
+		this.nombreproducto = nombreproducto;
+	}
+
+	
+	
 	public DetallePedido() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	/*
-	 * public DetallePedido(int codpedido, int codproducto, String nombreproducto,
-	 * String descripcion, int cantidad, double precio, double subtotal) { super();
-	 * this.codpedido = codpedido; this.codproducto = codproducto;
-	 * this.nombreproducto = nombreproducto; this.descripcion = descripcion;
-	 * this.cantidad = cantidad; this.precio = precio; this.subtotal = subtotal; }
-	 */
+	
 
-	/*
-	 * public DetallePedido(int codproducto, String nombreproducto, String
-	 * descripcion, int cantidad, double precio, double subtotal) { super();
-	 * this.codproducto = codproducto; this.nombreproducto = nombreproducto;
-	 * this.descripcion = descripcion; this.cantidad = cantidad; this.precio =
-	 * precio; this.subtotal = subtotal; }
-	 */
-	public DetallePedido(int codpedido, int codproducto, int cantidad, double precio, double subtotal) {
+
+	public DetallePedido(int codpedido, int codproducto, String nombreproducto, int cantidad, double precio,
+			double subtotal) {
 		super();
 		this.codpedido = codpedido;
 		this.codproducto = codproducto;
+		this.nombreproducto = nombreproducto;
 		this.cantidad = cantidad;
 		this.precio = precio;
 		this.subtotal = subtotal;

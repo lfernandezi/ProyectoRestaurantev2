@@ -44,7 +44,9 @@ public class PedidoController {
 			for(Carrito carrito : listapedidos) {
 				DetallePedido detalle= new DetallePedido();
 				detalle.setCodproducto(carrito.getCodproducto());
+				
 				detalle.setCantidad(carrito.getCantidad());
+				detalle.setNombreproducto(carrito.getNombreproducto());
 				detalle.setPrecio(carrito.getPrecio());
 				detalle.setSubtotal(carrito.getSubtotal());
 				
@@ -97,6 +99,28 @@ public class PedidoController {
 		return new ResultadoResponse(respuesta, mensaje);
 	}
 		
+	@GetMapping("/buscarPedidoporEstado")
+	@ResponseBody
+	public List<Pedido> buscarPedidoporEstado (@RequestParam ("estado")String estado){
+		List<Pedido> nvalista= pedidoService.buscarPedidoporEstado(estado);
+		
+		return nvalista;
+		
+	}
 	
+	@GetMapping("/buscarPedidoporCodigo")
+	@ResponseBody
+	public List<Pedido> buscarPedidoporCodigo (@RequestParam ("codpedido")int codpedido){
+		List<Pedido> nvalista= pedidoService.buscarPedidoporCódigo(codpedido);
+		return nvalista;
+		
+	}
 
+	@GetMapping("/buscarPedidoporCliente")
+	@ResponseBody
+	public List<Pedido> buscarPedidoporCliente (@RequestParam ("codcliente")int codcliente){
+		List<Pedido> nvalista= pedidoService.buscarPedidoporCliente(codcliente);
+		return nvalista;
+		
+	}
 }

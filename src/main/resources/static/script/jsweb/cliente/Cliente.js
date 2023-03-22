@@ -13,40 +13,40 @@ $(document).on("change", "#cbobuscar", function() {
 		$("#errorbuscar").show();
 	} else {
 		$("#txtbuscar").hide();
-		$("#errorbuscar").text();
+		$("#errorbuscar").text("");
 	}
 });
 
-$(document).on("click", "#btnbuscar", function() {	
+$(document).on("click", "#btnbuscar", function() {
 	var buscar = $("#cbobuscar").val();
 	var codigo = $("#txtbuscar").val();
 	var dnicliente = $("#txtbuscar").val();
-	
+
 	if (buscar === "0") {
 		alert("Seleccione una opción");
 		$("#errorbuscar").text("");
 	} else {
-		if (buscar === "1") {			
+		if (buscar === "1") {
 			ListarCliente();
 		} else {
-			if (buscar === "2") {	
+			if (buscar === "2") {
 				if (codigo == "") {
 					$("#errorbuscar").text("Ingresar solo numero");
 				} else {
-					$("#errorbuscar").text("");			
-				BuscarCodigo(codigo);
-				}				
+					$("#errorbuscar").text("");
+					BuscarCodigo(codigo);
+				}
 			} else {
 				if (dnicliente.length != 8) {
 					$("#errorbuscar").text("Ingresar el DNI (MAX. 8 NUMEROS)");
 				} else {
-					$("#errorbuscar").text("");					
+					$("#errorbuscar").text("");
 					BuscarClientexdni(codigo);
 				}
 			}
 		}
 	}
- 
+
 });
 
 
@@ -66,7 +66,6 @@ $(document).on("click", "#btneliminarcliente", function() {
 			codcliente: $("#hddcodclienteeliminar").val()
 		}),
 		success: function(resultado) {
-			//var estilo = "danger";
 			if (resultado.respuesta) {
 				alert(resultado.mensaje);
 				ListarCliente();
@@ -85,6 +84,13 @@ function ListarCliente() {
 		success: function(data) {
 			$("#tblCliente > tbody").html("");
 			$.each(data, function(index, value) {
+			if (value.codcliente == 0 || value.codcliente == null) {
+					$("#tblCliente > tbody").append(
+						"<tr>" +
+						"<td colspan='10' class='text-center'> NO SE ENCONTRARON CLIENTES </td>" +
+						"</tr>");
+				} else {
+			
 				$("#tblCliente > tbody").append("<tr>" +
 					"<td>" + value.codcliente + "</td>" +
 					"<td class='text-center'>" + value.xnombre + "</td>" +
@@ -104,14 +110,24 @@ function ListarCliente() {
 					">Eliminar</button></td>" +
 					"</tr>"
 				);
+				}
 			});
+		},
+		error: function(xhr, status) {
+
+			$("#tblCliente > tbody").append(
+
+				"<tr>" +
+				"<td colspan='10' class='text-center'> OCURRIÓ UN ERROR </td>" +
+				"</tr>");
+
 		}
 	});
 }
 
 
-function BuscarCodigo(codigo) {	
-	$.ajax({		
+function BuscarCodigo(codigo) {
+	$.ajax({
 		type: "GET",
 		url: "buscarCliente",
 		data: {
@@ -121,6 +137,13 @@ function BuscarCodigo(codigo) {
 		success: function(data) {
 			$("#tblCliente > tbody").html("");
 			$.each(data, function(index, value) {
+			
+			if (value.codcliente == 0 || value.codcliente == null) {
+					$("#tblCliente > tbody").append(
+						"<tr>" +
+						"<td colspan='10' class='text-center'> NO SE ENCONTRARON CLIENTES </td>" +
+						"</tr>");
+				} else {
 				$("#tblCliente > tbody").append("<tr>" +
 					"<td>" + value.codcliente + "</td>" +
 					"<td class='text-center'>" + value.xnombre + "</td>" +
@@ -140,7 +163,17 @@ function BuscarCodigo(codigo) {
 					">Eliminar</button></td>" +
 					"</tr>"
 				);
+				}
 			})
+		},
+		error: function(xhr, status) {
+
+			$("#tblCliente > tbody").append(
+
+				"<tr>" +
+				"<td colspan='10' class='text-center'> OCURRIÓ UN ERROR </td>" +
+				"</tr>");
+
 		}
 	});
 }
@@ -157,26 +190,43 @@ function BuscarClientexdni(codigo) {
 		success: function(data) {
 			$("#tblCliente > tbody").html("");
 			$.each(data, function(index, value) {
-				$("#tblCliente > tbody").append("<tr>" +
-					"<td>" + value.codcliente + "</td>" +
-					"<td class='text-center'>" + value.xnombre + "</td>" +
-					"<td class='text-center'>" + value.xapellido + "</td>" +
-					"<td class='text-center'>" + value.xdni + "</td>" +
-					"<td class='text-center'>" + value.xtelefono + "</td>" +
-					"<td class='text-center'>" + value.xdireccion + "</td>" +
-					"<td class='text-center'>" + value.xemail + "</td>" +
-					"<td class='text-center'>" + value.xestado + "</td>" +
-					"<td><button type='button' class='btn btn-outline-warning btnactualizarcliente' " +
-					" data-codcliente='" + value.codempleado + "'" +
-					" data-xestado='" + value.xestado + "'" +
-					">Inhabilitar</button></td>" +
-					"<td><button type='button' class='btn btn-outline-danger btneliminarcliente' " +
-					" data-codcliente='" + value.codcliente + "'" +
-					" data-xnombre='" + value.xnombre + "'" +
-					">Eliminar</button></td>" +
-					"</tr>"
-				);
+				if (value.codcliente == 0 || value.codcliente == null) {
+					$("#tblCliente > tbody").append(
+						"<tr>" +
+						"<td colspan='10' class='text-center'> NO SE ENCONTRARON CLIENTES </td>" +
+						"</tr>");
+				} else {
+					$("#tblCliente > tbody").append("<tr>" +
+						"<td>" + value.codcliente + "</td>" +
+						"<td class='text-center'>" + value.xnombre + "</td>" +
+						"<td class='text-center'>" + value.xapellido + "</td>" +
+						"<td class='text-center'>" + value.xdni + "</td>" +
+						"<td class='text-center'>" + value.xtelefono + "</td>" +
+						"<td class='text-center'>" + value.xdireccion + "</td>" +
+						"<td class='text-center'>" + value.xemail + "</td>" +
+						"<td class='text-center'>" + value.xestado + "</td>" +
+						"<td><button type='button' class='btn btn-outline-warning btnactualizarcliente' " +
+						" data-codcliente='" + value.codempleado + "'" +
+						" data-xestado='" + value.xestado + "'" +
+						">Inhabilitar</button></td>" +
+						"<td><button type='button' class='btn btn-outline-danger btneliminarcliente' " +
+						" data-codcliente='" + value.codcliente + "'" +
+						" data-xnombre='" + value.xnombre + "'" +
+						">Eliminar</button></td>" +
+						"</tr>"
+					);
+				}
 			})
+		},
+
+		error: function(xhr, status) {
+
+			$("#tblCliente > tbody").append(
+
+				"<tr>" +
+				"<td colspan='10' class='text-center'> OCURRIÓ UN ERROR </td>" +
+				"</tr>");
+
 		}
 	});
 }

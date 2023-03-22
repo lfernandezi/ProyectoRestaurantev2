@@ -17,7 +17,7 @@ public class DetallaPedidoService {
 	public void IngresarDetallePedido(List<DetallePedido> listapedido) {
 		for (DetallePedido detalle:listapedido) {
 			detarepo.ingresarDetallePedido(detalle.getCodproducto(),
-					detalle.getCantidad(),detalle.getPrecio(), detalle.getSubtotal());
+					detalle.getCantidad(), detalle.getNombreproducto(),  detalle.getPrecio(), detalle.getSubtotal());
 		}
 		
 	}

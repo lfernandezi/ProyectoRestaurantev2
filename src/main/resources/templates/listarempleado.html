@@ -12,15 +12,12 @@
 	<div th:fragment="titulo" class="alert alert-danger" role="alert">
 		<h1 class="text-center">"RESTAURANTE POLLERIA EATSFREE"</h1>
 	</div>
+	<nav th:replace="layout::menua"></nav>
 	<h2 class="text-center">MANTENIMIENTO DE EMPLEADOS</h2>
 	<div class="container">
 		<div class="row">
 			<div class="col-sm">
-				<a class="nav-link" th:href="@{/Menus/menua}"> Volver al Menu
-					Administrador </a>
 				<hr />
-
-		
 				<div class="row g-4">
 					<label>Buscar Empleado:</label>
 					<div class="col-auto">
