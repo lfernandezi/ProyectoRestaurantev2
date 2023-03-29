@@ -1,6 +1,6 @@
 package edu.pe.idat.controller;
 
-import java.io.Console;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +20,7 @@ import edu.pe.idat.service.CargoEmpleadoService;
 import edu.pe.idat.service.EmpleadoService;
 import edu.pe.idat.model.AreaEmpleado;
 import edu.pe.idat.model.CargoEmpleado;
-import edu.pe.idat.model.Cliente;
+
 import edu.pe.idat.model.Empleado;
 import edu.pe.idat.model.EmpleadoResponse;
 import edu.pe.idat.model.response.ResultadoResponse;
@@ -56,6 +57,7 @@ public class EmpleadoController {
 		String mensaje="EMPLEADO REGISTRADO CORRECTAMENTE ";
 		Boolean respuesta=true;
 		try {
+			
 			empleadoService.registrarEmpleado(objEmpleado);			
 		}catch(Exception ex) {
 			mensaje="EMPLEADO NO REGISTRADO";
@@ -81,7 +83,7 @@ public class EmpleadoController {
 	
 	@GetMapping("/buscarEmpleado")
 	@ResponseBody
-	public List<EmpleadoResponse> buscarEmpleado(@RequestParam("codempleado") Integer codigo) {
+	public List<EmpleadoResponse> buscarEmpleado(@RequestParam("codempleado") int codigo) {
 		List <EmpleadoResponse> listempleado = new ArrayList<EmpleadoResponse>();
 		listempleado.add(empleadoService.buscarEmpleado(codigo)); 
 		return listempleado;

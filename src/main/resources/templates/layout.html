@@ -20,7 +20,7 @@
 	<div th:fragment="titulo" class="alert alert-danger" role="alert">
 		<h1 class="text-center">"RESTAURANTE POLLERIA EATSFREE"</h1>
 	</div>
-	<nav th:fragment="navlogin"
+	<!--nav th:fragment="navlogin"
 		class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<img src="/img/loginpollo2.jpg" alt="jacket" width="50" height="50">
 		<a class="navbar-brand">INGRESO :</a>
@@ -52,7 +52,7 @@
 			<ul class="navbar-nav">
 			</ul>
 		</div>
-	</nav>
+	</nav-->
 
 	<nav th:fragment="menuvx"
 		class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -82,12 +82,10 @@
 		</div>
 	</nav>
 
-
-
-	<nav th:fragment="menu"
+<nav th:fragment="menua"
 		class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<img src="/img/loginpollo2.jpg" alt="jacket" width="50" height="50">
-		<a class="navbar-brand">CLIENTE :</a>
+		<a class="navbar-brand">ADMINISTRADOR :</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -95,21 +93,29 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" th:href="@{/carrito}">CARRITO</a></li>
-
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false" th:text="${mensaje}"></a>
+					aria-expanded="false"> MANTENIMIENTO </a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" th:href="@{/login}">INICIAR SESION</a> <a
-							class="dropdown-item" th:href="@{/registrarCliente}">REGISTRARSE</a>
+						<a class="dropdown-item" th:href="@{/listarproducto}">PRODUCTOS</a>
+						<a class="dropdown-item" th:href="@{/listarempleado}">EMPLEADOS</a>
+						<a class="dropdown-item" th:href="@{/listaclientes}">CLIENTES</a>
+						<a class="dropdown-item" th:href="@{/listarpedido}">PEDIDOS</a> <a
+							class="dropdown-item" th:href="@{/listarcategorias}">CATEGORIAS</a>
+					</div></li>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown2"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"></a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown2">
 
+						<a class="dropdown-item" id="acion4">INICIAR SESION</a>
 					</div></li>
 			</ul>
 		</div>
 	</nav>
-	<nav th:fragment="menua"
+	<!--nav th:fragment="menua"
 		class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<img src="/img/loginpollo2.jpg" alt="jacket" width="50" height="50">
 		<a class="navbar-brand">ADMINISTRADOR :</a>
@@ -135,8 +141,40 @@
 						SESIÓN</a></li>
 			</ul>
 		</div>
-	</nav>
+	</nav-->
+	
 	<nav th:fragment="menue"
+		class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<img src="/img/loginpollo2.jpg" alt="jacket" width="50" height="50">
+		<a class="navbar-brand">EMPLEADO:</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNav" aria-controls="navbarNav"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> MANTENIMIENTO </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" th:href="@{/listarproducto}">PRODUCTOS</a>
+						<a class="dropdown-item" th:href="@{/listaclientes}">CLIENTES</a>
+						<a class="dropdown-item" th:href="@{/listarpedido}">PEDIDOS</a>
+					</div></li>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown2"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"></a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+
+						<a class="dropdown-item" id="acion4">CERRAR SESIÓN</a>
+					</div></li>
+			</ul>
+		</div>
+	</nav>
+	<!--nav th:fragment="menue"
 		class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<img src="/img/loginpollo2.jpg" alt="jacket" width="50" height="50">
 		<a class="navbar-brand">EMPLEADOS :</a>
@@ -169,7 +207,7 @@
 						o REGISTRATE</a></li>
 			</ul>
 		</div>
-	</nav>
+	</nav-->
 
 
 
@@ -185,7 +223,7 @@
 			</div>
 			<div class="modal-body">
 
-				<!-- form th:action="registrarpedido" method="post"-->
+				<!--form th:action="registrarpedido" method="post"-->
 					<div class="form-group">
 						<label for="txtnombre">NOMBRE:</label> <input type="text"
 							class="form-control" id="txtnombre" readonly>

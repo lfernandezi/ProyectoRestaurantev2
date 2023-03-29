@@ -5,9 +5,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<script type="text/javascript"
+<!--script type="text/javascript"
 	th:src="@{/script/jsweb/cliente/Cliente.js}">
-</script>
+	
+</script-->
 <body>
 	<div th:replace=layout::titulo></div>
 	<div class="alert alert-warning" role="alert">
@@ -24,10 +25,10 @@
 							<span class="text-danger" th:text="${mensaje}"></span>
 							
 						</div-->
-						
+
 						<div class="text-center">
-							<span class="text-danger" th:text="${mensaje}"></span>
-							<span class="text-success" th:text="${mensaje1}"></span>
+							<span class="text-danger" th:text="${mensaje}"></span> <span
+								class="text-success" th:text="${mensaje1}"></span>
 						</div>
 						<div class="card-body" id="cardCliente">
 							<form th:action="@{/registrarCliente}" method="post"
@@ -78,11 +79,10 @@
 								<div class="row g-3">
 									<div class="col">
 										<label for="txtcontrasenia">Ingrese Contraseña:</label> <input
-											type="text" th:field="*{xcontrasenia}"
-											class="form-control" id="txtcontrasenia"> <span
-											id="errorcontrasenia" class="text-danger"></span>
-											
-											<input type="hidden"  th:field="*{codcliente}"  id="txtcodcliente" val="0"/>
+											type="text" th:field="*{xcontrasenia}" class="form-control"
+											id="txtcontrasenia"> <span id="errorcontrasenia"
+											class="text-danger"></span> <input type="hidden"
+											th:field="*{codcliente}" id="txtcodcliente" val="0" />
 									</div>
 								</div>
 								<br />
@@ -98,9 +98,9 @@
 								</div>
 								<div id="mensaje"></div>
 							</form>
-							
-							
-							
+
+
+
 						</div>
 					</div>
 				</div>

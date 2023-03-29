@@ -2,14 +2,10 @@ package edu.pe.idat.model;
 
 import java.sql.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 public class EmpleadoResponse {
 
-	private int codempleado;
+	private Integer codempleado;
 
 	private String nombre;
 
@@ -24,6 +20,8 @@ public class EmpleadoResponse {
 	private CargoEmpleado codcargo;
 
 	private AreaEmpleado codarea;
+	
+	private String rol;
 
 	public int getCodempleado() {
 		return codempleado;
@@ -88,9 +86,25 @@ public class EmpleadoResponse {
 	public void setCodarea(AreaEmpleado codarea) {
 		this.codarea = codarea;
 	}
+	
+	
 
-	public EmpleadoResponse(int codempleado, String nombre, String apellido, String dni, String contrasenia,
-			Date fecha_ingreso, CargoEmpleado codcargo, AreaEmpleado codarea) {
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+
+	public void setCodempleado(Integer codempleado) {
+		this.codempleado = codempleado;
+	}
+
+
+
+	public EmpleadoResponse(Integer codempleado, String nombre, String apellido, String dni, String contrasenia,
+			Date fecha_ingreso, CargoEmpleado codcargo, AreaEmpleado codarea, String rol) {
 		super();
 		this.codempleado = codempleado;
 		this.nombre = nombre;
@@ -100,12 +114,17 @@ public class EmpleadoResponse {
 		this.fecha_ingreso = fecha_ingreso;
 		this.codcargo = codcargo;
 		this.codarea = codarea;
+		this.rol = rol;
 	}
 
 	public EmpleadoResponse() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+
+
+
 
 	
 }

@@ -12,6 +12,7 @@ public class Usuario {
 	@Id
 	private Integer codusuario;
 	
+	
 	@Column
 	private String email;
 	
@@ -61,6 +62,8 @@ public class Usuario {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	
 	public Usuario(Integer codusuario, String email, String password, String rol) {
 		super();
 		this.codusuario = codusuario;

@@ -53,17 +53,20 @@ $(document).on("click", "#btnbuscar", function() {
 $(document).on("click", ".btneliminarcliente", function() {
 	$("#mensajeeliminar").text("Está Seguro(a) de deshabilitar el cliente: " +
 		$(this).attr("data-xnombre") + " con Codigo :" + $(this).attr("data-codcliente") + "?");
-	$("#hddcodclienteeliminar").val($(this).attr("data-codcliente"))
+	$("#hddcodclienteeliminar").val($(this).attr("data-xemail"))
 	$("#modaleliminarcliente").modal("show");
 });
 
 $(document).on("click", "#btneliminarcliente", function() {
+
+
 	$.ajax({
 		type: "DELETE",
 		contentType: "application/json",
 		url: "/eliminarCliente",
 		data: JSON.stringify({
-			codcliente: $("#hddcodclienteeliminar").val()
+			xemail: $("#hddcodclienteeliminar").val(),
+			
 		}),
 		success: function(resultado) {
 			if (resultado.respuesta) {
@@ -102,11 +105,16 @@ function ListarCliente() {
 					"<td class='text-center'>" + value.xestado + "</td>" +
 					"<td><button type='button' class='btn btn-outline-warning btnactualizarcliente' " +
 					" data-codcliente='" + value.codcliente + "'" +
+					
+					" data-email='" + value.email + "'" +
 					" data-xestado='" + value.xestado + "'" +
 					">Inhabilitar</button></td>" +
 					"<td><button type='button' class='btn btn-outline-danger btneliminarcliente' " +
 					" data-codcliente='" + value.codcliente + "'" +
+					
+					" data-email='" + value.email + "'" +
 					" data-xnombre='" + value.xnombre + "'" +
+					" data-xemail='" + value.xemail + "'" +
 					">Eliminar</button></td>" +
 					"</tr>"
 				);
@@ -160,6 +168,7 @@ function BuscarCodigo(codigo) {
 					"<td><button type='button' class='btn btn-outline-danger btneliminarcliente' " +
 					" data-codcliente='" + value.codcliente + "'" +
 					" data-xnombre='" + value.xnombre + "'" +
+					" data-xemail='" + value.xemail + "'" +
 					">Eliminar</button></td>" +
 					"</tr>"
 				);
@@ -212,6 +221,7 @@ function BuscarClientexdni(codigo) {
 						"<td><button type='button' class='btn btn-outline-danger btneliminarcliente' " +
 						" data-codcliente='" + value.codcliente + "'" +
 						" data-xnombre='" + value.xnombre + "'" +
+						" data-xemail='" + value.xemail + "'" +
 						">Eliminar</button></td>" +
 						"</tr>"
 					);

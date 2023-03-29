@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div th:replace="layout::titulo"></div>
-	<nav th:replace="layout::navlogin"></nav>
+	
 	<div class="alert alert-warning" role="alert">
 		<div class="container">
 			<div class="row">
@@ -28,23 +28,30 @@
 							</div>
 							<form th:action="@{/login}" method="post" th:object="${usuario}">
 								<div class="form-group">
-									<label for="txtemail">CORREO ELECTRONICO</label> <input
-										type="text" placeholder="Ingresar correo" class="form-control"
+									<label for="txtemail">USUARIO</label> <input type="text"
+										placeholder="Ingresar usuario" class="form-control"
 										th:field="*{email}" id="txtemail">
 								</div>
 								<div class="form-group">
 									<label for="txtcontraseña">CONTRASEÑA</label> <input
-										type="password" placeholder="Ingresar Contraseña"
+										type="password" placeholder="Ingresar contraseña"
 										class="form-control" th:field="*{password}" id="txtcontraseña">
 								</div>
-								
-								<input type="hidden"  th:field="*{codusuario}"  id="txtcodusuario" value="0" />
+
+								<div class="form-group form-check">
+									<input type="checkbox" class="form-check-input"
+										id="exampleCheck1" value="Emp" th:field="*{rol}"> <label
+										class="form-check-label" for="exampleCheck1">Soy
+										empleado</label>
+								</div>
+
+								<input type="hidden" th:field="*{codusuario}" id="txtcodusuario"
+									value="0" />
 								<button type="submit"
 									class="btn btn-outline-success btn-block btnvalidar">INGRESAR</button>
 								<br> <a th:href="@{registrarCliente}"
 									class="btn btn-outline-primary btn-block">REGISTRATE
-									AQUI!!!</a> <br> <a th:href="@{/Menus/menua}">Ingresar
-									como empleado</a>
+									AQUI!!!</a> <br> <a th:href="@{/Menus/menu}"  class="btn btn-dark btn-lg btn-block">VER CARTA COMO INVITADO</a>
 							</form>
 
 						</div>

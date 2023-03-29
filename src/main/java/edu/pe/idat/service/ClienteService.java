@@ -16,8 +16,15 @@ public class ClienteService {
 	ClienteRepository clienterepository;
 
 	public List<Cliente> listarCliente() {
-
-		return clienterepository.findAll();
+		List<Cliente> lsct=clienterepository.findAll();
+		
+		if(lsct.isEmpty()) {
+			Cliente c=new Cliente();
+			c.setCodcliente(0);
+			
+			lsct.add(c);
+		}
+		return lsct;
 	}
 
 	public void RegistrarCliente(Cliente cliente) {
@@ -27,13 +34,15 @@ public class ClienteService {
 	}
 
 	public void EliminarCliente(Cliente cliente) {
-		clienterepository.eliminarCliente(cliente.getCodcliente());
+		clienterepository.eliminarCliente(cliente.getXemail());
 	}
 
-	public Cliente buscarcliente(Integer codigo) {
+	public Cliente buscarcliente(int codigo) {
 		Cliente cbd = clienterepository.findById(codigo).orElse(null);
 		if (Objects.isNull(cbd)) {
-			return new Cliente();
+			Cliente c=new Cliente();
+			c.setCodcliente(0);
+			return c;
 		} else {
 			return cbd;
 		}
@@ -49,6 +58,19 @@ public class ClienteService {
 		}
 
 		return liscbd;
+	}
+	
+	public Cliente buscarclientexEmail(String email) {
+		Cliente cbd = clienterepository.buscarClienteEmail(email);
+		if (Objects.isNull(cbd)) {
+			Cliente c=new Cliente();
+			c.setCodcliente(0);
+			return c;
+		} else {
+			return cbd;
+		}
+
+		
 	}
 
 	public void ActualizarCliente(Cliente cliente) {

@@ -40,7 +40,8 @@
 
 					<div class="col-sm" align="right">
 						<input type="image" src="/img/registrar.png" width="60"
-							height="50" id="btnagregarempleado" align="center">Registrar Empleado
+							height="50" id="btnagregarempleado" align="center">Registrar
+						Empleado
 					</div>
 				</div>
 				<hr />
@@ -117,17 +118,31 @@
 						<span id="errorapellido" class="text-danger"></span>
 					</div>
 
+
 					<div class="form-group">
-						<label for="txtdni">INGRESE DNI:</label> <input type="number"
-							class="form-control" id="txtdni"> <span id="errordni"
+						<label for="txtfecha">FECHA DE INGRESO:</label> <input type="date"
+							class="form-control" id="txtfecha"> <span id="errorfecha"
 							class="text-danger"></span>
 					</div>
 
+
+					<div class="form-group">
+						<label for="cboarea">SELECCIONE AREA:</label> <select
+							class="form-control" id="cboarea">
+						</select>
+					</div>
 					<div class="form-group">
 						<label for="cbocargo">SELECCIONE CARGO:</label> <select
 							class="form-control" id="cbocargo">
 
 						</select> <span id="errorcargo" class="text-danger"></span>
+					</div>
+
+					<hr>
+					<div class="form-group">
+						<label for="txtdni">INGRESE DNI:</label> <input type="number"
+							class="form-control" id="txtdni"> <span id="errordni"
+							class="text-danger"></span>
 					</div>
 
 					<div class="form-group">
@@ -137,16 +152,16 @@
 					</div>
 
 					<div class="form-group">
-						<label for="txtfecha">FECHA DE INGRESO:</label> <input type="date"
-							class="form-control" id="txtfecha"> <span id="errorfecha"
-							class="text-danger"></span>
+						<label for="cborol">SELECCIONE ROL DE EMPLEADO:</label> <select
+							class="form-control" id="cborol">
+							<option value="0">Seleccionar</option>
+							<option value="1">Empleado</option>
+							<option value="2">Administrador</option>
+
+						</select> <span id="errorrol" class="text-danger"></span>
 					</div>
 
-					<div class="form-group">
-						<label for="cboarea">SELECCIONE AREA:</label> <select
-							class="form-control" id="cboarea">
-						</select>
-					</div>
+
 
 					<input type="hidden" value="0" id="hddcodempleado" />
 				</div>

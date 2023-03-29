@@ -14,11 +14,11 @@ import edu.pe.idat.model.Cliente;
 import edu.pe.idat.model.Empleado;
 
 @Repository
-public interface EmpleadoRepository extends JpaRepository<Empleado, Integer> {	
-	/*
+public interface EmpleadoRepository extends JpaRepository<Empleado,Integer> {	
+	
 	@Transactional
 	@Modifying
-	@Query(value="{call sp_InsertaEmpleado(:nombre, :apellido, :dni, :cargo ,:contrasena, :fecha_ingreso, :area)}",
+	@Query(value="{call sp_RegistrarEmpleado(:nombre, :apellido, :dni, :cargo ,:contrasena, :fecha_ingreso, :area,:rol)}",
 			nativeQuery = true)											
 	void InsertaEmpleado (@Param("nombre")String nombre,
 						  @Param("apellido")String apellido,
@@ -26,10 +26,11 @@ public interface EmpleadoRepository extends JpaRepository<Empleado, Integer> {
 						  @Param("cargo")Integer cargo,
 						  @Param("contrasena")String contrasena,
 						  @Param("fecha_ingreso")Date fecha_ingreso,
-	 					  @Param("area")Integer area);
+						  @Param("area")Integer area,
+						  @Param("rol")String rol);
 	
 	
-	@Transactional
+	/*@Transactional
 	@Modifying
 	@Query(value="{call sp_ActualizarEmpleado(:codempleado, :nombre, :apellido, :dni, :cargo, :contrasena, :fecha_ingreso, :area)}",
 			nativeQuery=true)

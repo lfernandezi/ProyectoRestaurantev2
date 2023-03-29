@@ -7,10 +7,8 @@ $(document).on("change", "#cbobuscarempleado", function() {
 	$("#errorbuscarempleado").text("");
 	$("#txtbuscarempleado").val("");
 	var buscarempleado = $("#cbobuscarempleado").val();
-	//alert(idespecialidad);
 	if (buscarempleado === "2" || buscarempleado === "3") {
 		$("#txtbuscarempleado").show();
-		//$("#tblcategoria").html("");
 		$("#errorbuscarempleado").show();
 	} else {
 		$("#txtbuscarempleado").hide();
@@ -93,6 +91,7 @@ $(document).on("click", "#btnagregarempleado", function() {
 	$("#txtcontrasena").val("");
 	$("#txtfecha").val("");
 	$("#cboarea").val("");
+	$("#cborol").val("");
 	$("#hddcodempleado").val("");
 	$("#modalempleado").modal("show");
 });
@@ -107,10 +106,10 @@ $(document).on("click", ".btnactualizarempleado", function() {
 	$("#txtdni").val($(this).attr("data-dni"));
 	$("#txtcontrasena").val($(this).attr("data-contrasenia"));
 	$("#txtfecha").val($(this).attr("data-fecha_ingreso"));
-	//$("#cboarea").val($(this).attr("data-codarea"));
+	$("#cborol").val($(this).attr("data-role"));
 	$("#hddcodempleado").val($(this).attr("data-codempleado"));
 	$("#modalempleado").modal("show");
-	alert
+
 });
 
 $(document).on("click", ".btneliminarempleado", function() {
@@ -179,6 +178,7 @@ $(document).on("click", "#btnregistarempleado", function() {
 		//case 6: alert("No ingresó Fecha"); break;
 		//case 7: alert("No ingreso Area"); break;
 		case 0:
+			cadena = $("#cborol").val();
 			$.ajax({
 				type: "Post",
 				contentType: "application/json",
@@ -191,7 +191,8 @@ $(document).on("click", "#btnregistarempleado", function() {
 					codcargo: parseInt($("#cbocargo").val()),
 					contrasenia: $("#txtcontrasena").val(),
 					fecha_ingreso: $("#txtfecha").val(),
-					codarea: parseInt($("#cboarea").val())
+					codarea: parseInt($("#cboarea").val()),
+					role: $("#cborol").val()
 				}),
 				success: function(resultado) {
 					if (resultado.respuesta) {
@@ -239,10 +240,16 @@ function ListarEmpleado() {
 		dataType: "json",
 		success: function(resultado) {
 			console.log(resultado);
-			
-			
+
+
 			$("#tblEmpleado > tbody").html("");
 			$.each(resultado, function(index, value) {
+				var rol = "";
+				if (value.rol == "ROLE_ADMIN") {
+					rol = "2";
+				} else {
+					rol = "1"
+				}
 				if (value.codempleado == 0) {
 					$("#tblEmpleado > tbody").append(
 						"<tr>" +
@@ -269,6 +276,7 @@ function ListarEmpleado() {
 						" data-contrasenia='" + value.contrasenia + "'" +
 						" data-fecha_ingreso='" + value.fecha_ingreso + "'" +
 						" data-codarea='" + value.codarea.codarea + "'" +
+						" data-role='" + rol + "'" +
 						">Actualizar</button></td>" +
 						"<td><button type='button' class='btn btn-outline-danger btneliminarempleado' " +
 						" data-codempleado='" + value.codempleado + "'" +
@@ -304,6 +312,13 @@ function BuscarempleadoxCodigo(codigo) {
 		success: function(data) {
 			$("#tblEmpleado > tbody").html("");
 			$.each(data, function(index, value) {
+			
+			var rol = "";
+				if (value.rol == "ROLE_ADMIN") {
+					rol = "2";
+				} else {
+					rol = "1"
+				}
 				if (value.codempleado == 0) {
 					$("#tblEmpleado > tbody").append(
 						"<tr>" +
@@ -330,6 +345,7 @@ function BuscarempleadoxCodigo(codigo) {
 						" data-contrasenia='" + value.contrasenia + "'" +
 						" data-fecha_ingreso='" + value.fecha_ingreso + "'" +
 						" data-codarea='" + value.codarea.codarea + "'" +
+						" data-role='" + rol+ "'" +
 						">Actualizar</button></td>" +
 						"<td><button type='button' class='btn btn-outline-danger btneliminarempleado' " +
 						" data-codempleado='" + value.codempleado + "'" +
@@ -365,6 +381,13 @@ function BuscarEmpleadoxdni(codigo) {
 		success: function(data) {
 			$("#tblEmpleado > tbody").html("");
 			$.each(data, function(index, value) {
+			
+			var rol = "";
+				if (value.rol == "ROLE_ADMIN") {
+					rol = "2";
+				} else {
+					rol = "1"
+				}
 				if (value.codempleado == 0) {
 					$("#tblEmpleado > tbody").append(
 						"<tr>" +
@@ -391,7 +414,8 @@ function BuscarEmpleadoxdni(codigo) {
 						" data-codcargo='" + value.codcargo.codcargo + "'" +
 						" data-contrasenia='" + value.contrasenia + "'" +
 						" data-fecha_ingreso='" + value.fecha_ingreso + "'" +
-						" data-codarea='" + value.codarea.coparea + "'" +
+						" data-codarea='" + value.codarea.codarea + "'" +
+						" data-role='" + rol + "'" +
 						">Actualizar</button></td>" +
 						"<td><button type='button' class='btn btn-outline-danger btneliminarempleado' " +
 						" data-codempleado='" + value.codempleado + "'" +
@@ -431,8 +455,6 @@ function ListarArea(codigoarea) {
 
 				);
 			});
-			/*$("#cboarea").append(
-				"<option value='100'> Otro </option>");*/
 
 			$("#cboarea").val(codigoarea);
 		}

@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
-
 import edu.pe.idat.model.Pedido;
 import edu.pe.idat.repository.PedidoRepository;
 
@@ -26,7 +24,14 @@ public class PedidoService {
 			}
 	
 	public List<Pedido> listarPedido(){
-	return pedidorepository.findAll();
+		List<Pedido> list=pedidorepository.findAll();
+		if(list.isEmpty()) {
+			Pedido p=new Pedido();
+			p.setCodpedido(0);
+			
+			list.add(p);
+		}
+	return list;
 	}
 	
 	public void ActualizarEstadoPedido (int codpedido, String estado) {

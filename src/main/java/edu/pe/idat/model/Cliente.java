@@ -10,6 +10,8 @@ import javax.persistence.Table;
 public class Cliente {
 	@Id
 	private int codcliente;
+	
+	
 	@Column(name = "dni")
 	private String xdni;
 	@Column(name = "nombre")
@@ -37,9 +39,13 @@ public class Cliente {
 	public void setCodcliente(int codcliente) {
 		this.codcliente = codcliente;
 	}
+	
+
 	public String getXdni() {
 		return xdni;
 	}
+	
+	
 	public void setXdni(String xdni) {
 		this.xdni = xdni;
 	}
@@ -102,7 +108,7 @@ public class Cliente {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	
 
 }

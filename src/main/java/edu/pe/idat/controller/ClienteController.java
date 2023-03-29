@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,7 +37,7 @@ public class ClienteController {
 	public String registrarCliente(Model model, final HttpSession session) {
 		Usuario usu = (Usuario) session.getAttribute("otrasesion");
 		if (Objects.nonNull(usu)) {
-			Cliente cli = clienteservice.buscarcliente(usu.getCodusuario());
+			Cliente cli = clienteservice.buscarclientexEmail(usu.getEmail());
 			model.addAttribute("nuevocliente", cli);
 			return "registrarCliente";
 		} else {
@@ -163,7 +163,7 @@ public class ClienteController {
 		Boolean respuesta = true;
 		try {
 			clienteservice.EliminarCliente(objcliente);
-			ususervice.eliminarUsuario(objcliente.getCodcliente());
+			//ususervice.eliminarUsuario(objcliente.getCodcliente());
 
 		} catch (Exception e) {
 			mensaje = "Cliente no Eliminado";
@@ -174,7 +174,7 @@ public class ClienteController {
 
 	@GetMapping("/buscarCliente")
 	@ResponseBody
-	public List<Cliente> buscarCliente(@RequestParam("codcliente") Integer codigo) {
+	public List<Cliente> buscarCliente(@RequestParam("codcliente") int codigo) {
 		List<Cliente> lista = new ArrayList<Cliente>();
 		lista.add(clienteservice.buscarcliente(codigo));
 		return lista;

@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import edu.pe.idat.model.Carrito;
 import edu.pe.idat.model.DetallePedido;
 import edu.pe.idat.model.Pedido;
-import edu.pe.idat.model.Producto;
+
 import edu.pe.idat.model.response.ResultadoResponse;
-import edu.pe.idat.service.CarritoService;
+
 import edu.pe.idat.service.DetallaPedidoService;
 import edu.pe.idat.service.PedidoService;
 

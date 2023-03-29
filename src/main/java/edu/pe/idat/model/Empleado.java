@@ -14,6 +14,8 @@ public class Empleado {
 	@Id
 	private int codempleado;	
 	
+	
+	
 	@Column(name="nombre")
 	private String nombre;
 	
@@ -34,6 +36,8 @@ public class Empleado {
 	
 	@Column(name="codarea")
 	private Integer codarea;
+	
+	private String role;
 
 	public int getCodempleado() {
 		return codempleado;
@@ -42,11 +46,14 @@ public class Empleado {
 	public void setCodempleado(int codempleado) {
 		this.codempleado = codempleado;
 	}
+	
+	
 
 	public String getNombre() {
 		return nombre;
 	}
 
+	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
@@ -99,8 +106,21 @@ public class Empleado {
 		this.codarea = codarea;
 	}
 
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public Empleado() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Empleado(int codempleado, String nombre, String apellido, String dni, String contrasenia, Date fecha_ingreso,
-			Integer codcargo, Integer codarea) {
+			Integer codcargo, Integer codarea, String role) {
 		super();
 		this.codempleado = codempleado;
 		this.nombre = nombre;
@@ -110,25 +130,8 @@ public class Empleado {
 		this.fecha_ingreso = fecha_ingreso;
 		this.codcargo = codcargo;
 		this.codarea = codarea;
+		this.role = role;
 	}
 
-	public Empleado(int codempleado, String nombre, String apellido, String dni, String contrasenia,
-			Date fecha_ingreso) {
-		super();
-		this.codempleado = codempleado;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.dni = dni;
-		this.contrasenia = contrasenia;
-		this.fecha_ingreso = fecha_ingreso;
-	}
-
-	public Empleado() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	
-	
 	
 }

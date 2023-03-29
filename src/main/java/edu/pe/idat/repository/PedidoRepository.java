@@ -22,7 +22,9 @@ public interface PedidoRepository extends JpaRepository<Pedido,Integer>{
 	@Query(value = "{call sp_IngresarPedido(:direccion,  "
 	+ ":ubicacion, :monto, :estado, :motivo, :codcliente)}", nativeQuery = true)
 	void ingresarPedido( @Param("direccion") String direccion,  @Param("ubicacion") String ubicacion,
-			 @Param("monto") Double monto, @Param("estado") String estado, @Param("motivo") String motivo, @Param("codcliente") Integer codcliente);
+			 @Param("monto") Double monto, @Param("estado") String estado, @Param("motivo") String motivo,
+			 @Param("codcliente") Integer codcliente);
+			 
 	
 	@Transactional
 	@Modifying
@@ -38,6 +40,8 @@ public interface PedidoRepository extends JpaRepository<Pedido,Integer>{
 	
 	@Query(value = "{call sp_ListarPedidoxCliente(:codcliente)}",
 			nativeQuery = true)
-	public	List<Pedido> buscarPedidoporCliente(@Param("codcliente")int codcliente);
+	public	List<Pedido> buscarPedidoporCliente(
+			@Param("codcliente")int codcliente);
+		
 }
 

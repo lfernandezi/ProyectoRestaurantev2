@@ -38,7 +38,8 @@ public class Pedido {
 
 	@Column(name = "codcliente")
 	private int codcliente;
-
+	
+	
 	public int getCodpedido() {
 		return codpedido;
 	}
@@ -103,6 +104,7 @@ public class Pedido {
 		this.codenvio = codenvio;
 	}
 
+	
 	public int getCodcliente() {
 		return codcliente;
 	}
@@ -125,10 +127,13 @@ public class Pedido {
 		this.codcliente = codcliente;
 	}
 
+	
 	public Pedido() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	
 
 	public Pedido(String direccion, String ubicacion, double monto, String estado, String motivo, int codenvio,
 			int codcliente) {
