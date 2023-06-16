@@ -2,6 +2,7 @@ package edu.pe.idat.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,8 +20,8 @@ import edu.pe.idat.model.Categoria;
 import edu.pe.idat.model.Cliente;
 import edu.pe.idat.model.Empleado;
 import edu.pe.idat.model.Producto;
-import edu.pe.idat.model.ProductoResponse;
 import edu.pe.idat.model.Usuario;
+import edu.pe.idat.model.response.ProductoResponse;
 import edu.pe.idat.model.response.ResultadoResponse;
 import edu.pe.idat.service.CategoriaService;
 import edu.pe.idat.service.ProductoService;
@@ -35,8 +36,17 @@ public class CategoriaController {
 	CategoriaService categoriaservice;
 
 	@GetMapping("/listarcategorias")
-	public String menua(Model model) {
-		return "listarcategorias";
+	public String menua(Model model, final HttpSession session) {
+		
+		Usuario usu = (Usuario) session.getAttribute("sesionempl");
+		if (Objects.isNull(usu)){
+			model.addAttribute("mensaje", "No estás registrado");
+			model.addAttribute("usuario", new Usuario());
+			return "login";
+		} else {
+			return "listarcategorias";
+		}
+		
 	}
 	
 	@GetMapping("/listarCategorias")

@@ -26,8 +26,6 @@ public class LoginController {
 	@Autowired
 	private UsuarioService ususervice;
 
-	@Autowired
-	private ClienteService clienteservice;
 
 	@GetMapping("/login")
 	public String login(Model model) {
@@ -61,11 +59,12 @@ public class LoginController {
 							} else {
 								request.getSession().setAttribute("sesionempl", loginbd);
 								model.addAttribute("mensaje", "" + loginbd.getEmail());
-								if (loginbd.getRol().equals("ROLE_ADMIN")) {
+								/*if (loginbd.getRol().equals("ROLE_ADMIN")) {
 									return "Menus/menua";
 								} else {
 									return "Menus/menue";
-								}
+								}*/
+								return "Menus/menua";
 							}
 						} else {
 							if (!loginbd.getRol().equals("ROLE_CLIENTE")) {
@@ -114,18 +113,15 @@ public class LoginController {
 	
 	@GetMapping("/verusuarioempl")
 	@ResponseBody
-	public ResultadoResponse verusuarioempl(final HttpSession session) {
-		Boolean respuesta = true;
-		String mensaje = "algo";
+	public Usuario verusuarioempl(final HttpSession session) {
+		
 		try {
 			Usuario emp = (Usuario) session.getAttribute("sesionempl");
-
-			mensaje = emp.getEmail();
+			return emp;
 		} catch (Exception e) {
-			respuesta = false;
-			mensaje = "No estás registrado";
+			return new Usuario(0,null,null,null);
 		}
-		return new ResultadoResponse(respuesta, mensaje);
+		
 	}
 
 	@GetMapping("/cerrarsesion")
@@ -149,7 +145,7 @@ public class LoginController {
 		session.getAttribute("sesionempl");
 		session.invalidate();
 		try {
-			Usuario cliente = (Usuario) session.getAttribute("sesionempl");
+			Usuario empleado = (Usuario) session.getAttribute("sesionempl");
 
 			return false;
 		} catch (Exception e) {

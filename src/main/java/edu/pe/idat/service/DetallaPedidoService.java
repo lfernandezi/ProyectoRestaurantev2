@@ -27,5 +27,7 @@ public class DetallaPedidoService {
 		return detarepo.verDetallePedido(codpedido);
 	}
 		
-
+	public List<DetallePedido> listarDetalle() {
+		return detarepo.findAll();
+	}
 }

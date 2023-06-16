@@ -3,6 +3,9 @@ package edu.pe.idat.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +25,8 @@ import edu.pe.idat.model.AreaEmpleado;
 import edu.pe.idat.model.CargoEmpleado;
 
 import edu.pe.idat.model.Empleado;
-import edu.pe.idat.model.EmpleadoResponse;
+import edu.pe.idat.model.Usuario;
+import edu.pe.idat.model.response.EmpleadoResponse;
 import edu.pe.idat.model.response.ResultadoResponse;
 
 @Controller
@@ -39,9 +43,17 @@ public class EmpleadoController {
 	
 	
 	@GetMapping("/listarempleado")	
-	public String listarempleado (Model model) {
-		model.addAttribute("listadoempleado",null);
-		return "listarempleado";
+	public String listarempleado (Model model,final HttpSession session) {
+		Usuario usu = (Usuario) session.getAttribute("sesionempl");
+		if (Objects.isNull(usu)){
+			model.addAttribute("mensaje", "No estás registrado");
+			model.addAttribute("usuario", new Usuario());
+			return "login";
+		} else {
+			model.addAttribute("listadoempleado",null);
+			return "listarempleado";
+		}
+		
 	}
 	
 	@GetMapping("/listarEmpleado")

@@ -1,6 +1,9 @@
-package edu.pe.idat.model;
+package edu.pe.idat.model.response;
 
 import java.sql.Date;
+
+import edu.pe.idat.model.AreaEmpleado;
+import edu.pe.idat.model.CargoEmpleado;
 
 
 public class EmpleadoResponse {

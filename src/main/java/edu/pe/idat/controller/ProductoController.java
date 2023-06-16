@@ -1,23 +1,31 @@
 package edu.pe.idat.controller;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
 import edu.pe.idat.service.CategoriaService;
 import edu.pe.idat.service.ProductoService;
 import edu.pe.idat.model.Categoria;
 import edu.pe.idat.model.Producto;
-import edu.pe.idat.model.ProductoResponse;
+import edu.pe.idat.model.Usuario;
+import edu.pe.idat.model.response.ProductoResponse;
 import edu.pe.idat.model.response.ResultadoResponse;
 
 @Controller
@@ -30,11 +38,17 @@ public class ProductoController {
 	CategoriaService categoriaservice;
 	
 	@GetMapping("/listarproducto")	
-	public String listarproducto ()
-	//(Model model) 
+	public String listarproducto (Model model, final HttpSession session)
 	{
-		//model.addAttribute("listadoproducto", productoService.listarProducto());
-		return "listarproducto";
+		Usuario usu = (Usuario) session.getAttribute("sesionempl");
+		if (Objects.isNull(usu)){
+			model.addAttribute("mensaje", "No estás registrado");
+			model.addAttribute("usuario", new Usuario());
+			return "login";
+		} else {
+			return "listarproducto";
+		}
+		
 	}
 	
 	@GetMapping("/listarProducto")
@@ -48,6 +62,7 @@ public class ProductoController {
 	public ResultadoResponse registrarProducto(@RequestBody Producto objProducto) {
 		String mensaje="COMIDA REGISTRADA CORRECTAMENTE ";
 		Boolean respuesta=true;
+		
 		try {
 			productoService.registrarProducto(objProducto);			
 		}catch(Exception ex) {

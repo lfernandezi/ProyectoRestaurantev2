@@ -1,3 +1,7 @@
+$(document).ready(function() {
+	$("#btncambiarImagen").hide();
+});
+
 $(document).on("click", "#btnagregarproducto", function() {
 	ListarCategoria(0);
 	$("#txtnombre").val("");
@@ -7,6 +11,35 @@ $(document).on("click", "#btnagregarproducto", function() {
 	$("#hddcodproducto").val("");
 	$("#modalproducto").modal("show");
 });
+
+$(document).on("change", "#controlimagen", function() {
+	console.log(this.files);
+	var files = this.files;
+	var element;
+	for (var i = 0; i < files.length; i++) {
+		element = files[i];
+
+		var imgcodificada = URL.createObjectURL(element);
+		var img = $(
+			"<div class='card'>" +
+			" <img  src='" + imgcodificada + "' id='img-preview'>" +
+			"<button type='button' class='btn btn-outline-info'" +
+			"	id='btncambiarImagen'>Ocultar Vista Previa</button>" +
+			"</div>"
+		);
+		
+		$(img).insertBefore("#img-preview");
+		$("#controlimagen").hide();
+		$("#btncambiarImagen").show();
+	}
+});
+
+$(document).on("click", "#btncambiarImagen", function() {
+	$(this).parent().remove();
+
+	$("#controlimagen").show();
+});
+
 
 $(document).on("click", ".btnactualizarproducto", function() {
 	var codcategoria = $(this).attr("data-codcategoria");
@@ -30,7 +63,11 @@ $(document).on("click", ".btneliminarproducto", function() {
 });
 
 $(document).on("click", "#btnregistarproducto", function() {
-	var codigo = 0;
+		
+    if ($("#controlimagen").val()== ""){
+    	alert("No eligió imagen");
+    	}
+    	codigo = 5;
 	if ($("#txtprecio").val() <= 0) {
 		$("#errorprecio").text("Ingresar Valor Mayor a CERO(SOLO ACEPTA NUMEROS)");
 		codigo = 4;
@@ -55,6 +92,8 @@ $(document).on("click", "#btnregistarproducto", function() {
 	} else {
 		$("#errornombre").text("");
 	}
+	
+	alert($("#controlimagen").val());
 
 	switch (codigo) {
 		//case 1: alert("INGRESAR NOMBRE COMBO"); break;
@@ -62,6 +101,10 @@ $(document).on("click", "#btnregistarproducto", function() {
 		//case 3: alert("INGRESAR CATEGORIA COMIDA"); break;
 		//case 4: alert("INGRESAR PRECIO COMIDA"); break;
 		case 0:
+		
+		
+		
+		
 			$.ajax({
 				type: "Post",
 				contentType: "application/json",
@@ -71,7 +114,8 @@ $(document).on("click", "#btnregistarproducto", function() {
 					nombre: $("#txtnombre").val(),
 					descripcion: $("#txtdescripcion").val(),
 					codcategoria: $("#cbocategoria").val(),
-					precio: $("#txtprecio").val()
+					precio: $("#txtprecio").val(),
+					imagen: $("#controlimagen").val()
 				}),
 				success: function(resultado) {
 					if (resultado.respuesta) {
@@ -257,5 +301,23 @@ function BuscarproductoxCodigo(codigo) {
 	});
 }
 
+function ListarCategoria() {
+	$.ajax({
+		type: "GET",
+		url: "/listarCategorias",
+		dataType: "json",
+		success: function(resultado) {
+			//console.log(resultado);
+			$("#cbocategoria").html("");
+			$("#cbocategoria").append(
+				"<option value='0'> Seleccionar</option>");
+			$.each(resultado, function(index, value) {
+				$("#cbocategoria").append(
+					"<option value='" + value.codcategoria + "'>" + value.categoria + "</option>"
+				);
+			});
 
+		}
+	});
+}
 

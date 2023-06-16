@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	$("#tblcategoria").hide();
+
 	ListarCategoria();
 });
 

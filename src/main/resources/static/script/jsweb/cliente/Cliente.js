@@ -1,15 +1,15 @@
 $(document).ready(function() {
 	$("#txtbuscar").hide();
+	
 });
 
 $(document).on("change", "#cbobuscar", function() {
 	$("#errorbuscar").text("");
 	$("#txtbuscar").val("");
 	var buscar = $("#cbobuscar").val();
-	//alert(idespecialidad);
+
 	if (buscar === "2" || buscar === "3") {
 		$("#txtbuscar").show();
-		//$("#tblcategoria").html("");
 		$("#errorbuscar").show();
 	} else {
 		$("#txtbuscar").hide();
@@ -50,16 +50,14 @@ $(document).on("click", "#btnbuscar", function() {
 });
 
 
-$(document).on("click", ".btneliminarcliente", function() {
+$(document).on("click", "#btneliminarcliente", function() {
 	$("#mensajeeliminar").text("Está Seguro(a) de deshabilitar el cliente: " +
 		$(this).attr("data-xnombre") + " con Codigo :" + $(this).attr("data-codcliente") + "?");
 	$("#hddcodclienteeliminar").val($(this).attr("data-xemail"))
 	$("#modaleliminarcliente").modal("show");
 });
 
-$(document).on("click", "#btneliminarcliente", function() {
-
-
+$(document).on("click", "#btneliminarcliente2", function() {
 	$.ajax({
 		type: "DELETE",
 		contentType: "application/json",
@@ -103,15 +101,14 @@ function ListarCliente() {
 					"<td class='text-center'>" + value.xdireccion + "</td>" +
 					"<td class='text-center'>" + value.xemail + "</td>" +
 					"<td class='text-center'>" + value.xestado + "</td>" +
-					"<td><button type='button' class='btn btn-outline-warning btnactualizarcliente' " +
+				/*	"<td><button type='button' class='btn btn-outline-warning btnactualizarcliente' " +
 					" data-codcliente='" + value.codcliente + "'" +
 					
 					" data-email='" + value.email + "'" +
 					" data-xestado='" + value.xestado + "'" +
-					">Inhabilitar</button></td>" +
-					"<td><button type='button' class='btn btn-outline-danger btneliminarcliente' " +
+					">Inhabilitar</button></td>" +*/
+					"<td><button type='button' class='btn btn-outline-danger' id='btneliminarcliente' " +
 					" data-codcliente='" + value.codcliente + "'" +
-					
 					" data-email='" + value.email + "'" +
 					" data-xnombre='" + value.xnombre + "'" +
 					" data-xemail='" + value.xemail + "'" +
@@ -161,11 +158,8 @@ function BuscarCodigo(codigo) {
 					"<td class='text-center'>" + value.xdireccion + "</td>" +
 					"<td class='text-center'>" + value.xemail + "</td>" +
 					"<td class='text-center'>" + value.xestado + "</td>" +
-					"<td><button type='button' class='btn btn-outline-warning btnactualizarcliente' " +
-					" data-codcliente='" + value.codempleado + "'" +
-					" data-xestado='" + value.xestado + "'" +
-					">Inhabilitar</button></td>" +
-					"<td><button type='button' class='btn btn-outline-danger btneliminarcliente' " +
+					
+					"<td><button type='button' class='btn btn-outline-danger' id='btneliminarcliente' " +
 					" data-codcliente='" + value.codcliente + "'" +
 					" data-xnombre='" + value.xnombre + "'" +
 					" data-xemail='" + value.xemail + "'" +
@@ -214,11 +208,8 @@ function BuscarClientexdni(codigo) {
 						"<td class='text-center'>" + value.xdireccion + "</td>" +
 						"<td class='text-center'>" + value.xemail + "</td>" +
 						"<td class='text-center'>" + value.xestado + "</td>" +
-						"<td><button type='button' class='btn btn-outline-warning btnactualizarcliente' " +
-						" data-codcliente='" + value.codempleado + "'" +
-						" data-xestado='" + value.xestado + "'" +
-						">Inhabilitar</button></td>" +
-						"<td><button type='button' class='btn btn-outline-danger btneliminarcliente' " +
+					
+						"<td><button type='button' class='btn btn-outline-danger' id='btneliminarcliente' " +
 						" data-codcliente='" + value.codcliente + "'" +
 						" data-xnombre='" + value.xnombre + "'" +
 						" data-xemail='" + value.xemail + "'" +
@@ -242,11 +233,5 @@ function BuscarClientexdni(codigo) {
 }
 
 
-$(document).on("click", ".btnactualizarestado", function() {
-	$("#txtnombre").val($(this).attr("data-xnombre"));
-	$("#txtapellido").val($(this).attr("data-xapellido"));
-	$("#modalcambiarestado").modal("show");
-
-});
 
 

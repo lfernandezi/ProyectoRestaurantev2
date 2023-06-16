@@ -1,5 +1,6 @@
 package edu.pe.idat.service;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -25,12 +26,15 @@ public class PedidoService {
 	
 	public List<Pedido> listarPedido(){
 		List<Pedido> list=pedidorepository.findAll();
+		
+		
 		if(list.isEmpty()) {
 			Pedido p=new Pedido();
 			p.setCodpedido(0);
 			
 			list.add(p);
 		}
+		
 	return list;
 	}
 	

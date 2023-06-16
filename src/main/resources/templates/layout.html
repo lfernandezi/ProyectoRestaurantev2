@@ -20,39 +20,6 @@
 	<div th:fragment="titulo" class="alert alert-danger" role="alert">
 		<h1 class="text-center">"RESTAURANTE POLLERIA EATSFREE"</h1>
 	</div>
-	<!--nav th:fragment="navlogin"
-		class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<img src="/img/loginpollo2.jpg" alt="jacket" width="50" height="50">
-		<a class="navbar-brand">INGRESO :</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarNav" aria-controls="navbarNav"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNav">
-			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link"
-					th:href="@{/Menus/menu}">CARTA</a></li>
-				<li class="nav-item"><a class="nav-link" th:href="@{/carrito}">CARRITO</a></li>
-			</ul>
-		</div>
-
-
-	</nav>
-	<nav th:fragment="navloginE"
-		class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<img src="/img/loginpollo2.jpg" alt="jacket" width="50" height="50">
-		<a class="navbar-brand">INGRESO :</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarNav" aria-controls="navbarNav"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNav">
-			<ul class="navbar-nav">
-			</ul>
-		</div>
-	</nav-->
 
 	<nav th:fragment="menuvx"
 		class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -85,7 +52,7 @@
 <nav th:fragment="menua"
 		class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<img src="/img/loginpollo2.jpg" alt="jacket" width="50" height="50">
-		<a class="navbar-brand">ADMINISTRADOR :</a>
+		<a class="navbar-brand"   id="roles"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -98,11 +65,11 @@
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"> MANTENIMIENTO </a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" th:href="@{/listarproducto}">PRODUCTOS</a>
-						<a class="dropdown-item" th:href="@{/listarempleado}">EMPLEADOS</a>
-						<a class="dropdown-item" th:href="@{/listaclientes}">CLIENTES</a>
-						<a class="dropdown-item" th:href="@{/listarpedido}">PEDIDOS</a> <a
-							class="dropdown-item" th:href="@{/listarcategorias}">CATEGORIAS</a>
+						<a id="productos" class="dropdown-item" th:href="@{/listarproducto}">PRODUCTOS</a>
+						<a id="empleados" class="dropdown-item" th:href="@{/listarempleado}">EMPLEADOS</a>
+						<a id="clientes" class="dropdown-item" th:href="@{/listaclientes}">CLIENTES</a>
+						<a id="pedidos" class="dropdown-item" th:href="@{/listarpedido}">PEDIDOS</a> 
+						<a id="categorias" class="dropdown-item" th:href="@{/listarcategorias}">CATEGORIAS</a>
 					</div></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown2"
@@ -110,43 +77,26 @@
 					aria-expanded="false"></a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown2">
 
-						<a class="dropdown-item" id="acion4">INICIAR SESION</a>
+						<a class="dropdown-item" id="acion4">CERRAR SESIÓN</a>
 					</div></li>
+					<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="" id="navbarDropdown3"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false">PEDIDOS</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+
+						<a class="dropdown-item" th:href="@{/listarpedido}">IR</a>
+					</div></li>
+					
 			</ul>
 		</div>
 	</nav>
-	<!--nav th:fragment="menua"
-		class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<img src="/img/loginpollo2.jpg" alt="jacket" width="50" height="50">
-		<a class="navbar-brand">ADMINISTRADOR :</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarNav" aria-controls="navbarNav"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNav">
-			<ul class="navbar-nav">
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> MANTENIMIENTO </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" th:href="@{/listarproducto}">PRODUCTOS</a>
-						<a class="dropdown-item" th:href="@{/listarempleado}">EMPLEADOS</a>
-						<a class="dropdown-item" th:href="@{/listaclientes}">CLIENTES</a>
-						<a class="dropdown-item" th:href="@{/listarpedido}">PEDIDOS</a> <a
-							class="dropdown-item" th:href="@{/listarcategorias}">CATEGORIAS</a>
-					</div></li>
-				<li class="nav-item"><a class="nav-link" th:href="@{/login}">CERRAR
-						SESIÓN</a></li>
-			</ul>
-		</div>
-	</nav-->
+
 	
 	<nav th:fragment="menue"
 		class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<img src="/img/loginpollo2.jpg" alt="jacket" width="50" height="50">
-		<a class="navbar-brand">EMPLEADO:</a>
+		<a class="navbar-brand"  id="roles"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -174,41 +124,6 @@
 			</ul>
 		</div>
 	</nav>
-	<!--nav th:fragment="menue"
-		class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<img src="/img/loginpollo2.jpg" alt="jacket" width="50" height="50">
-		<a class="navbar-brand">EMPLEADOS :</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarNav" aria-controls="navbarNav"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNav">
-			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link"
-					th:href="@{/categorias}">CATEGORIAS</a></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> MANTENIMIENTO </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" th:href="@{/listarproducto}">PRODUCTOS</a>
-					</div></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> PEDIDOS </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" th:href="@{/listarproducto}">RECEPCIONADOS</a>
-						<a class="dropdown-item" th:href="@{/listarproducto}">PENDIENTES</a>
-						<a class="dropdown-item" th:href="@{/listarproducto}">ENTREGADOS</a>
-					</div></li>
-				<li class="nav-item"><a class="nav-link" th:href="@{/login}">INGRESA
-						o REGISTRATE</a></li>
-			</ul>
-		</div>
-	</nav-->
-
 
 
 	<div class="modal-dialog" th:fragment="datoscliente">

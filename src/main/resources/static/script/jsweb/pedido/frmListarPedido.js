@@ -60,12 +60,12 @@ $(document).on("click", "#btnbuscarpedido", function() {
 				} else {
 					if (buscar === "3") {
 					$("#errorbuscarpedido").text("");
-						alert("se busca " + codigo);
+						alert("Buscando pedido n. " + codigo);
 						buscarPedidoporCodigo(codigo);
 
 					} else {
 						$("#errorbuscarpedido").text("");
-						alert("Se busca dni " + codigo);
+						alert("Buscando por código de cliente n. " + codigo);
 						buscarPedidoporCliente(codigo);
 						
 					}
@@ -124,10 +124,15 @@ function listarpedido() {
 						"<td colspan='10' class='text-center'> NO SE ENCONTRARON PEDIDOS </td>" +
 						"</tr>");
 				} else {
+				
+				new Date (value.fechacreacion);
+				
 				$("#tblpedido > tbody").append(
 					"<tr>" +
 					"<td>" + value.codpedido + "</td>" +
-					"<td>" + value.fechacreacion + "</td>" +
+					//"<td>" + value.fechacreacion+ "</td>" +
+					
+					"<td>" + new Date (value.fechacreacion).toLocaleString()+ "</td>" +
 					"<td>" + value.codcliente + "</td>" +
 					"<td>" + value.direccion + "</td>" +
 					"<td>" + value.monto + "</td>" +
@@ -312,6 +317,16 @@ function VerDetallePedido(codigo) {
 		},
 		datatype: 'json',
 		success: function(data) {
+		$("#cabecera").html("");
+		$("#cabecera").append(
+		
+		"<div class='form-group row'>"+
+		"<label for='staticEmail' class='col-sm-2 col-form-label'>Nro Pedido</label>"+
+		"<div class='col-sm-10'><input type='text' readonly class='form-control-plaintext'"+
+		" value='"+codigo+"'></div></div>"
+		
+		);
+		
 			$("#tbldetallepedido > tbody").html("");
 			$.each(data, function(index, valu) {
 

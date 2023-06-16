@@ -2,10 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="login::head">
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
-<script type="text/javascript" th:src="@{/script/jsweb/pedido/frmListarPedido.js}"></script>
+<script type="text/javascript"
+	th:src="@{/script/jsweb/pedido/frmListarPedido.js}"></script>
 
 <body>
 	<div th:fragment="titulo" class="alert alert-danger" role="alert">
@@ -16,158 +17,174 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm">
-			<div class="col-sm-30">
-				<hr />
-				<div class="row g-3">
-					<label>Buscar Pedido:</label>
-					<div class="col-auto">
-						<select class="form-control" id="cbobuscarpedido">
-							<option value="0">Seleccionar</option>
-							<option value="1">Todos</option>
-							<option value="2">Por Estado</option>
-							<option value="3">Por Número de Pedido</option>
-							<option value="4">Por Código de Cliente</option>
-						</select>
+				<div class="col-sm-30">
+					<hr />
+					<div class="row g-3">
+						<label>Buscar Pedido:</label>
+						<div class="col-auto">
+							<select class="form-control" id="cbobuscarpedido">
+								<option value="0">Seleccionar</option>
+								<option value="1">Todos</option>
+								<option value="2">Por Estado</option>
+								<option value="3">Por Número de Pedido</option>
+								<option value="4">Por Código de Cliente</option>
+							</select>
+						</div>
+						<div class="col-auto">
+							<select class="form-control" id="cbobuscarporestado">
+								<option value="0">Seleccione</option>
+								<option value="Recibido">Recibido</option>
+								<option value="En Preparación">En Preparación</option>
+								<option value="Listo para Envío">Listo para Envío</option>
+								<option value="En Ruta">En Ruta</option>
+								<option value="Entregado">Entregado</option>
+								<option value="Cancelado">Cancelado</option>
+								<option value="Anulado">Anulado</option>
+							</select>
+						</div>
+						<div class="col-auto">
+							<input type="number" class="form-control" id="txtbuscarpedido"
+								placeholder="Ejm: 123456"> <span id="errorbuscarpedido"
+								class="text-danger"></span>
+						</div>
+						<div class="col-auto">
+							<button type="submit" class="btn btn-primary mb-3"
+								id="btnbuscarpedido">Buscar</button>
+						</div>
+
 					</div>
-					<div class="col-auto">
-						<select class="form-control" id="cbobuscarporestado">
+					<hr />
+					<table id="tblpedido" class="table table-hover table-bordered">
+						<thead class="table-secondary">
+							<tr>
+								<td scope="col">CODIGO</td>
+								<td scope="col">FECHA</td>
+								<td scope="col">CLIENTE</td>
+								<td scope="col">DIRECCION</td>
+								<td scope="col">SUBTOTAL</td>
+								<td scope="col">ESTADO</td>
+								<td scope="col">VER PEDIDO</td>
+								<td scope="col">Cambiar estado</td>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal agregar y actualizar -->
+		<div class="modal fade" id="modalpedido" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-xl">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">VER PEDIDO</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body" >
+						<div id="cabecera">
+						</div>
+						<div class="table-responsive">
+							<table id="tbldetallepedido"
+								class="table table-hover table-bordered">
+								<thead class="table-secondary">
+									<tr>
+										<td scope="col" class="text-center">Nro Pedido</td>
+										<td scope="col" class="text-center">Nro producto</td>
+										<td scope="col" class="text-center">Nombre Producto</td>
+										<!-- td scope="col" class="text-center">Descripción</td-->
+										<td scope="col" class="text-center">Cantidad</td>
+										<td scope="col" class="text-center">Precio</td>
+										<td scope="col" class="text-center">SubTotal</td>
+
+									</tr>
+								</thead>
+								<tbody>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-secondary"
+							data-dismiss="modal">CERRAR</button>
+						<button type="button" class="btn btn-outline-success"
+							id="btnregistarempleado">IMPRIMIR</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Modal actualizarPedido -->
+		<div class="modal fade" id="modalactualizarpedido" tabindex="-1"
+			aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Cambiar Estado</h5>
+						<button type="button" class="btn-close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+
+						<select class="form-control" id="cboEstadoPedido">
 							<option value="0">Seleccione</option>
-						<option value="Recibido">Recibido</option>
-						<option value="En Preparación">En Preparación</option>
-						<option value="Listo para Envío">Listo para Envío</option>
-						<option value="En Ruta">En Ruta</option>
-						<option value="Entregado">Entregado</option>
-						<option value="Cancelado">Cancelado</option>
-						<option value="Anulado">Anulado</option>
-						</select>
+							<option value="Recibido">Recibido</option>
+							<option value="En Preparación">En Preparación</option>
+							<option value="Listo para Envío">Listo para Envío</option>
+							<option value="En Ruta">En Ruta</option>
+							<option value="Entregado">Entregado</option>
+							<option value="Cancelado">Cancelado</option>
+							<option value="Anulado">Anulado</option>
+						</select> <input type="hidden" value="0" id="hddcodpedidoactualizar">
 					</div>
-					<div class="col-auto">
-						<input type="number" class="form-control" id="txtbuscarpedido" placeholder="Ejm: 123456">
-						<span id="errorbuscarpedido" class="text-danger"></span>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Cerrar</button>
+						<button type="button" class="btn btn-primary"
+							id="btnActualizarEstadoPedido">Actualizar estado</button>
 					</div>
-					<div class="col-auto">
-						<button type="submit" class="btn btn-primary mb-3" id="btnbuscarpedido">Buscar</button>
-					</div>
-					
-				</div>
-				<hr />
-				<table id="tblpedido" class="table table-hover table-bordered">
-					<thead class="table-secondary">
-						<tr>
-							<td scope="col">CODIGO</td>
-							<td scope="col">FECHA</td>
-							<td scope="col">CLIENTE</td>
-							<td scope="col">DIRECCION</td>
-							<td scope="col">SUBTOTAL</td>
-							<td scope="col">ESTADO</td>
-							<td scope="col">VER PEDIDO</td>
-							<td scope="col">Cambiar estado</td>
-						</tr>
-					</thead>
-					<tbody>
-					
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-
-	<!-- Modal agregar y actualizar -->
-	<div class="modal fade" id="modalpedido" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-xl">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">VER
-						PEDIDO</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="table-responsive">
-						<table id="tbldetallepedido" class="table table-hover table-bordered">
-							<thead class="table-secondary">
-								<tr>
-									<td scope="col" class="text-center">Nro Pedido</td>
-									<td scope="col" class="text-center">Nro producto</td>
-									<td scope="col" class="text-center">Nombre Producto</td>
-									<!-- td scope="col" class="text-center">Descripción</td-->
-									<td scope="col" class="text-center">Cantidad</td>
-									<td scope="col" class="text-center">Precio</td>
-									<td scope="col" class="text-center">SubTotal</td>
-
-								</tr>
-							</thead>
-							<tbody>
-
-							</tbody>
-						</table>
-					</div>
-				</div>
-
-				<div class="modal-footer">
-					<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">CERRAR</button>
-					<button type="button" class="btn btn-outline-success" id="btnregistarempleado">IMPRIMIR</button>
 				</div>
 			</div>
 		</div>
-	</div>
 
+		<!-- Modal eliminar EMPLEADO-->
+		<div class="modal fade" id="modaleliminarempleado" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Eliminar
+							Empleado</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<label id="mensajeeliminar"></label> <input type="hidden"
+							value="0" id="hddcodempleadoeliminar">
 
-	<!-- Modal actualizarPedido -->
-	<div class="modal fade" id="modalactualizarpedido" tabindex="-1" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">Cambiar Estado</h5>
-					<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span></button>
-				</div>
-				<div class="modal-body">
-					
-					<select class="form-control" id="cboEstadoPedido">
-						<option value="0">Seleccione</option>
-						<option value="Recibido">Recibido</option>
-						<option value="En Preparación">En Preparación</option>
-						<option value="Listo para Envío">Listo para Envío</option>
-						<option value="En Ruta">En Ruta</option>
-						<option value="Entregado">Entregado</option>
-						<option value="Cancelado">Cancelado</option>
-						<option value="Anulado">Anulado</option>
-					</select>
-					<input type="hidden" value="0" id="hddcodpedidoactualizar">
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-					<button type="button" class="btn btn-primary" id="btnActualizarEstadoPedido">Actualizar estado</button>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-secondary"
+							data-dismiss="modal">CERRAR</button>
+						<button type="button" class="btn btn-outline-danger"
+							id="btneliminarempleado">ELIMINAR</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-
-	<!-- Modal eliminar EMPLEADO-->
-	<div class="modal fade" id="modaleliminarempleado" tabindex="-1" aria-labelledby="exampleModalLabel"
-		aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Eliminar
-						Empleado</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<label id="mensajeeliminar"></label> <input type="hidden" value="0" id="hddcodempleadoeliminar">
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">CERRAR</button>
-					<button type="button" class="btn btn-outline-danger" id="btneliminarempleado">ELIMINAR</button>
-				</div>
-			</div>
-		</div>
-	</div>
 </body>
 
 </html>

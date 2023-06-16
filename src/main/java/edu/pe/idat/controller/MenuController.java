@@ -28,24 +28,16 @@ public class MenuController {
 
 	@GetMapping("/Menus/menua")
 	public String menua(Model model, final HttpSession session) {
-
-		Usuario usu = (Usuario) session.getAttribute("sesionempl");
-		model.addAttribute("mensaje", usu.getEmail());
-		if (Objects.isNull(usu)) {
-			return "/login";
-		}
-		return "/Menus/menua";
+			Usuario usu = (Usuario) session.getAttribute("sesionempl");
+			if (Objects.isNull(usu)){
+				model.addAttribute("mensaje", "No estás registrado");
+				model.addAttribute("usuario", new Usuario());
+				return "login";
+			} else {
+				return "Menus/menua";
+			}
 	}
 
-	@GetMapping("/Menus/menue")
-	public String menue(Model model, final HttpSession session) {
-		Usuario usu = (Usuario) session.getAttribute("sesionempl");
-		model.addAttribute("mensaje", usu.getEmail());
-		if (Objects.isNull(usu)) {
-			return "/login";
-		}
-		return "/Menus/menue";
-	}
 
 	@GetMapping("/Menus/menu")
 	public String menu(Model model, final HttpSession session) {
@@ -54,11 +46,11 @@ public class MenuController {
 		try {
 			model.addAttribute("mensaje", usu.getEmail());
 			model.addAttribute("listadoCategoria", categoriaservice.ListarCategoria());
-			return "/Menus/menu";
+			return "Menus/menu";
 		} catch (Exception e) {
 			model.addAttribute("mensaje", "Aún no estás registrado");
 			model.addAttribute("listadoCategoria", categoriaservice.ListarCategoria());
-			return "/Menus/menu";
+			return "Menus/menu";
 		}
 	}
 

@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 import edu.pe.idat.repository.CategoriaRepository;
 import edu.pe.idat.repository.ProductoRepository;
 import edu.pe.idat.model.Empleado;
-import edu.pe.idat.model.EmpleadoResponse;
 import edu.pe.idat.model.Producto;
-import edu.pe.idat.model.ProductoResponse;
+import edu.pe.idat.model.response.EmpleadoResponse;
+import edu.pe.idat.model.response.ProductoResponse;
 
 @Service
 public class ProductoService {	
@@ -57,7 +57,7 @@ public class ProductoService {
 			prd.setDescripcion(producto.getDescripcion());
 			prd.setPrecio(producto.getPrecio());
 			prd.setCodcategoria(producto.getCodcategoria());
-			
+			prd.setImagen(producto.getImagen());
 			productoRepository.save(prd);
 			    
 		}else {

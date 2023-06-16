@@ -8,7 +8,7 @@ import edu.pe.idat.repository.AreaEmpleadoRepository;
 import edu.pe.idat.repository.CargoEmpleadoRepository;
 import edu.pe.idat.repository.EmpleadoRepository;
 import edu.pe.idat.model.Empleado;
-import edu.pe.idat.model.EmpleadoResponse;
+import edu.pe.idat.model.response.EmpleadoResponse;
 
 @Service
 public class EmpleadoService {

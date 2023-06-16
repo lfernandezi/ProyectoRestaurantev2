@@ -1,4 +1,6 @@
-package edu.pe.idat.model;
+package edu.pe.idat.model.response;
+
+import edu.pe.idat.model.Categoria;
 
 public class ProductoResponse {
 	

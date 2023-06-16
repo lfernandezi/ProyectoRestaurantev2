@@ -49,9 +49,16 @@ public class ClienteController {
 	}
 
 	@GetMapping("/listaclientes")
-	public String listar(Model model) {
+	public String listar(Model model,final HttpSession session) {
+		Usuario usu = (Usuario) session.getAttribute("sesionempl");
+		if (Objects.isNull(usu)){
+			model.addAttribute("mensaje", "No estás registrado");
+			model.addAttribute("usuario", new Usuario());
+			return "login";
+		} else {
+			return "listaclientes";
+		}
 		
-		return "listaclientes";
 	}
 
 	@GetMapping("/listarCliente")
@@ -75,7 +82,7 @@ public class ClienteController {
 		if (cliente.getXdireccion() == "") {
 			codigo = 4;
 		}
-		if (tel.length() != 9) {
+		if (tel.length() < 7) {
 			codigo = 7;
 		}
 		if (doc.length() != 8) {
