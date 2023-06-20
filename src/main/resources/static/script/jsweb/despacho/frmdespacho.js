@@ -157,7 +157,7 @@ function BuscarCliente() {
 	var total = 0;
 	$.ajax({
 		type: "GET",
-		url: "/listarcliente",
+		url: "/listarCliente",
 		dataType: "json",
 		success: function(datos) {
 			$("#tblClienteFinal").html("");

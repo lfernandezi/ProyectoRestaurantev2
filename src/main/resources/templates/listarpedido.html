@@ -75,10 +75,11 @@
 			</div>
 		</div>
 
-		<!-- Modal agregar y actualizar -->
+		<!-- Modal ver detalle pedido -->
 		<div class="modal fade" id="modalpedido" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-xl">
+				
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">VER PEDIDO</h5>
@@ -87,9 +88,10 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body" >
-						<div id="cabecera">
-						</div>
+		
+			
+					<div class="modal-body">
+						<div id="cabecera"></div>
 						<div class="table-responsive">
 							<table id="tbldetallepedido"
 								class="table table-hover table-bordered">
@@ -115,12 +117,13 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-outline-secondary"
 							data-dismiss="modal">CERRAR</button>
-						<button type="button" class="btn btn-outline-success"
-							id="btnregistarempleado">IMPRIMIR</button>
+						<button type="submit" class="btn btn-outline-success"
+							id="btnimprimirdetallecocina" value=0>IMPRIMIR</button>
 					</div>
 				</div>
 			</div>
 		</div>
+
 
 
 		<!-- Modal actualizarPedido -->

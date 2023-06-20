@@ -21,11 +21,11 @@ $(document).on("change", "#cbobuscarpedido", function() {
 			$("#cbobuscarporestado").show();
 			$("#errorbuscar").show();
 			$("#txtbuscarpedido").hide();
-		}else{
-		$("#cbobuscarporestado").hide();
+		} else {
+			$("#cbobuscarporestado").hide();
 			$("#errorbuscar").show();
 			$("#txtbuscarpedido").hide();
-			}
+		}
 	}
 });
 
@@ -40,13 +40,13 @@ $(document).on("click", "#btnbuscarpedido", function() {
 		$("#errorbuscar").text("");
 	} else {
 		if (buscar === "1") {
-		
-		$("#txtbuscarpedido").hide();
+
+			$("#txtbuscarpedido").hide();
 			$("#errorbuscarpedido").text("");
 			listarpedido();
 		} else {
 			if (buscar === "2") {
-			$("#txtbuscarpedido").hide();
+				$("#txtbuscarpedido").hide();
 				if (estado == "0") {
 					alert("Seleccione una opción");
 				} else {
@@ -55,11 +55,11 @@ $(document).on("click", "#btnbuscarpedido", function() {
 				}
 			} else {
 				if (codigo == "") {
-						$("#errorbuscarpedido").text("Ingresar datos de búsqueda");
-					
+					$("#errorbuscarpedido").text("Ingresar datos de búsqueda");
+
 				} else {
 					if (buscar === "3") {
-					$("#errorbuscarpedido").text("");
+						$("#errorbuscarpedido").text("");
 						alert("Buscando pedido n. " + codigo);
 						buscarPedidoporCodigo(codigo);
 
@@ -67,7 +67,7 @@ $(document).on("click", "#btnbuscarpedido", function() {
 						$("#errorbuscarpedido").text("");
 						alert("Buscando por código de cliente n. " + codigo);
 						buscarPedidoporCliente(codigo);
-						
+
 					}
 				}
 			}
@@ -87,6 +87,7 @@ $(document).on("click", ".btnverpedido", function() {
 $(document).on("click", ".btnactualizarpedido", function() {
 	var codigo = $(this).attr("data-codpedido");
 	$("#hddcodpedidoactualizar").val($(this).attr("data-codpedido"));
+	$("#cboEstadoPedido").val($(this).attr("data-estado"));
 	$("#modalactualizarpedido").modal("show");
 
 
@@ -114,39 +115,40 @@ function listarpedido() {
 		url: "/listarPedido",
 		dataType: "json",
 		success: function(resultado) {
-			
+
 			$("#tblpedido > tbody").html("");
 			$.each(resultado, function(index, value) {
-			
-			if (value.codpedido == 0 || value.codpedido == null) {
+
+				if (value.codpedido == 0 || value.codpedido == null) {
 					$("#tblpedido > tbody").append(
 						"<tr>" +
 						"<td colspan='10' class='text-center'> NO SE ENCONTRARON PEDIDOS </td>" +
 						"</tr>");
 				} else {
-				
-				new Date (value.fechacreacion);
-				
-				$("#tblpedido > tbody").append(
-					"<tr>" +
-					"<td>" + value.codpedido + "</td>" +
-					//"<td>" + value.fechacreacion+ "</td>" +
-					
-					"<td>" + new Date (value.fechacreacion).toLocaleString()+ "</td>" +
-					"<td>" + value.codcliente + "</td>" +
-					"<td>" + value.direccion + "</td>" +
-					"<td>" + value.monto + "</td>" +
-					"<td>" + value.estado + "</td>" +
 
-					"<td><input type='image' align='center' src='/img/ingresar.jpg' width='60' height='40'" +
-					"class='btnverpedido'data-codpedido='" + value.codpedido + "'" +
-					"data-codcliente='" + value.codcliente + "'" + "></td>" +
+					new Date(value.fechacreacion);
 
-					"<td><input type='image' align='center' src='/img/actualizar.jpg' width='60' height='40'" +
-					"class='btnactualizarpedido' data-codpedido='" + value.codpedido + "'" +
-					"data-codcliente='" + value.codcliente + "'" + "></td>" +
-					"</tr>");
-					}
+					$("#tblpedido > tbody").append(
+						"<tr>" +
+						"<td>" + value.codpedido + "</td>" +
+						//"<td>" + value.fechacreacion+ "</td>" +
+
+						"<td>" + new Date(value.fechacreacion).toLocaleString() + "</td>" +
+						"<td>" + value.codcliente + "</td>" +
+						"<td>" + value.direccion + "</td>" +
+						"<td>" + value.monto + "</td>" +
+						"<td>" + value.estado + "</td>" +
+
+						"<td><input type='image' align='center' src='/img/ingresar.jpg' width='60' height='40'" +
+						"class='btnverpedido'data-codpedido='" + value.codpedido + "'" +
+						"data-codcliente='" + value.codcliente + "'" + "></td>" +
+
+						"<td><input type='image' align='center' src='/img/actualizar.jpg' width='60' height='40'" +
+						"class='btnactualizarpedido' data-codpedido='" + value.codpedido + "'" +
+						"data-codcliente='" + value.codcliente + "'" +
+						"data-estado='" + value.estado + "'" + "></td>" +
+						"</tr>");
+				}
 			});
 		},
 		error: function(xhr, status) {
@@ -176,10 +178,14 @@ function buscarPedidoporEstado(_estado) {
 						"<td colspan='10' class='text-center'> NO SE ENCONTRARON PEDIDOS </td>" +
 						"</tr>");
 				} else {
+					new Date(value.fechacreacion);
+
 					$("#tblpedido > tbody").append(
 						"<tr>" +
 						"<td>" + value.codpedido + "</td>" +
-						"<td>" + value.fechacreacion + "</td>" +
+						//"<td>" + value.fechacreacion+ "</td>" +
+
+						"<td>" + new Date(value.fechacreacion).toLocaleString() + "</td>" +
 						"<td>" + value.codcliente + "</td>" +
 						"<td>" + value.direccion + "</td>" +
 						"<td>" + value.monto + "</td>" +
@@ -191,10 +197,9 @@ function buscarPedidoporEstado(_estado) {
 
 						"<td><input type='image' align='center' src='/img/actualizar.jpg' width='60' height='40'" +
 						"class='btnactualizarpedido' data-codpedido='" + value.codpedido + "'" +
-						"data-codcliente='" + value.codcliente + "'" + "></td>" +
-						"</tr>"
-
-					);
+						"data-codcliente='" + value.codcliente + "'" +
+						"data-estado='" + value.estado + "'" + "></td>" +
+						"</tr>");
 				}
 			});
 		},
@@ -225,10 +230,14 @@ function buscarPedidoporCodigo(codigopedido) {
 						"<td colspan='10' class='text-center'> NO SE ENCONTRARON PEDIDOS </td>" +
 						"</tr>");
 				} else {
+					new Date(value.fechacreacion);
+
 					$("#tblpedido > tbody").append(
 						"<tr>" +
 						"<td>" + value.codpedido + "</td>" +
-						"<td>" + value.fechacreacion + "</td>" +
+						//"<td>" + value.fechacreacion+ "</td>" +
+
+						"<td>" + new Date(value.fechacreacion).toLocaleString() + "</td>" +
 						"<td>" + value.codcliente + "</td>" +
 						"<td>" + value.direccion + "</td>" +
 						"<td>" + value.monto + "</td>" +
@@ -240,10 +249,9 @@ function buscarPedidoporCodigo(codigopedido) {
 
 						"<td><input type='image' align='center' src='/img/actualizar.jpg' width='60' height='40'" +
 						"class='btnactualizarpedido' data-codpedido='" + value.codpedido + "'" +
-						"data-codcliente='" + value.codcliente + "'" + "></td>" +
-						"</tr>"
-
-					);
+						"data-codcliente='" + value.codcliente + "'" +
+						"data-estado='" + value.estado + "'" + "></td>" +
+						"</tr>");
 				}
 			});
 		},
@@ -274,10 +282,14 @@ function buscarPedidoporCliente(codigocliente) {
 						"<td colspan='10' class='text-center'> NO SE ENCONTRARON PEDIDOS </td>" +
 						"</tr>");
 				} else {
+					new Date(value.fechacreacion);
+
 					$("#tblpedido > tbody").append(
 						"<tr>" +
 						"<td>" + value.codpedido + "</td>" +
-						"<td>" + value.fechacreacion + "</td>" +
+						//"<td>" + value.fechacreacion+ "</td>" +
+
+						"<td>" + new Date(value.fechacreacion).toLocaleString() + "</td>" +
 						"<td>" + value.codcliente + "</td>" +
 						"<td>" + value.direccion + "</td>" +
 						"<td>" + value.monto + "</td>" +
@@ -289,10 +301,9 @@ function buscarPedidoporCliente(codigocliente) {
 
 						"<td><input type='image' align='center' src='/img/actualizar.jpg' width='60' height='40'" +
 						"class='btnactualizarpedido' data-codpedido='" + value.codpedido + "'" +
-						"data-codcliente='" + value.codcliente + "'" + "></td>" +
-						"</tr>"
-
-					);
+						"data-codcliente='" + value.codcliente + "'" +
+						"data-estado='" + value.estado + "'" + "></td>" +
+						"</tr>");
 				}
 			});
 		},
@@ -317,16 +328,17 @@ function VerDetallePedido(codigo) {
 		},
 		datatype: 'json',
 		success: function(data) {
-		$("#cabecera").html("");
-		$("#cabecera").append(
-		
-		"<div class='form-group row'>"+
-		"<label for='staticEmail' class='col-sm-2 col-form-label'>Nro Pedido</label>"+
-		"<div class='col-sm-10'><input type='text' readonly class='form-control-plaintext'"+
-		" value='"+codigo+"'></div></div>"
-		
-		);
-		
+			$("#cabecera").html("");
+			$("#btnimprimirdetallecocina").val(codigo);
+			$("#cabecera").append(
+
+				"<div class='form-group row'>" +
+				"<label for='staticEmail' class='col-sm-2 col-form-label'>Nro Pedido</label>" +
+				"<div class='col-sm-10'><input type='text' readonly class='form-control-plaintext'" +
+				" value='" + codigo + "'></div></div>"
+
+			);
+
 			$("#tbldetallepedido > tbody").html("");
 			$.each(data, function(index, valu) {
 
@@ -364,3 +376,32 @@ function ActualizarEstadoPedido(codigo, estado) {
 		}
 	});
 }
+
+$(document).on("click", "#btnimprimirdetallecocina", function() {
+
+	var codigo = $("#btnimprimirdetallecocina").val();
+
+	$.ajax({
+		type: 'GET',
+		url: '/obtenerPdfCocina',
+		xhrFields: {
+			responseType: 'blob'
+		},
+		data: {
+			ajax: true,
+			codpedido: codigo
+		},
+		success: function(json) {
+			var a = document.createElement('a');
+			var url = window.URL.createObjectURL(json);
+			a.href = url;
+			a.download = 'PedidoCocina'+codigo+'.pdf';
+			a.click();
+			window.URL.revokeObjectURL(url);
+		},
+		error: function() {
+			console.log("Error");
+		}
+	});
+
+});

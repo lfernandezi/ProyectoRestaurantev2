@@ -31,6 +31,7 @@ import edu.pe.idat.model.response.ResultadoResponse;
 
 import edu.pe.idat.service.DetallaPedidoService;
 import edu.pe.idat.service.PedidoService;
+import edu.pe.idat.service.ReportePedidoService;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -47,6 +48,9 @@ public class PedidoController {
 	
 	@Autowired
 	DetallaPedidoService detalleservice;
+	
+	@Autowired
+	ReportePedidoService reporteservice;
 
 	@PostMapping("/ingresarPedido")
 	@ResponseBody
@@ -97,28 +101,7 @@ public class PedidoController {
 	}
 	
 	
-	@GetMapping("/obtenerPdf")
-	public ResponseEntity<byte []> getPDF() throws Exception, JRException {
-		
-		JRBeanCollectionDataSource beanCollection=new JRBeanCollectionDataSource(detalleservice.listarDetalle());
-		JasperReport compilereport =   JasperCompileManager.compileReport(new FileInputStream("src/main/resources/PedidoReporteJasper.jrxml"));
 	
-		
-		HashMap<String, Object> map = new HashMap<>();
-		JasperPrint report=  JasperFillManager.fillReport(compilereport, map, beanCollection);
-		
-		
-		
-		
-		byte [] dat = JasperExportManager.exportReportToPdf(report);
-		
-		org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders(); 
-		
-		headers.set(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION,"inline;filename=Reporte.pdf");
-		
-		return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(dat);
-	
-	}
 	
 	@GetMapping("/listarPedido")
 	@ResponseBody
