@@ -59,8 +59,8 @@ public class ReporteController {
 	@GetMapping("/obtenerPdf2")
 	public ResponseEntity<byte []> getPDF2(@RequestParam ("codpedido")int codpedido) throws Exception, JRException {
 		
-		JRBeanCollectionDataSource beanCollection=new JRBeanCollectionDataSource(reporteservice.buscarReporte(codpedido));
-		JasperReport compilereport =   JasperCompileManager.compileReport(new FileInputStream("src/main/resources/PedidoReporteJasper.jrxml"));
+		JRBeanCollectionDataSource beanCollection=new JRBeanCollectionDataSource(detalleservice.verDetallePedido(codpedido));
+		JasperReport compilereport =   JasperCompileManager.compileReport(new FileInputStream("src/main/resources/ReporteCocina1.jrxml"));
 	
 		
 		HashMap<String, Object> map = new HashMap<>();

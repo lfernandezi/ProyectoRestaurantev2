@@ -383,7 +383,7 @@ $(document).on("click", "#btnimprimirdetallecocina", function() {
 
 	$.ajax({
 		type: 'GET',
-		url: '/obtenerPdfCocina',
+		url: '/obtenerPdf2',
 		xhrFields: {
 			responseType: 'blob'
 		},
