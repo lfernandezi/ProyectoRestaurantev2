@@ -27,7 +27,8 @@ $(document).on("change", "#cbocategoria", function() {
 						$("#tblcategoria").append(
 							"<div class='col mb-4'>" +
 							"<div class='card border-warning h-100'>" +
-							"<img src='/img/" + value.nombre + ".jpg' class='card-img-top' alt='...'>" +
+							//"<img src='/img/" + value.nombre + ".jpg' class='card-img-top' alt='...'>" +
+							"<img src='/img/" + value.imagen + "' class='card-img-top' alt='...'>" +
 							"<div class='card-body'>" +
 							"<h5 class='card-title'><b>" + value.nombre + "</b></h5>" +
 							"<p class='card-text'>" + value.descripcion + "</p>" +

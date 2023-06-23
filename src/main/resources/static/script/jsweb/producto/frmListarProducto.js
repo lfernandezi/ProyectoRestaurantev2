@@ -1,5 +1,9 @@
 $(document).ready(function() {
-	$("#btncambiarImagen").hide();
+	ListarProductos();
+	alert("Acción realizada");
+	$("#btnregistarproducto").hide();
+	$("#txtbuscarproducto").hide();
+
 });
 
 $(document).on("click", "#btnagregarproducto", function() {
@@ -8,37 +12,10 @@ $(document).on("click", "#btnagregarproducto", function() {
 	$("#txtdescripcion").val("");
 	$("#cbocategoria").val("");
 	$("#txtprecio").val("");
-	$("#hddcodproducto").val("");
+	$("#hddcodproducto").val(0);
 	$("#modalproducto").modal("show");
 });
 
-$(document).on("change", "#controlimagen", function() {
-	console.log(this.files);
-	var files = this.files;
-	var element;
-	for (var i = 0; i < files.length; i++) {
-		element = files[i];
-
-		var imgcodificada = URL.createObjectURL(element);
-		var img = $(
-			"<div class='card'>" +
-			" <img  src='" + imgcodificada + "' id='img-preview'>" +
-			"<button type='button' class='btn btn-outline-info'" +
-			"	id='btncambiarImagen'>Ocultar Vista Previa</button>" +
-			"</div>"
-		);
-		
-		$(img).insertBefore("#img-preview");
-		$("#controlimagen").hide();
-		$("#btncambiarImagen").show();
-	}
-});
-
-$(document).on("click", "#btncambiarImagen", function() {
-	$(this).parent().remove();
-
-	$("#controlimagen").show();
-});
 
 
 $(document).on("click", ".btnactualizarproducto", function() {
@@ -51,7 +28,7 @@ $(document).on("click", ".btnactualizarproducto", function() {
 	$("#txtprecio").val($(this).attr("data-precio"));
 	$("#hddcodproducto").val($(this).attr("data-codproducto"));
 	$("#modalproducto").modal("show");
-	alert(codcategoria);
+	
 });
 
 $(document).on("click", ".btneliminarproducto", function() {
@@ -62,48 +39,58 @@ $(document).on("click", ".btneliminarproducto", function() {
 
 });
 
-$(document).on("click", "#btnregistarproducto", function() {
-		
-    if ($("#controlimagen").val()== ""){
+$(document).on("click", "#btnvalidar", function() {
+
+	
+    /*if ($("#controlimagen").val()== ""){
     	alert("No eligió imagen");
     	}
-    	codigo = 5;
+    	codigo = 5;*/
+    if (hddcodproducto)
 	if ($("#txtprecio").val() <= 0) {
 		$("#errorprecio").text("Ingresar Valor Mayor a CERO(SOLO ACEPTA NUMEROS)");
 		codigo = 4;
 	} else {
 		$("#errorprecio").text("");
+		codigo = 0;
 	}
 	if ($("#cbocategoria").val() === "" || $("#cbocategoria").val() === 0 || $("#cbocategoria").val() === "0") {
 		$("#errorcategoria").text("Ingresar una CATEGORIA");
 		codigo = 3;
 	} else {
 		$("#errorcategoria").text("");
+		codigo = 0;
 	}
 	if ($("#txtdescripcion").val() === "") {
 		$("#errordescripcion").text("Ingresar la DESCRIPCION DEL PRODUCTO");
 		codigo = 2;
+		
 	} else {
 		$("#errordescripcion").text("");
+		codigo = 0;
 	}
 	if ($("#txtnombre").val() === "") {
 		$("#errornombre").text("Ingresar el NOMBRE COMBO");
 		codigo = 1;
 	} else {
 		$("#errornombre").text("");
+		codigo = 0;
 	}
 	
-	alert($("#controlimagen").val());
-
-	switch (codigo) {
+	if($("#errorprecio").text()=="" && $("#errorcategoria").text()== "" && $("#errordescripcion").text()== "" && $("#errornombre").text()== ""){
+	$("#btnregistarproducto").show();
+	
+	}
+	/*switch (codigo) {
 		//case 1: alert("INGRESAR NOMBRE COMBO"); break;
 		//case 2: alert("INGRESAR DESCRIPCION COMIDA "); break;
 		//case 3: alert("INGRESAR CATEGORIA COMIDA"); break;
 		//case 4: alert("INGRESAR PRECIO COMIDA"); break;
 		case 0:
 		
-		
-		
+	
+	$("#btnregistarproducto").show();
+
 		
 			$.ajax({
 				type: "Post",
@@ -128,7 +115,7 @@ $(document).on("click", "#btnregistarproducto", function() {
 					$("#modalproducto").modal("hide");
 				}
 			});
-	}
+	}*/
 
 });
 
@@ -215,10 +202,6 @@ function sololetras(e) {
 }
 
 
-$(document).ready(function() {
-	//ListarProductos();
-	$("#txtbuscarproducto").hide();
-});
 
 $(document).on("change", "#cbobuscarproducto", function() {
 	$("#errorbuscarproducto").text("");
@@ -301,7 +284,7 @@ function BuscarproductoxCodigo(codigo) {
 	});
 }
 
-function ListarCategoria() {
+function ListarCategoria(codcategoria) {
 	$.ajax({
 		type: "GET",
 		url: "/listarCategorias",
@@ -316,8 +299,11 @@ function ListarCategoria() {
 					"<option value='" + value.codcategoria + "'>" + value.categoria + "</option>"
 				);
 			});
+			
+			$("#cbocategoria").val(codcategoria);
 
 		}
 	});
 }
+
 

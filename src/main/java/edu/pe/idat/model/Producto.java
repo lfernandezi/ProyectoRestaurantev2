@@ -1,6 +1,5 @@
 package edu.pe.idat.model;
 
-import java.sql.Blob;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,13 +20,13 @@ public class Producto {
 	private String descripcion;
 	
 	@Column(name = "precio")
-	private Double precio;
+	private double precio;
 	
 	@Column(name = "codcategoria")
 	private int codcategoria;
 	
 	@Column(name = "imagen")
-	private Blob imagen;
+	private String imagen;
 
 	public int getCodproducto() {
 		return codproducto;
@@ -53,11 +52,11 @@ public class Producto {
 		this.descripcion = descripcion;
 	}
 
-	public Double getPrecio() {
+	public double getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(Double precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
 
@@ -69,15 +68,30 @@ public class Producto {
 		this.codcategoria = codcategoria;
 	}
 
-	public Blob getImagen() {
+	public String getImagen() {
 		return imagen;
 	}
 
-	public void setImagen(Blob imagen) {
+	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
 
+	public Producto(int codproducto, String nombre, String descripcion, double precio, int codcategoria,
+			String imagen) {
+		super();
+		this.codproducto = codproducto;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.precio = precio;
+		this.codcategoria = codcategoria;
+		this.imagen = imagen;
+	}
 
+	public Producto() {
+		
+	}
+
+	
 	
 	
 }

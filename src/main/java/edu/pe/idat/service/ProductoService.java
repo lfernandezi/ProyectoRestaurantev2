@@ -50,15 +50,15 @@ public class ProductoService {
 	public void registrarProducto(Producto producto) {
 		if(producto.getCodproducto() == 0) {
 			
-			//productoRepository.registrarProducto(producto.getNombre(),producto.getDescripcion(),producto.getCategoria(),producto.getPrecio());  
+			productoRepository.save(producto);  
 			
-			Producto prd= new Producto();
+			/*Producto prd= new Producto();
 			prd.setNombre(producto.getNombre());
 			prd.setDescripcion(producto.getDescripcion());
 			prd.setPrecio(producto.getPrecio());
 			prd.setCodcategoria(producto.getCodcategoria());
-			prd.setImagen(producto.getImagen());
-			productoRepository.save(prd);
+			prd.setImagen(null);
+			productoRepository.save(prd);*/
 			    
 		}else {
 			//productoRepository.actualizarProducto(producto.getCodproducto(),producto.getNombre(),producto.getDescripcion(),producto.getCategoria(),producto.getPrecio());
