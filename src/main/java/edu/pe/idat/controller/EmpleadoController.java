@@ -50,8 +50,15 @@ public class EmpleadoController {
 			model.addAttribute("usuario", new Usuario());
 			return "login";
 		} else {
-			model.addAttribute("listadoempleado",null);
-			return "listarempleado";
+			if(usu.getRol().equals("ROLE_EMPLEADO")) {
+				model.addAttribute("mensaje", "No tiene permisos para este formulario");
+				model.addAttribute("usuario", new Usuario());
+				return "login";
+			}else {
+				model.addAttribute("listadoempleado",null);
+				return "listarempleado";
+			}
+			
 		}
 		
 	}

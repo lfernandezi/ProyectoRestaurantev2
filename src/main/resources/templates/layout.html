@@ -43,10 +43,10 @@
 						<a class="dropdown-item" id="acion1">INICIAR SESION</a> <a
 							class="dropdown-item" id="acion2" th:href="@{/registrarCliente}">REGISTRARSE</a>
 						<a class="dropdown-item" id="acion3" data-toggle="modal"
-							data-target="#exampleModal">MIS DATOS</a>
-						 <a
-							class="dropdown-item" id="acion5" th:href="@{/mispedidos}">MIS PEDIDOS</a>
-							
+							data-target="#exampleModal">MIS DATOS</a> <a
+							class="dropdown-item" id="acion5" th:href="@{/mispedidos}">MIS
+							PEDIDOS</a>
+
 					</div></li>
 			</ul>
 		</div>
@@ -72,7 +72,7 @@
 							th:href="@{/listarproducto}">PRODUCTOS</a> <a id="empleados"
 							class="dropdown-item" th:href="@{/listarempleado}">EMPLEADOS</a>
 						<a id="clientes" class="dropdown-item" th:href="@{/listaclientes}">CLIENTES</a>
-						<a id="pedidos" class="dropdown-item" th:href="@{/listarpedido}">PEDIDOS</a>
+						<!--a id="pedidos" class="dropdown-item" th:href="@{/listarpedido}">PEDIDOS</a-->
 						<a id="categorias" class="dropdown-item"
 							th:href="@{/listarcategorias}">CATEGORIAS</a>
 					</div></li>
@@ -98,7 +98,7 @@
 	</nav>
 
 
-	<nav th:fragment="menue"
+	<!-- nav th:fragment="menue"
 		class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<img src="/img/loginpollo2.jpg" alt="jacket" width="50" height="50">
 		<a class="navbar-brand" id="roles"></a>
@@ -128,10 +128,10 @@
 					</div></li>
 			</ul>
 		</div>
-	</nav>
+	</nav-->
 
 
-	<div class="modal-dialog" th:fragment="datoscliente">
+	<!--div class="modal-dialog" th:fragment="datoscliente">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalLabel">ACTUALIZAR
@@ -143,7 +143,7 @@
 			</div>
 			<div class="modal-body">
 
-				<!--form th:action="registrarpedido" method="post"-->
+				<form th:action="registrarpedido" method="post">
 				<div class="form-group">
 					<label for="txtnombre">NOMBRE:</label> <input type="text"
 						class="form-control" id="txtnombre" readonly>
@@ -174,14 +174,43 @@
 					id="btnagregarcarrito">MODIFICAR</button>
 			</div>
 		</div>
-	</div>
+	</div-->
 
 	<footer th:fragment="footerRestaurant">
 		<div class="card text-white bg-dark mb-3">
+
 			<div class="card-header">CONTÁCTANOS</div>
-			<div class="card-body">
-				<h5 class="card-title">REDES SOCIALES</h5>
-				<p class="card-text">WHATSAPP: 912223083</p>
+			<div class="card-group bg-dark">
+				<div class="card bg-dark">
+					<div class="card-body">
+						<h6 class="card-title">REDES SOCIALES</h6>
+						<p class="text-white bg-dark"></p>
+						<a href="https://wa.me/51912223083" target="_blanck" ><img alt="jacket" width="30" height="30" src="/img/descargawp.jpg"> Whatsapp </img></a>
+						
+						
+						<a href="https://facebook.com/fernandezluis05" target="_blanck" ><img alt="jacket" width="30" height="30" src="/img/descargaface.jpg"> Facebook</img></a>
+						<!--p class="text-white bg-dark">WHATSAPP: 912223083</p-->
+					</div>
+				</div>
+				<div class="card bg-dark">
+					<div class="card-body">
+						<h6 class="card-title">TIENDAS</h6>
+						<p class="card-text">SEDE SAN JUAN:</p>
+						<p class="card-text">
+							<small >Av. Los Lirios 234 - Urb. Entel - San Juan de miraflores</small>
+						</p>
+					</div>
+				</div>
+				<div class="card bg-dark">
+
+					<div class="card-body">
+						<h6 class="card-title">EMAIL</h6>
+						<a href="https://mail.google.com/mail/u/0/#inbox?compose=new"  target="_blanck"><img alt="jacket" width="20" height="20" src="/img/gmail.jpg">luismass640@gmail.com </img> </a>
+						<p class="card-text"> 
+							<small ></small>
+						</p>
+					</div>
+				</div>
 			</div>
 		</div>
 
