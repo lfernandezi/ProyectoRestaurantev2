@@ -133,7 +133,9 @@
 			</div>
 		</div>
 	</div>
-	<div class="alert alert-warning" role="alert">
+	
+	
+	<!-- div class="alert alert-warning" role="alert">
 		<div class="container" id="contenedor4">
 			<div class="row">
 				<div class="col-sm">
@@ -147,6 +149,10 @@
 							<h2 class="card-title text-center">VENTA REGISTRADA</h2>
 							<h5 class="card-text text-center">Su Pedido está en Camino a su Domicilio</h5>
 						</div>
+						<div id="tblPedidoingresado" class="card-body alert alert-secondary">
+					</div>
+						
+						
 						<a th:href="@{/Menus/menu}" class="btn btn-outline-primary btn-block">REGRESAR AL MENU</a>
 					</div>
 
@@ -156,7 +162,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div-->
 
 	<!-- Modal cambiar direccion-->
 	<div class="modal fade" id="modaldireccion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -174,6 +180,11 @@
 					<div class="form-group">
 						<label for="txtdireccion2">Dirección de Despacho: </label> <input type="text"
 							class="form-control" id="txtdireccion2">
+					</div>
+					
+					<div class="form-group">
+						<label for="txtreferencia2">Referencia: </label> <input type="text"
+							class="form-control" id="txtreferencia2" placeholder="Agregar referencia">
 					</div>
 
 				</div>
@@ -235,6 +246,7 @@
 		</div>
 	</div>
 
+<footer th:replace="layout::footerRestaurant"></footer>
 </body>
 
 </html>

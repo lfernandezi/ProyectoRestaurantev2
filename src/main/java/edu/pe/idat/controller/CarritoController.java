@@ -80,7 +80,7 @@ public class CarritoController {
 		try {
 			request.getSession().setAttribute("misesion", carritoservice.eliminarproductodepedido(pedido, listapedido));
 		} catch (Exception ex) {
-			mensaje = "No se pudo eliminar en carrito";
+			mensaje = "No se pudo eliminar de carrito";
 			respuesta = false;
 		}
 		return new ResultadoResponse(respuesta, mensaje);

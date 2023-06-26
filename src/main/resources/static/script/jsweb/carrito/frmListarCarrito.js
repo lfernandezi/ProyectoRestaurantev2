@@ -22,7 +22,7 @@ $(document).on("click", ".btneliminarcarrito", function() {
 
 $(document).on("click", "#acion1", function() {
 	var registro = $("#navbarDropdown1").text();
-	if (registro == "No estás registrado") {
+	if (registro == "No ha iniciado sesión") {
 		window.open("http://localhost:9080/login", "_self");
 	}else{
 		$.ajax({
@@ -104,8 +104,8 @@ $(document).on("click", "#btneliminarcarrito", function() {
 
 
 $(document).on("click", "#btnirdespacho", function() {
-	if ($("#navbarDropdown1").text() == "No estás registrado") {
-		alert("No estás registrado");
+	if ($("#navbarDropdown1").text() == "No ha iniciado sesión") {
+		alert("No ha iniciado sesión");
 	} else {
 
 		abrirdespacho();

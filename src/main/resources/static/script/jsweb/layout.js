@@ -11,7 +11,7 @@ function verUsuario() {
 		dataType: "json",
 		success: function(resultado) {
 			$("#navbarDropdown1").text(resultado.mensaje);
-			if ($("#navbarDropdown1").text() != "No estás registrado") {
+			if ($("#navbarDropdown1").text() != "No ha iniciado sesión") {
 				$("#acion1").text("CERRAR SESION");
 				$("#acion2").hide();
 
@@ -25,7 +25,7 @@ function verUsuario() {
 
 $(document).on("click", "#acion1", function() {
 	var registro = $("#navbarDropdown1").text();
-	if (registro == "No estás registrado") {
+	if (registro == "No ha iniciado sesión") {
 		window.open("http://localhost:9080/login", "_self");
 	} else {
 		$.ajax({
@@ -57,7 +57,7 @@ $(document).on("click", "#acion3", function() {
 
 $(document).on("click", "#acion4", function() {
 	var registro = $("#navbarDropdown2").text();
-	if (registro == "No estás registrado") {
+	if (registro == "No ha iniciado sesión") {
 		window.open("http://localhost:9080/login", "_self");
 	} else {
 		$.ajax({

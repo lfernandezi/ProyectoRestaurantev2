@@ -8,6 +8,7 @@ $(document).ready(function() {
 
 $(document).on("click", "#btnmodificardireccion", function() {
 	$("#txtdireccion2").val($(this).attr("data-direccion"));
+	$("#txtreferencia2").val($("#txtreferencia").val());
 	$("#modaldireccion").modal("show");
 });
 
@@ -17,6 +18,7 @@ $(document).on("click", "#btncambiardireccion", function() {
 		alert("No se puede enviar sin dirección");
 	} else {
 		$("#txtdireccion").val($("#txtdireccion2").val());
+		$("#txtreferencia").val($("#txtreferencia2").val());
 		$("#modaldireccion").modal("hide");
 	}
 });
@@ -124,12 +126,15 @@ $(document).on("click", "#btningresarpedido", function() {
 		$("#contenedor1").hide();
 		$("#contenedor2").hide();
 		$("#contenedor3").hide();
-		$("#contenedor4").show();
+		url = "http://localhost:9080/venta";
+	window.open(url, "_self");
+		//$("#contenedor4").show();
 	}
 
 });
 
 function IngresarPedido() {
+	
 	$.ajax({
 		type: "POST",
 		contentType: "application/json",
@@ -138,6 +143,7 @@ function IngresarPedido() {
 			codcliente: $("#txtcodigo").val(),
 			direccion: $("#txtdireccion").val(),
 			monto: $("#txtsubtotal").val(),
+			referencia: $("#txtreferencia").val(),
 			//igv: $("#txtigv").val(),
 			monto: $("#txtmonto").val()
 		}),
@@ -154,10 +160,11 @@ function IngresarPedido() {
 }
 
 function BuscarCliente() {
+	var referencia= "";
 	var total = 0;
 	$.ajax({
 		type: "GET",
-		url: "/listarCliente",
+		url: "/listarclientedespacho",
 		dataType: "json",
 		success: function(datos) {
 			$("#tblClienteFinal").html("");
@@ -194,6 +201,17 @@ function BuscarCliente() {
 					"<div class='col'>" +
 					" <input type='text' class='form-control' id='txtdireccion'value='" +
 					value.xdireccion + "' readonly> <br />" +
+					
+					"<div class='row'>" +
+					"<div class='col'>" +
+					"<label for='txtreferencia'>Referencia:</label>" +
+					"</div> " +
+					"</div>" +
+					"<div class='row'>" +
+					"<div class='col'>" +
+					" <input type='text' class='form-control' id='txtreferencia'value='" +
+					referencia + "' readonly placeholder='Agregar referencia'> <br />" +
+					
 					" <button type='button' class='btn btn-outline-success' " +
 					"id='btnmodificardireccion' " +
 					" data-direccion='" + value.xdireccion + "'" +

@@ -2,35 +2,106 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="layout::head">
-	<meta charset="UTF-8">
-	<title></title>
+<meta charset="UTF-8">
+<title></title>
 </head>
-
+<script type="text/javascript"
+	th:src="@{/script/jsweb/despacho/venta.js}"></script>
 <body>
 	<div th:replace="layout::titulo"></div>
+
 	<div class="alert alert-warning" role="alert">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm">
-					<img src="img/loginpollo2.jpg" alt="jacket" width="360" height="600">
-				</div>
-				<div class="col-sm">
-					<br>
-					<div class="card" style="width: 20rem;">
-						<img src="img/venta.jpg" class="card-img-top" alt="...">
-						<div class="card-body">
-							<h2 class="card-title text-center">VENTA REGISTRADA</h2>
-							<h5 class="card-text text-center">Su Pedido esta en Camino a su Domicilio</h5>							
-						</div>
+		<div class="row">
+			<div class="col-xl">
+				<h2 class="card-title text-center">VENTA REGISTRADA</h2>
+				<h5 class="card-text text-center">Su Pedido fue recibido</h5>
+				<center>
+					<img src="img/venta.jpg" alt="jacket" width="150" height="150">
+					<button type="button" class="btn btn-outline-info"
+				id="btnverPedidoNuevo" align="center">VER PEDIDO</button>
+				</center>
+				
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			
+			<div class="col" align="center">
+				<a th:href="@{/Menus/menu}"
+					class="btn btn-outline-primary btn-block">REGRESAR AL MENU</a>
+			</div>
+		</div>
+		<br>
+		<div class="row" id="tarjetadetalle">
+			<div class="col-md">
+				<div class="card">
+				<span id="mensaje10"></span>
+				<button type="button" class="btn btn-outline-info"
+				id="btnverdetallepedidonuevo" align="center">VER detalle</button>
+					<div class="card-body" id="cardCliente">
+						<form th:action="@{/venta}" method="post"
+							th:object="${nuevopedido}">
+							<div class="row g-3">
+								<div class="col">
+									<label for="txtpedido">Numero Pedido :</label> <input
+										type="text" th:field="*{codpedido}" class="form-control"
+										id="txtpedido" readonly> <label for="txtfecha">Fecha
+										de Creacion:</label> <input type="text" th:field="*{fechacreacion}"
+										class="form-control" id="txtfecha" readonly> <label
+										for="txtmonto">Monto :</label> <input type="number"
+										th:field="*{monto}" class="form-control" id="txtmonto"
+										readonly> <label for="txtdireccion">Dirección
+										de Entrega:</label> <input type="text" th:field="*{direccion}"
+										class="form-control" id="txtdireccion" readonly> <label
+										for="txtreferencia">REFERENCIA:</label> <input type="text"
+										th:field="*{referencia}" class="form-control"
+										id="txtreferencia" readonly> <label for="txtestado">Estado
+										del Pedido:</label> <input type="text" th:field="*{estado}"
+										class="form-control" id="txtestado" readonly> <br>
+
+								</div>
+							</div>
+						</form>
 					</div>
-					
 				</div>
-				<div class="col-sm">
-						<img src="img/loginpollo1.jpg" alt="jacket" width="370" height="600">
+			</div>
+			<div class="col-sm">
+				<div class="card" id="cardDetalle">
+					<div class="card-header card-center">
+						<ul class="navbar-nav">
+							<h5 class=text-center>Detalle de Pedido</h5>
+						</ul>
+					</div>
+					<div class="card-body alert alert-secondary">
+						<table id="tbldetallepedido"
+							class="table table-hover table-bordered">
+							<thead class="table-secondary">
+								<tr>
+									<td scope="col">CODIGO</td>
+									<td scope="col">NOMBRE</td>
+									<td scope="col">PRECIO</td>
+									<td scope="col">CANTIDAD</td>
+									<td scope="col">SUBTOTAL</td>
+
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+					<div>
+						<div>
+							<div id="tblCompra" class="card-body alert alert-secondary">
+							</div>
+						</div>
+
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 </body>
+<footer th:replace="layout::footerRestaurant"></footer>
 
 </html>

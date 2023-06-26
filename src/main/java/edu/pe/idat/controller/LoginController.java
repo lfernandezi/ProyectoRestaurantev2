@@ -105,7 +105,7 @@ public class LoginController {
 			mensaje = cliente.getEmail();
 		} catch (Exception e) {
 			respuesta = false;
-			mensaje = "No estás registrado";
+			mensaje = "No ha iniciado sesión";
 		}
 		return new ResultadoResponse(respuesta, mensaje);
 	}

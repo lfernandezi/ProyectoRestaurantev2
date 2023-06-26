@@ -49,10 +49,10 @@
 		</div>
 	</nav>
 
-<nav th:fragment="menua"
+	<nav th:fragment="menua"
 		class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<img src="/img/loginpollo2.jpg" alt="jacket" width="50" height="50">
-		<a class="navbar-brand"   id="roles"></a>
+		<a class="navbar-brand" id="roles"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -65,11 +65,13 @@
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"> MANTENIMIENTO </a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a id="productos" class="dropdown-item" th:href="@{/listarproducto}">PRODUCTOS</a>
-						<a id="empleados" class="dropdown-item" th:href="@{/listarempleado}">EMPLEADOS</a>
+						<a id="productos" class="dropdown-item"
+							th:href="@{/listarproducto}">PRODUCTOS</a> <a id="empleados"
+							class="dropdown-item" th:href="@{/listarempleado}">EMPLEADOS</a>
 						<a id="clientes" class="dropdown-item" th:href="@{/listaclientes}">CLIENTES</a>
-						<a id="pedidos" class="dropdown-item" th:href="@{/listarpedido}">PEDIDOS</a> 
-						<a id="categorias" class="dropdown-item" th:href="@{/listarcategorias}">CATEGORIAS</a>
+						<a id="pedidos" class="dropdown-item" th:href="@{/listarpedido}">PEDIDOS</a>
+						<a id="categorias" class="dropdown-item"
+							th:href="@{/listarcategorias}">CATEGORIAS</a>
 					</div></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown2"
@@ -79,7 +81,7 @@
 
 						<a class="dropdown-item" id="acion4">CERRAR SESIÓN</a>
 					</div></li>
-					<li class="nav-item dropdown"><a
+				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="" id="navbarDropdown3"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">PEDIDOS</a>
@@ -87,16 +89,16 @@
 
 						<a class="dropdown-item" th:href="@{/listarpedido}">IR</a>
 					</div></li>
-					
+
 			</ul>
 		</div>
 	</nav>
 
-	
+
 	<nav th:fragment="menue"
 		class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<img src="/img/loginpollo2.jpg" alt="jacket" width="50" height="50">
-		<a class="navbar-brand"  id="roles"></a>
+		<a class="navbar-brand" id="roles"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -139,27 +141,27 @@
 			<div class="modal-body">
 
 				<!--form th:action="registrarpedido" method="post"-->
-					<div class="form-group">
-						<label for="txtnombre">NOMBRE:</label> <input type="text"
-							class="form-control" id="txtnombre" readonly>
-					</div>
+				<div class="form-group">
+					<label for="txtnombre">NOMBRE:</label> <input type="text"
+						class="form-control" id="txtnombre" readonly>
+				</div>
 
-					<div class="form-group">
-						<label for="txtdescripcion">DESCRIPCION PRODUCTO: </label> <input
-							type="text" class="form-control" id="txtdescripcion" readonly>
-					</div>
+				<div class="form-group">
+					<label for="txtdescripcion">DESCRIPCION PRODUCTO: </label> <input
+						type="text" class="form-control" id="txtdescripcion" readonly>
+				</div>
 
-					<div class="form-group">
-						<label for="txtprecio">PRECIO:</label> <input type="number"
-							class="form-control" id="txtprecio" readonly>
-					</div>
-					<div class="form-group">
-						<label for="txtprecio">CANTIDAD:</label> <input type="number"
-							class="form-control" id="txtcantidad"> <span
-							id="errorcantidad" class="text-danger"></span>
-					</div>
+				<div class="form-group">
+					<label for="txtprecio">PRECIO:</label> <input type="number"
+						class="form-control" id="txtprecio" readonly>
+				</div>
+				<div class="form-group">
+					<label for="txtprecio">CANTIDAD:</label> <input type="number"
+						class="form-control" id="txtcantidad"> <span
+						id="errorcantidad" class="text-danger"></span>
+				</div>
 
-					<input type="hidden" id="hddcodproducto" value="0" />
+				<input type="hidden" id="hddcodproducto" value="0" />
 				</form>
 			</div>
 			<div class="modal-footer">
@@ -171,7 +173,16 @@
 		</div>
 	</div>
 
+	<footer th:fragment="footerRestaurant">
+		<div class="card text-white bg-dark mb-3">
+			<div class="card-header">CONTÁCTANOS</div>
+			<div class="card-body">
+				<h5 class="card-title">REDES SOCIALES</h5>
+				<p class="card-text">WHATSAPP: 912223083</p>
+			</div>
+		</div>
 
+	</footer>
 </body>
 
 </html>

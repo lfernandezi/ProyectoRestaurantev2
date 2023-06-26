@@ -19,6 +19,9 @@ public class Pedido {
 
 	@Column(name = "direccion")
 	private String direccion;
+	
+	@Column(name = "referencia")
+	private String referencia;
 
 	@Column(name = "ubicacion")
 	private String ubicacion;
@@ -113,7 +116,31 @@ public class Pedido {
 		this.codcliente = codcliente;
 	}
 
-	public Pedido(int codpedido, Date fechacreacion, String direccion, String ubicacion, double monto, String estado,
+	
+	public Pedido(int codpedido, Date fechacreacion, String direccion, String referencia, String ubicacion,
+			double monto, String estado, String motivo, int codenvio, int codcliente) {
+		super();
+		this.codpedido = codpedido;
+		this.fechacreacion = fechacreacion;
+		this.direccion = direccion;
+		this.referencia = referencia;
+		this.ubicacion = ubicacion;
+		this.monto = monto;
+		this.estado = estado;
+		this.motivo = motivo;
+		this.codenvio = codenvio;
+		this.codcliente = codcliente;
+	}
+
+	public String getReferencia() {
+		return referencia;
+	}
+
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
+	}
+
+	/*public Pedido(int codpedido, Date fechacreacion, String direccion, String ubicacion, double monto, String estado,
 			String motivo, int codenvio, int codcliente) {
 		super();
 		this.codpedido = codpedido;
@@ -125,8 +152,7 @@ public class Pedido {
 		this.motivo = motivo;
 		this.codenvio = codenvio;
 		this.codcliente = codcliente;
-	}
-
+	}*/
 	
 	public Pedido() {
 		super();
@@ -135,7 +161,7 @@ public class Pedido {
 
 	
 
-	public Pedido(String direccion, String ubicacion, double monto, String estado, String motivo, int codenvio,
+	/*public Pedido(String direccion, String ubicacion, double monto, String estado, String motivo, int codenvio,
 			int codcliente) {
 		super();
 		this.direccion = direccion;
@@ -146,7 +172,7 @@ public class Pedido {
 		this.codenvio = codenvio;
 		this.codcliente = codcliente;
 	}
-
+*/
 	
 
 

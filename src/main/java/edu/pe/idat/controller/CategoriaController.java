@@ -40,7 +40,7 @@ public class CategoriaController {
 		
 		Usuario usu = (Usuario) session.getAttribute("sesionempl");
 		if (Objects.isNull(usu)){
-			model.addAttribute("mensaje", "No estás registrado");
+			model.addAttribute("mensaje", "No ha iniciado sesión");
 			model.addAttribute("usuario", new Usuario());
 			return "login";
 		} else {
@@ -94,7 +94,7 @@ public class CategoriaController {
 	@DeleteMapping("/eliminarCategoria")
 	@ResponseBody
 	public ResultadoResponse eliminarCategoria(@RequestBody Categoria cat) {
-		String mensaje="CATEGORIA ELIMINADOA CORRECTAMENTE";
+		String mensaje="CATEGORIA ELIMINADA CORRECTAMENTE";
 		Boolean respuesta=true;
 		try {
 			categoriaservice.eliminarCategoria(cat.getCodcategoria());

@@ -24,11 +24,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import edu.pe.idat.model.Carrito;
+import edu.pe.idat.model.Cliente;
 import edu.pe.idat.model.DetallePedido;
 import edu.pe.idat.model.Pedido;
 import edu.pe.idat.model.Usuario;
 import edu.pe.idat.model.response.ResultadoResponse;
-
+import edu.pe.idat.service.ClienteService;
 import edu.pe.idat.service.DetallaPedidoService;
 import edu.pe.idat.service.PedidoService;
 import edu.pe.idat.service.ReportePedidoService;
@@ -47,6 +48,9 @@ public class PedidoController {
 	PedidoService pedidoService;
 	
 	@Autowired
+	ClienteService clienteservice;
+	
+	@Autowired
 	DetallaPedidoService detalleservice;
 	
 	@Autowired
@@ -57,6 +61,8 @@ public class PedidoController {
 	public ResultadoResponse ingresarPedido(@RequestBody Pedido pedido, final HttpSession session) {
 		String mensaje = "Tu pedido ha sido ingresado ";
 		Boolean respuesta = true;
+		
+		
 		try {
 			pedidoService.IngresarPedido(pedido);
 			List<Carrito> listapedidos = (List<Carrito>) session.getAttribute("misesion");
@@ -109,7 +115,7 @@ public class PedidoController {
 	return pedidoService.listarPedido();
 	}
 	
-	@GetMapping("listarDetallePedido")
+	@GetMapping("/listarDetallePedido")
 	@ResponseBody
 	public List<DetallePedido> listarDetallePedido (@RequestParam ("codpedido")int codpedido){
 		//List<DetallePedido> nvalista=new ArrayList<DetallePedido>();
@@ -155,4 +161,25 @@ public class PedidoController {
 		return nvalista;
 		
 	}
+	
+	@GetMapping("/buscarUltimoPedido2")
+	@ResponseBody
+	public List<Pedido> buscarUltimoPedido2 (@RequestParam ("codcliente")int codcliente){
+		List<Pedido> nvalista= pedidoService.buscarUltimoPedido(codcliente);
+		return nvalista;
+		
+	}
+	
+	@GetMapping("/buscarUltimoPedido")
+	@ResponseBody
+	public List<Pedido> buscarUltimoPedido (final HttpSession session){
+		Usuario usu = (Usuario) session.getAttribute("otrasesion");
+		
+		Cliente  cli=clienteservice.buscarclientexEmail(usu.getEmail());
+		List<Pedido> nvalista= pedidoService.buscarUltimoPedido(cli.getCodcliente());
+		
+		return nvalista;
+		
+	}
+	
 }

@@ -44,7 +44,7 @@ public class ProductoController {
 	public String listarproducto(Model model, final HttpSession session) {
 		Usuario usu = (Usuario) session.getAttribute("sesionempl");
 		if (Objects.isNull(usu)) {
-			model.addAttribute("mensaje", "No estás registrado");
+			model.addAttribute("mensaje", "No ha iniciado sesión");
 			model.addAttribute("usuario", new Usuario());
 
 			return "login";

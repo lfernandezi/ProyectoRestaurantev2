@@ -136,6 +136,7 @@ function listarpedido() {
 						"<td>" + new Date(value.fechacreacion).toLocaleString() + "</td>" +
 						"<td>" + value.codcliente + "</td>" +
 						"<td>" + value.direccion + "</td>" +
+						"<td>" + value.referencia + "</td>" +
 						"<td>" + value.monto + "</td>" +
 						"<td>" + value.estado + "</td>" +
 

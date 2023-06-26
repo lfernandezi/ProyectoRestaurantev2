@@ -19,10 +19,14 @@ public class PedidoService {
 
 	
 	public void IngresarPedido(Pedido pedido) {
+		if (pedido.getReferencia().equals(null) || pedido.getReferencia().equals("")) {
+			pedido.setReferencia("Sin referencia");
+		}
 		
-	pedidorepository.ingresarPedido(pedido.getDireccion(),
+	pedidorepository.ingresarPedido(pedido.getDireccion(),pedido.getReferencia(),
 			 "-12.15670555303427, -76.97280153131642", pedido.getMonto(),"Recibido", "-",pedido.getCodcliente());
 			}
+	
 	
 	public List<Pedido> listarPedido(){
 		List<Pedido> list=pedidorepository.findAll();
@@ -80,5 +84,12 @@ public	List<Pedido> buscarPedidoporCliente(int codcliente){
 	}
 	
 	return nvalista;
+}
+
+public List<Pedido> buscarUltimoPedido(int codcliente){
+	List<Pedido> nvopedido= pedidorepository.buscarUltimoPedido(codcliente);
+	
+	
+	return nvopedido;
 }
 }
