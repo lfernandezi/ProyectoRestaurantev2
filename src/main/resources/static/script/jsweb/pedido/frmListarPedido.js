@@ -189,6 +189,7 @@ function buscarPedidoporEstado(_estado) {
 						"<td>" + new Date(value.fechacreacion).toLocaleString() + "</td>" +
 						"<td>" + value.codcliente + "</td>" +
 						"<td>" + value.direccion + "</td>" +
+						"<td>" + value.referencia + "</td>" +
 						"<td>" + value.monto + "</td>" +
 						"<td>" + value.estado + "</td>" +
 
@@ -241,6 +242,7 @@ function buscarPedidoporCodigo(codigopedido) {
 						"<td>" + new Date(value.fechacreacion).toLocaleString() + "</td>" +
 						"<td>" + value.codcliente + "</td>" +
 						"<td>" + value.direccion + "</td>" +
+						"<td>" + value.referencia + "</td>" +
 						"<td>" + value.monto + "</td>" +
 						"<td>" + value.estado + "</td>" +
 
@@ -293,6 +295,7 @@ function buscarPedidoporCliente(codigocliente) {
 						"<td>" + new Date(value.fechacreacion).toLocaleString() + "</td>" +
 						"<td>" + value.codcliente + "</td>" +
 						"<td>" + value.direccion + "</td>" +
+						"<td>" + value.referencia + "</td>" +
 						"<td>" + value.monto + "</td>" +
 						"<td>" + value.estado + "</td>" +
 

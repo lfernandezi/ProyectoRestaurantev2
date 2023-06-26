@@ -4,6 +4,11 @@ package edu.pe.idat.model;
 public class Carrito {
 	
 
+	public Carrito() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	private int codproducto;
 
 	private String nombreproducto;

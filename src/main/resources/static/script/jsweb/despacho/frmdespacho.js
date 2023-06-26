@@ -97,7 +97,7 @@ $(document).on("click", "#btnvalidartarjeta", function() {
 		$("#contenedor1").hide();
         $("#contenedor2").hide();
         $("#contenedor3").hide();
-        $("#contenedor4").show();
+       // $("#contenedor4").show();
 	} else {
 		alert("Datos incorrectos");
 	}
@@ -126,8 +126,8 @@ $(document).on("click", "#btningresarpedido", function() {
 		$("#contenedor1").hide();
 		$("#contenedor2").hide();
 		$("#contenedor3").hide();
-		url = "http://localhost:9080/venta";
-	window.open(url, "_self");
+		//url = "http://localhost:9080/venta";
+	//window.open(url, "_self");
 		//$("#contenedor4").show();
 	}
 
@@ -150,6 +150,8 @@ function IngresarPedido() {
 		success: function(resultado) {
 			if (resultado.respuesta) {
 				alert(resultado.mensaje);
+				url = "http://localhost:9080/venta";
+	window.open(url, "_self");
 				//listar nuevamente los productos
 			} else {
 				alert(resultado.mensaje);

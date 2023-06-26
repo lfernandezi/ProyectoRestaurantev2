@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="login::head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript"
+	th:src="@{/script/jsweb/pedido/frmlistarPedidoCliente.js}"></script>
+
+<body>
+<div th:replace="layout::titulo"></div>
+	<nav th:replace="layout::menuvx"></nav>
+	
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm">
+				<div class="col-5">
+				<div align="center">
+					<a th:href="@{/Menus/menu}"
+					class="btn btn-outline-primary btn-block">REGRESAR AL MENU</a>
+				</div>
+				<br>
+				
+				<div>
+				<table id="tblpedido" class="table table-hover table-bordered">
+				
+						<thead class="table-secondary">
+							<tr>
+								<td scope="col">CODIGO</td>
+								<td scope="col">FECHA</td>
+								
+								<td scope="col">DIRECCION</td>
+								<td scope="col">REFERENCIA</td>
+								<td scope="col">SUBTOTAL</td>
+								<td scope="col">ESTADO</td>
+								<td scope="col">VER PEDIDO</td>
+								
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+			
+				</div>
+			</div>
+		</div>	
+	</div>	
+	
+	<!-- Modal ver detalle pedido -->
+		<div class="modal fade" id="modalpedido" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-xl">
+				
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">VER PEDIDO</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+		
+			
+					<div class="modal-body">
+						<div id="cabecera"></div>
+						<div class="table-responsive">
+							<table id="tbldetallepedido"
+								class="table table-hover table-bordered">
+								<thead class="table-secondary">
+									<tr>
+										<td scope="col" class="text-center">Nro Pedido</td>
+										<td scope="col" class="text-center">Nro producto</td>
+										<td scope="col" class="text-center">Nombre Producto</td>
+										<!-- td scope="col" class="text-center">Descripción</td-->
+										<td scope="col" class="text-center">Cantidad</td>
+										<td scope="col" class="text-center">Precio</td>
+										<td scope="col" class="text-center">SubTotal</td>
+
+									</tr>
+								</thead>
+								<tbody>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-secondary"
+							data-dismiss="modal">CERRAR</button>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+					
+</body>
+<footer th:replace="layout::footerRestaurant"></footer>
+</html>

@@ -41,7 +41,7 @@ public class DespachoController {
 		Usuario cliente = (Usuario) session.getAttribute("otrasesion");
 		if (Objects.isNull(cliente)) {
 			model.addAttribute("mensaje", "No ha iniciado sesión");
-			return "carrito";
+			return "Menus/menu";
 		} else {
 			if (CollectionUtils.isEmpty(listapedidos)) {
 				model.addAttribute("mensaje", "No tienes productos en el carrito");
@@ -80,7 +80,7 @@ public class DespachoController {
 
 		if (Objects.isNull(usu)) {
 			model.addAttribute("mensaje", "No ha iniciado sesión");
-			return "carrito";
+			return "Menus/menu";
 		} else {
 			Cliente  cli=clienteservice.buscarclientexEmail(usu.getEmail());
 			List<Pedido> nvalista= pedidoService.buscarUltimoPedido(cli.getCodcliente());
@@ -95,7 +95,7 @@ public class DespachoController {
 		Usuario usu = (Usuario) session.getAttribute("otrasesion");
 		if (Objects.isNull(usu)) {
 			model.addAttribute("mensaje", "No ha iniciado sesión");
-			return "carrito";
+			return "Menus/menu";
 		} else {
 			Pedido ped= new Pedido();
 			model.addAttribute("nuevopedido", ped);

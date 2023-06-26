@@ -162,6 +162,15 @@ public class PedidoController {
 		
 	}
 	
+	@GetMapping("/buscarPedidoporCliente2")
+	@ResponseBody
+	public List<Pedido> buscarPedidoporCliente2 (final HttpSession session){
+		Usuario usu = (Usuario) session.getAttribute("otrasesion");
+		Cliente  cli=clienteservice.buscarclientexEmail(usu.getEmail());
+		List<Pedido> nvalista= pedidoService.buscarPedidoporCliente(cli.getCodcliente());
+		return nvalista;
+		
+	}
 	@GetMapping("/buscarUltimoPedido2")
 	@ResponseBody
 	public List<Pedido> buscarUltimoPedido2 (@RequestParam ("codcliente")int codcliente){
@@ -179,6 +188,19 @@ public class PedidoController {
 		List<Pedido> nvalista= pedidoService.buscarUltimoPedido(cli.getCodcliente());
 		
 		return nvalista;
+		
+	}
+	
+	@GetMapping("/mispedidos")
+	public String mispedidos (Model model ,final HttpSession session){
+		Usuario usu = (Usuario) session.getAttribute("otrasesion");
+		if (Objects.isNull(usu)){
+			model.addAttribute("mensaje", "No estás registrado");
+			model.addAttribute("usuario", new Usuario());
+			return "login";
+		} else {
+			return "mispedidos";
+		}
 		
 	}
 	

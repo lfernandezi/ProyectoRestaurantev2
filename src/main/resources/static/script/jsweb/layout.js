@@ -14,9 +14,10 @@ function verUsuario() {
 			if ($("#navbarDropdown1").text() != "No ha iniciado sesión") {
 				$("#acion1").text("CERRAR SESION");
 				$("#acion2").hide();
+				
 
 			} else {
-
+				$("#acion5").hide();
 				$("#acion3").hide();
 			}
 		}
@@ -105,3 +106,4 @@ function verUsuario2() {
 		}
 	});
 };
+

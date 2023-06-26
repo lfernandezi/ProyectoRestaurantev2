@@ -2,6 +2,7 @@ package edu.pe.idat.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -25,29 +26,39 @@ import edu.pe.idat.service.CarritoService;
 
 @Controller
 public class CarritoController {
-	
+
 	@Autowired
 	CarritoService carritoservice;
-	
+
 	@GetMapping("/carrito")
 	public String listarpedidos(Model model, final HttpSession session) {
+		Usuario cliente = (Usuario) session.getAttribute("otrasesion");
+		if (Objects.isNull(cliente)) {
+			model.addAttribute("mensaje", "No ha iniciado sesión");
+			return "Menus/menu";
+		} else {
+			List<Carrito> listapedidos = (List<Carrito>) session.getAttribute("misesion");
+			if (CollectionUtils.isEmpty(listapedidos)) {
+				listapedidos = new ArrayList<Carrito>();
+				Carrito p= new Carrito();
+				listapedidos.add(p);
+				model.addAttribute("compra", 0);
+				model.addAttribute("listadopedidos", listapedidos);
 
-		List<Carrito> listapedidos = (List<Carrito>) session.getAttribute("misesion");
-		if (CollectionUtils.isEmpty(listapedidos)) {
-			listapedidos = new ArrayList<Carrito>();
-			model.addAttribute("compra", 0);
-			model.addAttribute("listadopedidos", listapedidos);
-			
+			}
+			return "carrito";
 		}
-		return "carrito";
 	}
-	
+
 	@GetMapping("/listarcarrito")
 	@ResponseBody
-	public List<Carrito>listarcarrito(final HttpSession session) {
+	public List<Carrito> listarcarrito(final HttpSession session) {
 		List<Carrito> listapedidos = (List<Carrito>) session.getAttribute("misesion");
 		if (CollectionUtils.isEmpty(listapedidos)) {
 			listapedidos = new ArrayList<Carrito>();
+			Carrito p= new Carrito();
+			listapedidos.add(p);
+			
 		}
 		return listapedidos;
 	}
@@ -87,7 +98,7 @@ public class CarritoController {
 	}
 
 	@PostMapping("/actualizacarrito")
-	@ResponseBody	
+	@ResponseBody
 	public ResultadoResponse actualizacarrito(@RequestBody Carrito pedido, final HttpServletRequest request) {
 		String mensaje = "Se actualizó cantidad";
 		Boolean respuesta = true;
@@ -100,6 +111,5 @@ public class CarritoController {
 		}
 		return new ResultadoResponse(respuesta, mensaje);
 	}
-
 
 }

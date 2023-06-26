@@ -61,7 +61,6 @@ $(document).on("click", "#btnverPedidoNuevo", function() {
 
 $(document).on("click", "#btnverdetallepedidonuevo", function() {
 	var numepedido= $("#mensaje10").val();
-	alert (numepedido);
 	ListarDetalle(numepedido);
 	$("#cardDetalle").show();
 });
